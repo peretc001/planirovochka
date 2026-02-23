@@ -1,0 +1,42 @@
+@use "@/styles/typography";
+
+.root {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+
+  .form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 300px;
+
+    input {
+      height: 40px;
+    }
+
+    .password {
+      input {
+        height: 30px;
+      }
+    }
+
+    .policy {
+      @include typography.text-xs;
+      color: var(--gray-400);
+
+      a {
+        text-decoration: underline;
+        color: var(--gray-400);
+      }
+    }
+
+    .submit {
+      margin-top: 8px;
+    }
+  }
+}

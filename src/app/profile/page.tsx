@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Profile from '@/modules/profile/index'
+import Info from '@/modules/profile/info'
 
-const Page = () => <Profile />
+const Page = () => <Info />
 
 export default Page

@@ -5,9 +5,11 @@ import { getLocale } from 'next-intl/server'
 
 import UseQueryProviders from '@/lib/useQueryProviders'
 
-import '@/globals.scss'
+import Header from '@/layout/header/header'
 
-import '@ant-design/v5-patch-for-react-19'
+import AuthModal from '@/modals/authModal'
+
+import '@/globals.scss'
 
 const openSans = Open_Sans({ subsets: ['latin', 'cyrillic'] })
 
@@ -30,13 +32,17 @@ const RootLayout = async ({
       <body className={openSans.className}>
         <NextIntlClientProvider>
           <div className="layout-container">
-            <div>header</div>
+            <Header />
 
             <main>
               <UseQueryProviders>{children}</UseQueryProviders>
             </main>
             <div>footer</div>
           </div>
+
+          <UseQueryProviders>
+            <AuthModal />
+          </UseQueryProviders>
         </NextIntlClientProvider>
       </body>
     </html>

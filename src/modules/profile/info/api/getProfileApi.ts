@@ -1,8 +1,8 @@
 import serverApi from '@/lib/serverApi'
 
-export const getProfileApi = async (owner_id: number) => {
+export const getProfileApi = async () => {
   try {
-    const response = await serverApi.post('profile/get.php', { owner_id })
+    const response = await serverApi.post('profile/get.php')
 
     return response?.data
   } catch (err) {

@@ -8,9 +8,9 @@ import { useMutation } from '@tanstack/react-query'
 
 import { PhotoIcon } from '@heroicons/react/24/outline'
 
-import { addAvatarApi } from '@/modules/profile/index/api/addAvatarApi'
+import { addAvatarApi } from '@/modules/profile/info/api/addAvatarApi'
 // TODO: унести из shared
-import { deleteAvatarApi } from '@/modules/profile/index/api/deleteAvatarApi'
+import { deleteAvatarApi } from '@/modules/profile/info/api/deleteAvatarApi'
 
 import styles from './fileUpload.module.scss'
 
@@ -24,11 +24,9 @@ const FileUpload: FC<IFileUpload> = ({ form }) => {
   const t = useTranslations('profile')
 
   const avatar = Form.useWatch('avatar', form)
-  // TODO: если еще не создан юзер, owner_id = undefined
-  const ownerId = Form.useWatch('owner_id', form)
 
   const { isLoading: isUploadLoading, mutate: uploadFile } = useMutation({
-    mutationFn: file => addAvatarApi(file, ownerId),
+    mutationFn: file => addAvatarApi(file),
     onError: () => message.error(t('info.error')),
     onSuccess: url => {
       if (url) form.setFieldValue('avatar', url)
@@ -36,7 +34,7 @@ const FileUpload: FC<IFileUpload> = ({ form }) => {
   })
 
   const { mutate: deleteFile } = useMutation({
-    mutationFn: () => deleteAvatarApi(ownerId),
+    mutationFn: () => deleteAvatarApi(),
     onError: () => message.error(t('info.error')),
     onSuccess: status => {
       if (status) form.resetFields(['avatar'])

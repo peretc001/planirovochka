@@ -7,9 +7,9 @@ import { useMutation } from '@tanstack/react-query'
 import FileUpload from '@/shared/components/fileUpload/fileUpload'
 import Loader from '@/shared/components/loader/loader'
 
-import { addInfoApi } from '@/modules/profile/index/api/addInfoApi'
-import ProfileFormAutocomplete from '@/modules/profile/index/components/profileForm/profileFormAutocomplete'
-import { ICityOption } from '@/modules/profile/index/interface'
+import { addInfoApi } from '@/modules/profile/info/api/addInfoApi'
+import ProfileFormAutocomplete from '@/modules/profile/info/components/profileForm/profileFormAutocomplete'
+import { ICityOption } from '@/modules/profile/info/interface'
 
 import styles from './profileForm.module.scss'
 

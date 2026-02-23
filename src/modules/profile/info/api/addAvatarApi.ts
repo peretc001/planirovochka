@@ -1,10 +1,9 @@
-export const addAvatarApi = async (file: File, owner_id: number) => {
+export const addAvatarApi = async (file: File) => {
   try {
     const formData = new FormData()
     formData.append('file', file)
-    formData.append('owner_id', String(owner_id))
 
-    const res = await fetch('https://planirovochka.io/api/profile/avatar_upload.php', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/profile/avatar_upload.php', {
       body: formData,
       method: 'POST'
     })

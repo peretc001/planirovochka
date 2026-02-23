@@ -6,14 +6,14 @@ import { useQuery } from '@tanstack/react-query'
 
 import Loader from '@/shared/components/loader/loader'
 
+import { getProfileApi } from '@/modules/profile/about/api/getProfileApi'
 import AboutForm from '@/modules/profile/about/components/aboutForm/aboutForm'
-import { getProfileApi } from '@/modules/profile/index/api/getProfileApi'
 
 import styles from './main.module.scss'
 
 const Main = () => {
   const { isLoading, data } = useQuery({
-    queryFn: () => getProfileApi(1),
+    queryFn: getProfileApi,
     queryKey: ['profile_about']
   })
 

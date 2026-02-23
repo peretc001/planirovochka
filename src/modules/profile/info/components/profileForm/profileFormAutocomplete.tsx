@@ -6,8 +6,8 @@ import { useMutation } from '@tanstack/react-query'
 
 import { useDebouncedCallback } from '@/lib/useDebouncedCallback'
 
-import { getCityApi } from '@/modules/profile/index/api/getCityApi'
-import { ICityOption, ICitySuggestion } from '@/modules/profile/index/interface'
+import { getCityApi } from '@/modules/profile/info/api/getCityApi'
+import { ICityOption, ICitySuggestion } from '@/modules/profile/info/interface'
 
 interface ICityAutocomplete {
   readonly defaultCity: string | undefined

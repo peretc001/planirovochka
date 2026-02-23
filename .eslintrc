@@ -186,6 +186,7 @@
               ["@/shared.*$"],
               ["@/constant"],
               ["@/lib"],
+              ["@/layout"],
               ["@/store"],
               ["@/modals"],
               ["@/modules"],
