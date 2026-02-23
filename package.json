@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@ant-design/static-style-extract": "^2.0.4",
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@heroicons/react": "^2.2.0",
     "@types/node": "^20",
     "@types/react": "^19",
