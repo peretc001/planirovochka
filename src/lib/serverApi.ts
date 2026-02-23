@@ -47,6 +47,9 @@ class ServerApi {
         response.ok
           ? response.json()
           : response.json().then((body: any) => {
+              // TODO: временная обработка ошибки 401
+              if (response.status === 401) window.location.href = '/'
+
               const msg =
                 body?.message ?? body?.error ?? response.statusText ?? String(response.status)
               throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
@@ -76,6 +79,9 @@ class ServerApi {
         response.ok
           ? response.json()
           : response.json().then((body: any) => {
+              // TODO: временная обработка ошибки 401
+              if (response.status === 401) window.location.href = '/'
+
               const msg =
                 body?.message ?? body?.error ?? response.statusText ?? String(response.status)
               throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
