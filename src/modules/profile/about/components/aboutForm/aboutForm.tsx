@@ -34,7 +34,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
       status ? message.success(t('info.success')) : message.error(t('info.error'))
   })
 
-  const getHtmlChunks = (chunks: string) => <em>{chunks}</em>
+  const getHtmlChunks = (chunks: any) => <em>{chunks}</em>
 
   /* для фильтрации Select по label */
   const filterOption = (input: string, option?: { label?: string; value?: string }) =>
@@ -57,7 +57,9 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
       </Form.Item>
 
       <Form.Item
-        label={t.rich('info.types.label', { em: getHtmlChunks })}
+        label={t.rich('info.types.label', {
+          em: getHtmlChunks
+        })}
         name="types"
         rules={[{ message: t('info.require'), required: true }]}
       >

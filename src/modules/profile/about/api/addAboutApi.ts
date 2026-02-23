@@ -1,6 +1,6 @@
 import serverApi from '@/lib/serverApi'
 
-export const addAboutApi = async values => {
+export const addAboutApi = async (values: any) => {
   try {
     const response = await serverApi.post('profile/add_about.php', values)
 

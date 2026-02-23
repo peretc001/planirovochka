@@ -8,7 +8,7 @@ const addTailingSlash = (url: string = ''): string =>
 interface FetchParams {
   body?: string
   credentials?: 'include' | 'omit' | 'same-origin'
-  headers?: Record<string, string>
+  headers: Record<string, string>
   method?: 'GET' | 'POST'
   mode?: 'cors' | 'no-cors' | 'same-origin'
   signal?: AbortSignal

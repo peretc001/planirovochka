@@ -26,7 +26,7 @@ const FileUpload: FC<IFileUpload> = ({ form }) => {
   const avatar = Form.useWatch('avatar', form)
 
   const { isLoading: isUploadLoading, mutate: uploadFile } = useMutation({
-    mutationFn: file => addAvatarApi(file),
+    mutationFn: (file: File) => addAvatarApi(file),
     onError: () => message.error(t('info.error')),
     onSuccess: url => {
       if (url) form.setFieldValue('avatar', url)

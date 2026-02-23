@@ -26,13 +26,13 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
   const telegramUrlRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]{3,}$/
 
   const { isLoading, mutate: save } = useMutation({
-    mutationFn: values => addInfoApi(values),
+    mutationFn: (values: any) => addInfoApi(values),
     onError: () => message.error(t('info.error')),
     onSuccess: status =>
       status ? message.success(t('info.success')) : message.error(t('info.error'))
   })
 
-  const getHtmlChunks = (chunks: string) => <em>{chunks}</em>
+  const getHtmlChunks = (chunks: any) => <em>{chunks}</em>
 
   /* для выбора города */
   const handleSelectCity = (option: ICityOption) => {
@@ -57,7 +57,7 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
     <Form
       className={styles.root}
       form={form}
-      initialValues={!profile ? { telegram: 'https://t.me/' } : null}
+      initialValues={!profile ? { telegram: 'https://t.me/' } : undefined}
       layout="vertical"
       name="info"
       onFinish={onFinish}

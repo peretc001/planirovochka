@@ -20,7 +20,7 @@ const SignupPage: FC<ISignupPage> = ({ actionClose, actionSuccess }) => {
   const [checkPolicy, setCheckPolicy] = useState(true)
 
   const { isLoading, mutate: save } = useMutation({
-    mutationFn: values => signupApi(values),
+    mutationFn: (values: any) => signupApi(values),
     onError: () => message.error(t('status.error')),
     onSuccess: status => {
       if (status) actionClose()

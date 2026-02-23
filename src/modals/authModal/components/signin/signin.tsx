@@ -19,7 +19,7 @@ const SigninPage: FC<ISigninPage> = ({ actionClose, actionSuccess }) => {
   const [form] = Form.useForm()
 
   const { isLoading, mutate: save } = useMutation({
-    mutationFn: values => signinApi(values),
+    mutationFn: (values: any) => signinApi(values),
     onError: () => message.error(t('status.error')),
     onSuccess: status => {
       if (status) actionClose()

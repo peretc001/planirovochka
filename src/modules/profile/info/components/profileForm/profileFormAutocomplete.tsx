@@ -22,10 +22,10 @@ const ProfileFormAutocomplete: FC<ICityAutocomplete> = ({
 }) => {
   const t = useTranslations('profile')
 
-  const [cities, setCities] = useState([])
+  const [cities, setCities] = useState<[] | ICitySuggestion[]>([])
 
   const { mutate } = useMutation({
-    mutationFn: query => getCityApi(query),
+    mutationFn: (query: string) => getCityApi(query),
     onSuccess: (data: ICitySuggestion[]) => {
       if (data?.length > 0) {
         setCities(data)

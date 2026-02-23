@@ -4,7 +4,7 @@ export const getCityApi = async (city: string) => {
   const url = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address'
   const token = process.env.NEXT_PUBLIC_DADATA_TOKEN
 
-  const options = {
+  const options: any = {
     body: JSON.stringify({
       from_bound: { value: 'city' },
       query: city,
