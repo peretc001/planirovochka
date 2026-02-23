@@ -1,0 +1,75 @@
+@use "@/styles/typography";
+
+.root {
+  flex: 0 0 200;
+
+  @media screen and (max-width: 767px){
+    flex: none;
+  }
+
+  .wrapper {
+    position: sticky;
+    top: var(--offset-top);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: var(--main-white);
+    border-radius: var(--rounded-md);
+
+    @media screen and (max-width: 767px){
+      position: static;
+      top: auto;
+      flex: none;
+      flex-direction: row;
+      padding: 0 16px;
+      overflow: auto;
+      scrollbar-width: none;
+      margin: 0 -16px;
+      background: transparent;
+      border-radius: 0;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .item {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: var(--rounded-md);
+    padding: 8px 16px;
+    border-radius: var(--rounded-md);
+    white-space: nowrap;
+    @include typography.text-sm;
+
+    @media screen and (max-width: 767px){
+      background: var(--main-white);
+      border-bottom: 2px solid var(--main-white);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--blue-50);
+      }
+    }
+
+    &.active {
+      background: var(--gray-200);
+
+      @media screen and (max-width: 767px){
+        background: var(--main-white);
+        border-bottom: 2px solid var(--main-blue);
+        border-radius: var(--rounded-md) var(--rounded-md) 0 0;
+      }
+    }
+
+    .icon {
+      flex: none;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

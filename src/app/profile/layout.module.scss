@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+
+  .container {
+    flex: 1;
+    display: flex;
+    gap: 24px;
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+}
