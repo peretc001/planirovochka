@@ -3,6 +3,8 @@
 @use "./styles/utils";
 @use "./styles/ant";
 @use "./styles/typography";
+@use "./styles/variables";
+@use "./styles/keyframe-animations";
 
 body {
   background: var(--main-white);

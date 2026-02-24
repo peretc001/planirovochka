@@ -28,7 +28,6 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const t = useTranslations('profile')
 
   const [form] = Form.useForm()
-  const content = Form.useWatch('description', form)
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: values => addAboutApi(values),
@@ -64,11 +63,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
         name="description"
         rules={[{ message: t('require'), required: true }]}
       >
-        <Editor
-          content={content}
-          defaultContent={profile?.description}
-          onChange={handleChangeContent}
-        />
+        <Editor defaultContent={profile?.description} onChange={handleChangeContent} />
       </Form.Item>
 
       <Form.Item
