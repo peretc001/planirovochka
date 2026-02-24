@@ -135,6 +135,7 @@ const SimpleEditor: FC<IEditor> = ({ defaultContent, onChange }) => {
   const toolbarRef = useRef<HTMLDivElement>(null)
 
   const editor = useEditor({
+    // @ts-ignore
     content: defaultContent,
     editorProps: {
       attributes: {
