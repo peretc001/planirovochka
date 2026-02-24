@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { Button, Form, Input, message, Select } from 'antd'
+import { Button, Form, message, Select } from 'antd'
 import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
@@ -18,6 +18,8 @@ import { addAboutApi } from '@/modules/profile/about/api/addAboutApi'
 
 import styles from './aboutForm.module.scss'
 
+import Editor from '../editor/editor'
+
 interface IAboutForm {
   readonly profile: any
 }
@@ -26,12 +28,12 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const t = useTranslations('profile')
 
   const [form] = Form.useForm()
+  const content = Form.useWatch('description', form)
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: values => addAboutApi(values),
-    onError: () => message.error(t('info.error')),
-    onSuccess: status =>
-      status ? message.success(t('info.success')) : message.error(t('info.error'))
+    onError: () => message.error(t('error')),
+    onSuccess: status => (status ? message.success(t('success')) : message.error(t('error')))
   })
 
   const getHtmlChunks = (chunks: any) => <em>{chunks}</em>
@@ -39,6 +41,10 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
   /* для фильтрации Select по label */
   const filterOption = (input: string, option?: { label?: string; value?: string }) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+
+  const handleChangeContent = (html: React.ReactNode) => {
+    form.setFieldValue('description', html)
+  }
 
   const onFinish = async (values: any) => {
     await save(values)
@@ -52,69 +58,78 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
     <Form className={styles.root} form={form} layout="vertical" name="about" onFinish={onFinish}>
       {isLoading ? <Loader isFull /> : null}
 
-      <Form.Item hidden name="owner_id">
-        <Input />
+      <Form.Item
+        className={styles.editor}
+        label={t('about.description.label')}
+        name="description"
+        rules={[{ message: t('require'), required: true }]}
+      >
+        <Editor
+          content={content}
+          defaultContent={profile?.description}
+          onChange={handleChangeContent}
+        />
       </Form.Item>
 
       <Form.Item
-        label={t.rich('info.types.label', {
+        label={t.rich('about.types.label', {
           em: getHtmlChunks
         })}
         name="types"
-        rules={[{ message: t('info.require'), required: true }]}
+        rules={[{ message: t('require'), required: true }]}
       >
         <Select
           mode="multiple"
           options={DESIGN_TYPES}
-          placeholder={t('info.types.placeholder')}
+          placeholder={t('about.types.placeholder')}
           showSearch={{ filterOption }}
         />
       </Form.Item>
 
       <Form.Item
-        label={t.rich('info.styles.label', { em: getHtmlChunks })}
+        label={t.rich('about.styles.label', { em: getHtmlChunks })}
         name="styles"
-        rules={[{ message: t('info.require'), required: true }]}
+        rules={[{ message: t('require'), required: true }]}
       >
         <Select
           mode="multiple"
           options={DESIGN_STYLES}
-          placeholder={t('info.styles.placeholder')}
+          placeholder={t('about.styles.placeholder')}
           showSearch={{ filterOption }}
         />
       </Form.Item>
 
       <Form.Item
-        label={t.rich('info.segments.label', { em: getHtmlChunks })}
+        label={t.rich('about.segments.label', { em: getHtmlChunks })}
         name="segments"
-        rules={[{ message: t('info.require'), required: true }]}
+        rules={[{ message: t('require'), required: true }]}
       >
         <Select
           mode="multiple"
           options={DESIGN_SEGMENT}
-          placeholder={t('info.segments.placeholder')}
+          placeholder={t('about.segments.placeholder')}
         />
       </Form.Item>
 
       <Form.Item
-        label={t('info.experience.label')}
+        label={t('about.experience.label')}
         name="experience"
-        rules={[{ message: t('info.require'), required: true }]}
+        rules={[{ message: t('require'), required: true }]}
       >
-        <Select options={DESIGN_EXPERIENCE} placeholder={t('info.experience.placeholder')} />
+        <Select options={DESIGN_EXPERIENCE} placeholder={t('about.experience.placeholder')} />
       </Form.Item>
 
       <Form.Item
-        label={t('info.status.label')}
+        label={t('about.status.label')}
         name="status"
-        rules={[{ message: t('info.require'), required: true }]}
+        rules={[{ message: t('require'), required: true }]}
       >
-        <Select options={DESIGN_STATUS} placeholder={t('info.status.placeholder')} />
+        <Select options={DESIGN_STATUS} placeholder={t('about.status.placeholder')} />
       </Form.Item>
 
       <Form.Item>
         <Button htmlType="submit" type="primary">
-          {t('info.save')}
+          {t('save')}
         </Button>
       </Form.Item>
     </Form>

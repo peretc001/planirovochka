@@ -27,9 +27,8 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: (values: any) => addInfoApi(values),
-    onError: () => message.error(t('info.error')),
-    onSuccess: status =>
-      status ? message.success(t('info.success')) : message.error(t('info.error'))
+    onError: () => message.error(t('error')),
+    onSuccess: status => (status ? message.success(t('success')) : message.error(t('error')))
   })
 
   const getHtmlChunks = (chunks: any) => <em>{chunks}</em>
@@ -64,10 +63,6 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
     >
       {isLoading ? <Loader isFull /> : null}
 
-      <Form.Item hidden name="owner_id">
-        <Input />
-      </Form.Item>
-
       <div className={styles.avatar}>
         <Form.Item name="avatar">
           <FileUpload form={form} />
@@ -79,7 +74,7 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
         label={t('info.name.label')}
         name="name"
         rules={[
-          { message: t('info.require'), required: true },
+          { message: t('require'), required: true },
           { message: t('info.city.length'), min: 3 }
         ]}
       >
@@ -90,7 +85,7 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
         label={t.rich('info.city.label', { em: getHtmlChunks })}
         name="city"
         rules={[
-          { message: t('info.require'), required: true },
+          { message: t('require'), required: true },
           { message: t('info.city.length'), min: 3 }
         ]}
       >
@@ -106,7 +101,7 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
           label={t.rich('info.telegram.label', { em: getHtmlChunks })}
           name="telegram"
           rules={[
-            { message: t('info.require'), required: true },
+            { message: t('require'), required: true },
             { message: t('info.telegram.length'), min: 3 }
           ]}
         >
@@ -127,7 +122,7 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
 
       <Form.Item>
         <Button htmlType="submit" type="primary">
-          {t('info.save')}
+          {t('save')}
         </Button>
       </Form.Item>
     </Form>
