@@ -11,7 +11,8 @@ import { openSignupModal } from '@/lib/openSignupModal'
 const Login = () => {
   const handleSignup = () => {
     const actionSuccess = () => () => {
-      redirect(paths.profile.index)
+      // TODO: подумать, может заменить потом
+      window.location.reload()
     }
 
     openSignupModal(actionSuccess)

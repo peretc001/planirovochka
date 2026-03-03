@@ -29,7 +29,7 @@ const SigninPage: FC<ISigninPage> = ({ actionClose, actionSuccess }) => {
 
   const onFinish = async (values: any) => {
     await save(values)
-    if (actionSuccess) actionSuccess()
+    if (actionSuccess) setTimeout(actionSuccess, 500)
   }
 
   return (
