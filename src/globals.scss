@@ -44,13 +44,6 @@ main {
   touch-action: none;
 }
 
-.channel-page {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px 0;
-}
-
 h1 {
   @include typography.display-md;
   @include typography.bold;

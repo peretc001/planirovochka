@@ -6,16 +6,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
+import { CalendarDaysIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+
 import { paths } from '@/constants'
 
 import styles from './menu.module.scss'
-
-import {
-  CalendarDaysIcon,
-  CreditCardIcon,
-  ListBulletIcon,
-  UserCircleIcon
-} from '@heroicons/react/24/outline'
 
 const Menu = () => {
   const t = useTranslations('profile')
@@ -52,22 +47,6 @@ const Menu = () => {
         >
           <CalendarDaysIcon className={styles.icon} />
           {t('menu.about')}
-        </Link>
-        <Link
-          className={cns(styles.item, pathname === paths.profile.portfolio && styles.active)}
-          aria-label={paths.profile.portfolio}
-          href={paths.profile.portfolio}
-        >
-          <ListBulletIcon className={styles.icon} />
-          {t('menu.portfolio')}
-        </Link>
-        <Link
-          className={cns(styles.item, pathname === paths.profile.payment && styles.active)}
-          aria-label={paths.profile.payment}
-          href={paths.profile.payment}
-        >
-          <CreditCardIcon className={styles.icon} />
-          {t('menu.payment')}
         </Link>
       </div>
     </div>

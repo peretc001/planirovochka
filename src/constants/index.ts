@@ -32,7 +32,7 @@ export const DESIGN_TYPES = [
     value: 'furniture'
   },
   {
-    label: 'Авторский радзор',
+    label: 'Авторский надзор',
     value: 'autor'
   }
 ]

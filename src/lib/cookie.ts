@@ -1,4 +1,4 @@
-export const TOKEN_COOKIE_NAME = process.env.NEXT_PUBLIC_ACESS_TOKEN
+export const TOKEN_COOKIE_NAME = process.env.NEXT_PUBLIC_ACCESS_TOKEN
 
 export function setToken(value: string, maxAgeDays = 7): void {
   if (typeof document === 'undefined') return

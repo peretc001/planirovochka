@@ -1,34 +1,31 @@
-'use client'
+import React, { FC } from 'react'
+import Link from 'next/link'
 
-import React from 'react'
-import { Button } from 'antd'
-import { redirect } from 'next/navigation'
+import { IUser } from '@/shared/interfaces'
 
-import { paths } from '@/constants'
+import { jwtPayloadToUser, verifyJwtOnServer } from '@/lib/verifyJwtOnServer'
 
-import { removeToken } from '@/lib/cookie'
-import { openSignupModal } from '@/lib/openSignupModal'
+import Auth from '@/layout/header/auth/auth'
 
 import styles from './header.module.scss'
 
-const Header = () => {
-  const handleSignup = () => {
-    const actionSuccess = () => () => {
-      redirect(paths.profile.index)
-    }
+interface IHeader {
+  readonly user: IUser | null
+}
 
-    openSignupModal(actionSuccess)
-  }
-
-  const handleLogout = () => {
-    removeToken()
-    redirect('/')
-  }
+const Header: FC<IHeader> = async () => {
+  const payload = await verifyJwtOnServer()
+  const user = jwtPayloadToUser(payload)
 
   return (
     <div className={styles.root}>
-      <Button onClick={handleSignup}>signup</Button>
-      <Button onClick={handleLogout}>logout</Button>
+      <div className={styles.container}>
+        <Link className={styles.logo} href="/">
+          <img alt="" src="/logo.png" />
+        </Link>
+
+        <Auth user={user} />
+      </div>
     </div>
   )
 }
