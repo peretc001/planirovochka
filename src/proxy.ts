@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-const TOKEN_COOKIE_NAME = process.env.NEXT_PUBLIC_ACCESS_TOKEN
+const TOKEN_COOKIE_NAME = process.env.NEXT_PUBLIC_ACCESS_TOKEN || 'token'
 
 export function proxy(request: NextRequest) {
   const token = request.cookies.get(TOKEN_COOKIE_NAME)

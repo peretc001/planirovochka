@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 
-const TOKEN_COOKIE_NAME = process.env.NEXT_PUBLIC_ACCESS_TOKEN
+const TOKEN_COOKIE_NAME = process.env.NEXT_PUBLIC_ACCESS_TOKEN || 'token'
 const JWT_SECRET = process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET
 
 export interface JwtPayload {
