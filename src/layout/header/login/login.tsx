@@ -12,7 +12,7 @@ const Login = () => {
   const handleSignup = () => {
     const actionSuccess = () => () => {
       // TODO: подумать, может заменить потом
-      setTimeout(() => window.location.reload(), 500)
+      setTimeout(() => window.location.reload(), 1000)
     }
 
     openSignupModal(actionSuccess)
