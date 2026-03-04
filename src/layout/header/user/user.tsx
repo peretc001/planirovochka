@@ -29,7 +29,7 @@ const User: FC<IUserMenu> = ({ user }) => {
   const handleLogout = () => {
     removeToken()
     // TODO: подумать, может заменить потом
-    window.location.reload()
+    setTimeout(() => window.location.reload(), 500)
   }
 
   const items: MenuProps['items'] = [
