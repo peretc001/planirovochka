@@ -2,9 +2,6 @@
 
 import React from 'react'
 import { Button } from 'antd'
-import { redirect } from 'next/navigation'
-
-import { paths } from '@/constants'
 
 import { openSignupModal } from '@/lib/openSignupModal'
 

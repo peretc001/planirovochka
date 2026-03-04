@@ -18,23 +18,26 @@ const SigninPage: FC<ISigninPage> = ({ actionClose, actionSuccess }) => {
 
   const [form] = Form.useForm()
 
+  const handleSuccess = () => {
+    actionClose()
+    if (actionSuccess) actionSuccess()
+  }
+
   const { isLoading, mutate: save } = useMutation({
     mutationFn: (values: any) => signinApi(values),
     onError: () => message.error(t('status.error')),
     onSuccess: status => {
-      if (status) actionClose()
-      else message.error(t('status.empty'))
+      if (status) {
+        handleSuccess()
+      } else {
+        message.error(t('status.empty'))
+      }
     }
   })
 
-  const onFinish = async (values: any) => {
-    await save(values)
-    if (actionSuccess) actionSuccess()
-  }
-
   return (
     <div className={styles.root}>
-      <Form className={styles.form} form={form} layout="vertical" name="signup" onFinish={onFinish}>
+      <Form className={styles.form} form={form} layout="vertical" name="signup" onFinish={save}>
         <Form.Item
           label={t('email.label')}
           name="email"
