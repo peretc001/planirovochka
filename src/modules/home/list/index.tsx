@@ -10,7 +10,6 @@ import Cards from '@/modules/home/list/components/cards/cards'
 
 const List = () => {
   const searchParams = useSearchParams() as URLSearchParams
-  const params = new URLSearchParams(searchParams)
 
   const types = searchParams.get('types')?.split(',') ?? undefined
   const styles = searchParams.get('styles')?.split(',') ?? undefined
