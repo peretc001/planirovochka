@@ -23,8 +23,6 @@ const List = () => {
     queryKey: ['profiles_list', types, styles, segments, experience, status]
   })
 
-  console.log(data)
-
   return (
     <div>
       {isLoading ? 'loading' : null}
