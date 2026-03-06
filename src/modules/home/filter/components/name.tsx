@@ -12,11 +12,11 @@ const Name = () => {
 
   const inputRef = useRef<InputRef | null>(null)
 
-  const [search, setSearch] = useState('')
-
   const { replace } = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams() as URLSearchParams
+
+  const [search, setSearch] = useState(searchParams.get('query') ?? '')
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value

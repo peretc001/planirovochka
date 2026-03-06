@@ -66,6 +66,10 @@
       "experience": {
         "label": "Опыт",
         "placeholder": "Выберите ваш опыт"
+      },
+      "status": {
+        "label": "Вид занятости",
+        "placeholder": "Выберите вид занятости"
       }
     }
   },

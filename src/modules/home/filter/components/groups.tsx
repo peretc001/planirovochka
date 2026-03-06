@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, CheckboxOptionType, GetProp } from 'antd'
+import { Checkbox } from 'antd'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
@@ -30,26 +30,26 @@ const Groups = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams() as URLSearchParams
 
-  const onChange: GetProp<typeof Checkbox.Group, 'onChange'> =
-    (group: string) => (checkedValues: CheckboxOptionType) => {
-      const params = new URLSearchParams(searchParams)
+  const onChange = (group: string) => (checkedValues: (number | string)[]) => {
+    const params = new URLSearchParams(searchParams)
 
-      if (checkedValues.length > 0) {
-        params.set(group, checkedValues.toString())
-      } else {
-        params.delete(group)
-      }
-      replace(`${pathname}?${params.toString()}`, { scroll: false })
+    if (checkedValues.length > 0) {
+      params.set(group, checkedValues.toString())
+    } else {
+      params.delete(group)
     }
+
+    replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   return GROUPS.map(group => (
     <div key={group} className={styles.group}>
       <label htmlFor={group}>{t.rich(`about.${group}.label`)}</label>
       <Checkbox.Group
         className={styles.checkbox}
-        defaultValue={['']}
-        options={OPTIONS(group)}
-        onChange={onChange(group)}
+        defaultValue={searchParams.get(group)?.split(',') ?? []}
+        options={OPTIONS(group) ?? []}
+        onChange={checkedValues => onChange(group)(checkedValues)}
       />
     </div>
   ))
