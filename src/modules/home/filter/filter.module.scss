@@ -1,0 +1,88 @@
+@use "@/styles/typography";
+
+.root {
+  flex: none;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 1199px) {
+    padding: 16px;
+    background: var(--gray-50);
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--blue-50);
+    border-radius: var(--rounded-md);
+    border: 1px solid var(--blue-50);
+    border-bottom: none;
+    padding: 16px;
+
+    @media screen and (max-width: 1199px) {
+      margin-top: -12px;
+    }
+  }
+
+  .mobile {
+    flex: none;
+    min-height: 40px;
+    @include typography.text-xs;
+    color: var(--gray-400);
+  }
+
+  .search {
+    flex: 1;
+    position: relative;
+
+    .icon, .clear {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 8px;
+      z-index: 1;
+    }
+
+    .icon {
+      left: 8px;
+      pointer-events: none;
+    }
+
+    .clear {
+      right: 8px;
+      cursor: pointer;
+    }
+
+    .input_wrapper {
+      padding-right: 28px;
+    }
+  }
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      @include typography.text-xs;
+      @include typography.semibold;
+      color: var(--gray-600);
+    }
+
+    .checkbox {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 8px;
+
+      label {
+        @include typography.text-sm;
+        @include typography.regular;
+        color: var(--gray-600);
+      }
+    }
+  }
+}

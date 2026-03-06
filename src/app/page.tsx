@@ -1,5 +1,7 @@
 import React from 'react'
 
-const Page = () => <div />
+import Home from '@/modules/home'
+
+const Page = () => <Home />
 
 export default Page

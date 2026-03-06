@@ -37,6 +37,38 @@
   "home": {
     "description": "Проверка телеграм каналов перед покупкой рекламы или для анализа конкурентов"
   },
+  "filter": {
+    "description": "Поиск производится автоматически",
+    "search": {
+      "title": "Поиск",
+      "placeholder": "ФИО дизайнера"
+    },
+    "city": {
+      "title": "Город",
+      "placeholder": "Выберите город"
+    },
+    "about": {
+      "description": {
+        "label": "Расскажите о себе"
+      },
+      "types": {
+        "label": "Виды работ",
+        "placeholder": "Выберите виды выполняемых работ"
+      },
+      "styles": {
+        "label": "Стили дизайна",
+        "placeholder": "Выберите стили"
+      },
+      "segments": {
+        "label": "Сегменты",
+        "placeholder": "Выберите сегменты"
+      },
+      "experience": {
+        "label": "Опыт",
+        "placeholder": "Выберите ваш опыт"
+      }
+    }
+  },
   "profile": {
     "title": "Профиль",
     "require": "Обязательное поле",

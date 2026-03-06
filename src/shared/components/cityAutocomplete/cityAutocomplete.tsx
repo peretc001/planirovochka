@@ -6,8 +6,8 @@ import { useMutation } from '@tanstack/react-query'
 
 import { useDebouncedCallback } from '@/lib/useDebouncedCallback'
 
-import { getCityApi } from '@/modules/profile/info/api/getCityApi'
-import { ICityOption, ICitySuggestion } from '@/modules/profile/info/interface'
+import { getCityApi } from './api/getCityApi'
+import { ICityOption, ICitySuggestion } from './interface'
 
 interface ICityAutocomplete {
   readonly defaultCity: string | undefined
@@ -15,11 +15,7 @@ interface ICityAutocomplete {
   readonly onSelectCity: (option: ICityOption) => void
 }
 
-const ProfileFormAutocomplete: FC<ICityAutocomplete> = ({
-  defaultCity,
-  onClearCity,
-  onSelectCity
-}) => {
+const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onSelectCity }) => {
   const t = useTranslations('profile')
 
   const [cities, setCities] = useState<[] | ICitySuggestion[]>([])
@@ -70,4 +66,4 @@ const ProfileFormAutocomplete: FC<ICityAutocomplete> = ({
   )
 }
 
-export default ProfileFormAutocomplete
+export default CityAutocomplete

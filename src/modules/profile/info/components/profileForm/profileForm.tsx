@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
 
+import CityAutocomplete from '@/shared/components/cityAutocomplete/cityAutocomplete'
+import { ICityOption } from '@/shared/components/cityAutocomplete/interface'
 import FileUpload from '@/shared/components/fileUpload/fileUpload'
 import Loader from '@/shared/components/loader/loader'
 
 import { addInfoApi } from '@/modules/profile/info/api/addInfoApi'
-import ProfileFormAutocomplete from '@/modules/profile/info/components/profileForm/profileFormAutocomplete'
-import { ICityOption } from '@/modules/profile/info/interface'
 
 import styles from './profileForm.module.scss'
 
@@ -89,7 +89,7 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
           { message: t('info.city.length'), min: 3 }
         ]}
       >
-        <ProfileFormAutocomplete
+        <CityAutocomplete
           defaultCity={profile?.city}
           onClearCity={handleClearCity}
           onSelectCity={handleSelectCity}
