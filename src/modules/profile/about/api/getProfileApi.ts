@@ -7,5 +7,7 @@ export const getProfileApi = async () => {
     return response?.data
   } catch (err) {
     console.log('getProfileApi', err)
+
+    return null
   }
 }

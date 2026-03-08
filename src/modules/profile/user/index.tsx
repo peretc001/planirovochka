@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Main from '@/modules/profile/info/components/main/main'
+import Main from '@/modules/profile/user/components/main/main'
 
 const Info = () => <Main />
 

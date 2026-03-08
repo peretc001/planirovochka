@@ -8,9 +8,9 @@ import { useMutation } from '@tanstack/react-query'
 
 import { PhotoIcon } from '@heroicons/react/24/outline'
 
-import { addAvatarApi } from '@/modules/profile/info/api/addAvatarApi'
+import { addAvatarApi } from '@/modules/profile/user/api/addAvatarApi'
 // TODO: унести из shared
-import { deleteAvatarApi } from '@/modules/profile/info/api/deleteAvatarApi'
+import { deleteAvatarApi } from '@/modules/profile/user/api/deleteAvatarApi'
 
 import styles from './fileUpload.module.scss'
 

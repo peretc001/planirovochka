@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 
 import Loader from '@/shared/components/loader/loader'
 
-import { getProfileApi } from '@/modules/profile/info/api/getProfileApi'
-import ProfileForm from '@/modules/profile/info/components/profileForm/profileForm'
+import { getProfileApi } from '@/modules/profile/user/api/getProfileApi'
+import UserForm from '@/modules/profile/user/components/userForm/userForm'
 
 import styles from './main.module.scss'
 
@@ -18,9 +18,7 @@ const Main = () => {
   })
 
   return (
-    <div className={styles.root}>
-      {isLoading ? <Loader isFull /> : <ProfileForm profile={data} />}
-    </div>
+    <div className={styles.root}>{isLoading ? <Loader isFull /> : <UserForm profile={data} />}</div>
   )
 }
 

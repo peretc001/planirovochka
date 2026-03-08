@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Info from '@/modules/profile/info'
+import Info from '@/modules/profile/user'
 
 const Page = () => <Info />
 
