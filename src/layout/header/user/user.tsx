@@ -18,7 +18,7 @@ import { getUserApi } from '@/modules/profile/user/api/getUserApi'
 
 import styles from './user.module.scss'
 
-const User: FC<IUserMenu> = () => {
+const User = () => {
   const t = useTranslations('profile')
 
   const { data: user } = useQuery({

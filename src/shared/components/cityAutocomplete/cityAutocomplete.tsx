@@ -11,10 +11,11 @@ import { ICityOption, ICitySuggestion } from './interface'
 
 interface ICityAutocomplete {
   readonly defaultCity: string | undefined
+  readonly onClearCity?: () => void
   readonly onSelectCity: (option: ICityOption) => void
 }
 
-const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onSelectCity }) => {
+const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onSelectCity }) => {
   const t = useTranslations('profile')
 
   const [city, setCity] = useState(defaultCity)
@@ -54,11 +55,13 @@ const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onSelectCity }) 
   return (
     <AutoComplete
       id="info_city"
+      allowClear={!!onClearCity}
       maxLength={255}
       options={citiesList}
       placeholder={t('info.city.placeholder')}
       value={city}
       onChange={handleChangeCity}
+      onClear={onClearCity}
       onSelect={onSelect}
     />
   )
