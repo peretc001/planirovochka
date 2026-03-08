@@ -1,14 +1,12 @@
 import React, { FC } from 'react'
 
-import { IUser } from '@/shared/interfaces'
-
 import Login from '@/layout/header/login/login'
 import User from '@/layout/header/user/user'
 
 interface IAuth {
-  readonly user: IUser | null
+  readonly isAuth: boolean
 }
 
-const Auth: FC<IAuth> = ({ user }) => (user ? <User user={user} /> : <Login />)
+const Auth: FC<IAuth> = ({ isAuth }) => (isAuth ? <User /> : <Login />)
 
 export default Auth

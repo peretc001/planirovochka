@@ -4,27 +4,29 @@ import { FC } from 'react'
 import { Dropdown, MenuProps } from 'antd'
 import cns from 'classnames'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { useQuery } from '@tanstack/react-query'
 
-import { IUser } from '@/shared/interfaces'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 import { paths } from '@/constants'
 
 import { removeToken } from '@/lib/cookie'
 
+import { getUserApi } from '@/modules/profile/user/api/getUserApi'
+
 import styles from './user.module.scss'
 
-interface IUserMenu {
-  readonly user: IUser | null
-}
-
-const User: FC<IUserMenu> = ({ user }) => {
+const User: FC<IUserMenu> = () => {
   const t = useTranslations('profile')
 
-  const { name } = user || {}
+  const { data: user } = useQuery({
+    queryFn: getUserApi,
+    queryKey: ['user']
+  })
+
+  const { avatar, email } = user || {}
 
   const handleLogout = () => {
     removeToken()
@@ -52,12 +54,16 @@ const User: FC<IUserMenu> = ({ user }) => {
       {user ? (
         <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
           <div className={styles.user}>
-            <div className={styles.avatar} />
+            {avatar ? (
+              <img className={styles.avatar} alt="" src={process.env.NEXT_PUBLIC_URL + avatar} />
+            ) : (
+              <div className={styles.avatar} />
+            )}
 
             <div className={styles.drop}>
               <ChevronDownIcon className={styles.icon} />
             </div>
-            {name ? <div className={styles.name}>{name}</div> : null}
+            {email ? <div className={styles.email}>{email}</div> : null}
           </div>
         </Dropdown>
       ) : null}

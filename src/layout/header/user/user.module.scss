@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
     position: relative;
     cursor: pointer;
 
@@ -34,11 +34,10 @@
       background: var(--main-black);
     }
 
-    .name {
+    .email {
       @include typography.text-sm;
       @include typography.semibold;
       color: var(--main-black);
-      max-width: 80px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;

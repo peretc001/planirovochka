@@ -1,45 +1,24 @@
 import React, { FC, useState } from 'react'
-import { Form, FormInstance, message } from 'antd'
+import { message } from 'antd'
 import cns from 'classnames'
 import { useTranslations } from 'next-intl'
 import { useDropzone } from 'react-dropzone'
 
-import { useMutation } from '@tanstack/react-query'
-
 import { PhotoIcon } from '@heroicons/react/24/outline'
-
-import { addAvatarApi } from '@/modules/profile/user/api/addAvatarApi'
-// TODO: унести из shared
-import { deleteAvatarApi } from '@/modules/profile/user/api/deleteAvatarApi'
 
 import styles from './fileUpload.module.scss'
 
 import FilePreview from '../filePreview/filePreview'
 
 interface IFileUpload {
-  readonly form: FormInstance
+  readonly isLoading: boolean
+  readonly file: string
+  readonly onDelete: () => void
+  readonly onUpload: (file: File) => void
 }
 
-const FileUpload: FC<IFileUpload> = ({ form }) => {
+const FileUpload: FC<IFileUpload> = ({ isLoading, file, onDelete, onUpload }) => {
   const t = useTranslations('profile')
-
-  const avatar = Form.useWatch('avatar', form)
-
-  const { isLoading: isUploadLoading, mutate: uploadFile } = useMutation({
-    mutationFn: (file: File) => addAvatarApi(file),
-    onError: () => message.error(t('info.error')),
-    onSuccess: url => {
-      if (url) form.setFieldValue('avatar', url)
-    }
-  })
-
-  const { mutate: deleteFile } = useMutation({
-    mutationFn: () => deleteAvatarApi(),
-    onError: () => message.error(t('info.error')),
-    onSuccess: status => {
-      if (status) form.resetFields(['avatar'])
-    }
-  })
 
   const [isDragged, setIsDragged] = useState<boolean>(false)
 
@@ -56,7 +35,7 @@ const FileUpload: FC<IFileUpload> = ({ form }) => {
       setIsDragged(false)
     },
     onDrop: acceptedFiles => {
-      uploadFile(acceptedFiles[0])
+      onUpload(acceptedFiles[0])
       setIsDragged(false)
     },
     onDropRejected: async () => {
@@ -67,17 +46,13 @@ const FileUpload: FC<IFileUpload> = ({ form }) => {
 
   return (
     <section className={styles.root}>
-      {avatar ? <FilePreview avatar={avatar} handleDeleteFile={deleteFile} /> : null}
+      {file ? <FilePreview avatar={file} handleDeleteFile={onDelete} /> : null}
 
-      {!avatar && (
+      {!file && (
         // eslint-disable-next-line
         <div {...getRootProps({ className: 'dropzone' })}>
           <div
-            className={cns(
-              styles.add,
-              isUploadLoading && styles.loading,
-              isDragged && styles.dragged
-            )}
+            className={cns(styles.add, isLoading && styles.loading, isDragged && styles.dragged)}
           >
             <PhotoIcon className={styles.icon} />
           </div>

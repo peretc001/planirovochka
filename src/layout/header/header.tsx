@@ -18,7 +18,7 @@ const Header = async () => {
           <img alt="" src="/logo.png" />
         </Link>
 
-        <Auth user={user} />
+        <Auth isAuth={!!user?.id} />
       </div>
     </div>
   )
