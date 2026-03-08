@@ -11,6 +11,8 @@ import Cards from '@/modules/home/list/components/cards/cards'
 const List = () => {
   const searchParams = useSearchParams() as URLSearchParams
 
+  const name = searchParams.get('query') ?? undefined
+  const city = searchParams.get('city') ?? undefined
   const types = searchParams.get('types')?.split(',') ?? undefined
   const styles = searchParams.get('styles')?.split(',') ?? undefined
   const segments = searchParams.get('segments')?.split(',') ?? undefined
@@ -18,8 +20,8 @@ const List = () => {
   const status = searchParams.get('status')?.split(',') ?? undefined
 
   const { isLoading, data } = useQuery({
-    queryFn: () => getProfilesApi(types, styles, segments, experience, status),
-    queryKey: ['profiles_list', types, styles, segments, experience, status]
+    queryFn: () => getProfilesApi(name, city, types, styles, segments, experience, status),
+    queryKey: ['profiles_list', name, city, types, styles, segments, experience, status]
   })
 
   return (

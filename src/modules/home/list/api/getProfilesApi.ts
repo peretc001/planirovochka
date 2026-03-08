@@ -1,6 +1,8 @@
 import serverApi from '@/lib/serverApi'
 
 export const getProfilesApi = async (
+  name: string | undefined,
+  city: string | undefined,
   types: string[] | undefined,
   styles: string[] | undefined,
   segments: string[] | undefined,
@@ -10,7 +12,9 @@ export const getProfilesApi = async (
   try {
     const response = await serverApi.post('list/get.php', {
       styles,
+      city,
       experience,
+      name,
       segments,
       status,
       types
