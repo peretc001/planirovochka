@@ -1,46 +1,24 @@
 import React, { FC } from 'react'
-import { Button, Form, Input, message } from 'antd'
+import { Form, Input } from 'antd'
 import { useTranslations } from 'next-intl'
 
-import { useMutation } from '@tanstack/react-query'
-
 import FileUpload from '@/shared/components/fileUpload/fileUpload'
-import Loader from '@/shared/components/loader/loader'
-
-import { addInfoApi } from '@/modules/profile/user/api/addInfoApi'
+import { IUser } from '@/shared/interfaces'
 
 import styles from './userForm.module.scss'
 
 interface IUserForm {
-  readonly profile: any
+  readonly user: IUser
 }
 
-const UserForm: FC<IUserForm> = ({ profile }) => {
+const UserForm: FC<IUserForm> = ({ user }) => {
   const t = useTranslations('profile')
+  const t1 = useTranslations('auth')
 
   const [form] = Form.useForm()
 
-  const { isLoading, mutate: save } = useMutation({
-    mutationFn: (values: any) => addInfoApi(values),
-    onError: () => message.error(t('error')),
-    onSuccess: status => (status ? message.success(t('success')) : message.error(t('error')))
-  })
-
-  const onFinish = async (values: any) => {
-    await save(values)
-  }
-
   return (
-    <Form
-      className={styles.root}
-      form={form}
-      initialValues={profile}
-      layout="vertical"
-      name="info"
-      onFinish={onFinish}
-    >
-      {isLoading ? <Loader isFull /> : null}
-
+    <Form className={styles.root} form={form} initialValues={user} layout="vertical" name="user">
       <div className={styles.avatar}>
         <Form.Item name="avatar">
           <FileUpload form={form} />
@@ -48,10 +26,8 @@ const UserForm: FC<IUserForm> = ({ profile }) => {
         <p>{t('info.avatar')}</p>
       </div>
 
-      <Form.Item>
-        <Button htmlType="submit" type="primary">
-          {t('save')}
-        </Button>
+      <Form.Item label={t1('email.label')} name="email">
+        <Input disabled placeholder={t1('email.placeholder')} />
       </Form.Item>
     </Form>
   )

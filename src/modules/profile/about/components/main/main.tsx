@@ -14,7 +14,7 @@ import styles from './main.module.scss'
 const Main = () => {
   const { isLoading, data } = useQuery({
     queryFn: getProfileApi,
-    queryKey: ['profile_about']
+    queryKey: ['profile']
   })
 
   return (

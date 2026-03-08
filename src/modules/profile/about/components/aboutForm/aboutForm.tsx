@@ -16,7 +16,7 @@ import {
   DESIGN_TYPES
 } from '@/constants'
 
-import { addAboutApi } from '@/modules/profile/about/api/addAboutApi'
+import { addProfileApi } from '@/modules/profile/about/api/addProfileApi'
 
 import styles from './aboutForm.module.scss'
 
@@ -35,7 +35,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const telegramUrlRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]{3,}$/
 
   const { isLoading, mutate: save } = useMutation({
-    mutationFn: values => addAboutApi(values),
+    mutationFn: values => addProfileApi(values),
     onError: () => message.error(t('error')),
     onSuccess: status => (status ? message.success(t('success')) : message.error(t('error')))
   })
