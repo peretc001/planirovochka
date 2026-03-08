@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Button, Form, Input, message } from 'antd'
 import { useTranslations } from 'next-intl'
 
@@ -39,24 +39,15 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
     form.setFieldValue('city_code', option.id)
   }
 
-  /* очистка города */
-  const handleClearCity = () => {
-    form.resetFields(['city', 'city_code'])
-  }
-
   const onFinish = async (values: any) => {
     await save(values)
   }
-
-  useEffect(() => {
-    if (profile) form.setFieldsValue(profile)
-  }, [profile])
 
   return (
     <Form
       className={styles.root}
       form={form}
-      initialValues={!profile ? { telegram: 'https://t.me/' } : undefined}
+      initialValues={profile}
       layout="vertical"
       name="info"
       onFinish={onFinish}
@@ -86,14 +77,22 @@ const ProfileForm: FC<IProfileForm> = ({ profile }) => {
         name="city"
         rules={[
           { message: t('require'), required: true },
-          { message: t('info.city.length'), min: 3 }
+          { message: t('info.city.length'), min: 3 },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (value && getFieldValue('city_code') !== '') {
+                return Promise.resolve()
+              }
+              return Promise.reject(new Error(t('info.city.placeholder')))
+            }
+          })
         ]}
       >
-        <CityAutocomplete
-          defaultCity={profile?.city}
-          onClearCity={handleClearCity}
-          onSelectCity={handleSelectCity}
-        />
+        <CityAutocomplete defaultCity={profile?.city} onSelectCity={handleSelectCity} />
+      </Form.Item>
+
+      <Form.Item hidden name="city_code">
+        <Input />
       </Form.Item>
 
       <div className={styles.telegram}>

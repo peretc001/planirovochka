@@ -1,5 +1,5 @@
 export interface ICitySuggestion {
-  data: { city_kladr_id: string }
+  data: { city: string; city_kladr_id: string }
   value: string
 }
 

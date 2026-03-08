@@ -11,13 +11,13 @@ import { ICityOption, ICitySuggestion } from './interface'
 
 interface ICityAutocomplete {
   readonly defaultCity: string | undefined
-  readonly onClearCity: () => void
   readonly onSelectCity: (option: ICityOption) => void
 }
 
-const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onSelectCity }) => {
+const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onSelectCity }) => {
   const t = useTranslations('profile')
 
+  const [city, setCity] = useState(defaultCity)
   const [cities, setCities] = useState<[] | ICitySuggestion[]>([])
 
   const { mutate } = useMutation({
@@ -36,15 +36,15 @@ const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onS
   const getCityDebounced = useDebouncedCallback<(city: string) => void>(loadCity, 500)
 
   const handleChangeCity = (value: string) => {
-    if (value === '') onClearCity()
+    setCity(value)
 
     getCityDebounced(value)
   }
 
   const citiesList = cities.map((city: ICitySuggestion) => ({
     id: city.data.city_kladr_id,
-    label: city.value,
-    value: city.value
+    label: city.data.city,
+    value: city.data.city
   }))
 
   const onSelect = (data: string, option: ICityOption) => {
@@ -54,13 +54,11 @@ const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onS
   return (
     <AutoComplete
       id="info_city"
-      allowClear
-      defaultValue={defaultCity}
       maxLength={255}
       options={citiesList}
       placeholder={t('info.city.placeholder')}
+      value={city}
       onChange={handleChangeCity}
-      onClear={onClearCity}
       onSelect={onSelect}
     />
   )
