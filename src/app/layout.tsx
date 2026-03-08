@@ -31,16 +31,14 @@ const RootLayout = async ({
     <html lang={locale}>
       <body className={openSans.className}>
         <NextIntlClientProvider>
-          <div className="layout-container">
-            <Header />
-
-            <main>
-              <UseQueryProviders>{children}</UseQueryProviders>
-            </main>
-            <div>footer</div>
-          </div>
-
           <UseQueryProviders>
+            <div className="layout-container">
+              <Header />
+
+              <main>{children}</main>
+              <div>footer</div>
+            </div>
+
             <AuthModal />
           </UseQueryProviders>
         </NextIntlClientProvider>
