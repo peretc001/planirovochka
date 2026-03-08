@@ -12,7 +12,7 @@ import FilePreview from '../filePreview/filePreview'
 
 interface IFileUpload {
   readonly isLoading: boolean
-  readonly file: string
+  readonly file: string | undefined
   readonly onDelete: () => void
   readonly onUpload: (file: File) => void
 }
