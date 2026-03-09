@@ -2,10 +2,11 @@ import React, { FC, useEffect } from 'react'
 import { Button, Form, Input, message, Select } from 'antd'
 import { useTranslations } from 'next-intl'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import CityAutocomplete from '@/shared/components/cityAutocomplete/cityAutocomplete'
 import { ICityOption } from '@/shared/components/cityAutocomplete/interface'
+import FileUpload from '@/shared/components/fileUpload/fileUpload'
 import Loader from '@/shared/components/loader/loader'
 
 import {
@@ -16,7 +17,9 @@ import {
   DESIGN_TYPES
 } from '@/constants'
 
+import { addAvatarApi } from '@/modules/profile/about/api/addAvatarApi'
 import { addProfileApi } from '@/modules/profile/about/api/addProfileApi'
+import { deleteAvatarApi } from '@/modules/profile/about/api/deleteAvatarApi'
 
 import styles from './aboutForm.module.scss'
 
@@ -29,6 +32,8 @@ interface IAboutForm {
 const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const t = useTranslations('profile')
 
+  const queryClient = useQueryClient()
+
   const [form] = Form.useForm()
 
   const telegram = Form.useWatch('telegram', form)
@@ -38,6 +43,28 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
     mutationFn: values => addProfileApi(values),
     onError: () => message.error(t('error')),
     onSuccess: status => (status ? message.success(t('success')) : message.error(t('error')))
+  })
+
+  const { isLoading: isUploadLoading, mutate: uploadFile } = useMutation({
+    mutationFn: (file: File) => addAvatarApi(file),
+    onError: () => message.error(t('info.error')),
+    onSuccess: url => {
+      if (url) {
+        form.setFieldValue('avatar', url)
+        queryClient.invalidateQueries({ queryKey: ['profile'] })
+      }
+    }
+  })
+
+  const { mutate: deleteFile } = useMutation({
+    mutationFn: () => deleteAvatarApi(),
+    onError: () => message.error(t('info.error')),
+    onSuccess: status => {
+      if (status) {
+        form.resetFields(['avatar'])
+        queryClient.invalidateQueries({ queryKey: ['profile'] })
+      }
+    }
   })
 
   const getHtmlChunks = (chunks: any) => <em>{chunks}</em>
@@ -67,6 +94,16 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
   return (
     <Form className={styles.root} form={form} layout="vertical" name="about" onFinish={onFinish}>
       {isLoading ? <Loader isFull /> : null}
+
+      <div className={styles.avatar}>
+        <FileUpload
+          isLoading={isUploadLoading}
+          file={profile?.avatar}
+          onDelete={deleteFile}
+          onUpload={uploadFile}
+        />
+        <p>{t('info.avatar')}</p>
+      </div>
 
       <Form.Item
         label={t('info.name.label')}

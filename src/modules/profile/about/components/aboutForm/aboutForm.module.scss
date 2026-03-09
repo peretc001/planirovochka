@@ -5,6 +5,13 @@
   flex-direction: column;
   gap: 16px;
 
+  .avatar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 16px;
+  }
+
   .telegram {
     display: flex;
     align-items: flex-end;
