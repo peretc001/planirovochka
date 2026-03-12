@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
+
+import { IGallery } from '@/shared/interfaces'
 
 import styles from './cardGallery.module.scss'
 
-const CardGallery = ({ gallery }) => (
+interface IGalleryList {
+  readonly gallery: IGallery[]
+}
+
+const CardGallery: FC<IGalleryList> = ({ gallery }) => (
   <div className={styles.root}>
     {gallery.map(photo => (
       <picture key={photo.id} className={styles.picture}>

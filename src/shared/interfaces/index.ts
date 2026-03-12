@@ -14,6 +14,7 @@ export interface IProfile {
   created_at: string
   description: string
   experience: string
+  gallery: IGallery[]
   name: string
   owner_id: number
   segments: string[]
