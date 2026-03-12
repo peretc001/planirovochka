@@ -17,11 +17,12 @@ const Card: FC<ICard> = ({ card }) => (
 
         <div className={styles.about}>
           <div className={styles.city}>{card.city}</div>
-          <div className={styles.experience}>{card.experience}</div>
+          <div className={styles.experience}>Опыт: {card.experience}</div>
           <div className={styles.status}>{card.status}</div>
         </div>
       </div>
     </div>
+    <div className={styles.description} dangerouslySetInnerHTML={{ __html: card.description }} />
   </div>
 )
 

@@ -21,3 +21,12 @@ export interface IProfile {
   telegram: string
   types: string[]
 }
+
+export interface IGallery {
+  id: number
+  created_at: string
+  description: string
+  owner_id: number
+  type: string
+  url: string
+}

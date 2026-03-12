@@ -4,6 +4,7 @@ export const paths = {
   home: '/',
   profile: {
     about: '/profile/about',
+    gallery: '/profile/gallery',
     index: '/profile',
     payment: '/profile/payment',
     portfolio: '/profile/portfolio',
@@ -126,5 +127,17 @@ export const DESIGN_STATUS = [
   {
     label: 'Строительная компания',
     value: 'builder'
+  }
+]
+
+// Gallery
+export const GALLERY_TYPES = [
+  {
+    label: 'Визуализация',
+    value: 'visual'
+  },
+  {
+    label: 'Фото объекта',
+    value: 'real'
   }
 ]

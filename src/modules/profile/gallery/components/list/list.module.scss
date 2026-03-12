@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    gap: 16px;
+  }
+}
+
+.modal {
+  width: 100% !important;
+  max-width: 600px;
+}

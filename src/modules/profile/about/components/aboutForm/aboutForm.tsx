@@ -21,9 +21,9 @@ import { addAvatarApi } from '@/modules/profile/about/api/addAvatarApi'
 import { addProfileApi } from '@/modules/profile/about/api/addProfileApi'
 import { deleteAvatarApi } from '@/modules/profile/about/api/deleteAvatarApi'
 
-import styles from './aboutForm.module.scss'
+import SimpleEditor from '@/components/tiptap-templates/simple/simple-editor'
 
-import Editor from '../editor/editor'
+import styles from './aboutForm.module.scss'
 
 interface IAboutForm {
   readonly profile: any
@@ -169,7 +169,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
         name="description"
         rules={[{ message: t('require'), required: true }]}
       >
-        <Editor defaultContent={profile?.description} onChange={handleChangeContent} />
+        <SimpleEditor defaultContent={profile?.description} onChange={handleChangeContent} />
       </Form.Item>
 
       <Form.Item

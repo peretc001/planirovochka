@@ -6,7 +6,13 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { CalendarDaysIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import {
+  BriefcaseIcon,
+  CalendarDaysIcon,
+  DocumentTextIcon,
+  PhotoIcon,
+  UserCircleIcon
+} from '@heroicons/react/24/outline'
 
 import { paths } from '@/constants'
 
@@ -45,8 +51,24 @@ const Menu = () => {
           aria-label={paths.profile.about}
           href={paths.profile.about}
         >
-          <CalendarDaysIcon className={styles.icon} />
+          <DocumentTextIcon className={styles.icon} />
           {t('menu.about')}
+        </Link>
+        <Link
+          className={cns(styles.item, pathname === paths.profile.gallery && styles.active)}
+          aria-label={paths.profile.gallery}
+          href={paths.profile.gallery}
+        >
+          <PhotoIcon className={styles.icon} />
+          {t('menu.gallery')}
+        </Link>
+        <Link
+          className={cns(styles.item, pathname === paths.profile.portfolio && styles.active)}
+          aria-label={paths.profile.portfolio}
+          href={paths.profile.portfolio}
+        >
+          <BriefcaseIcon className={styles.icon} />
+          {t('menu.portfolio')}
         </Link>
       </div>
     </div>

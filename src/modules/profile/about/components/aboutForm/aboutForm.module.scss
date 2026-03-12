@@ -12,6 +12,10 @@
     margin-bottom: 16px;
   }
 
+  .editor :global(.simple-editor-content) {
+    min-height: 200px;
+  }
+
   .telegram {
     display: flex;
     align-items: flex-end;
