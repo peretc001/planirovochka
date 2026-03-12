@@ -1,5 +1,8 @@
 .root {
+  @include max-container;
   display: flex;
   gap: 24px;
-  padding: 16px 0;
+  padding: 16px;
+  margin: 0 auto;
+  overflow: hidden;
 }

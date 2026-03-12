@@ -1,6 +1,7 @@
 @use "@/styles/typography";
 
 .root {
+  flex: none;
   display: flex;
   flex-direction: column;
 

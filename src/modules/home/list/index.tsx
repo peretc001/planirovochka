@@ -8,6 +8,8 @@ import { useQuery } from '@tanstack/react-query'
 import { getProfilesApi } from '@/modules/home/list/api/getProfilesApi'
 import Cards from '@/modules/home/list/components/cards/cards'
 
+import cssStyles from './list.module.scss'
+
 const List = () => {
   const searchParams = useSearchParams() as URLSearchParams
 
@@ -25,7 +27,7 @@ const List = () => {
   })
 
   return (
-    <div>
+    <div className={cssStyles.root}>
       {isLoading ? 'loading' : null}
 
       {data?.length > 0 && <Cards cards={data} />}
