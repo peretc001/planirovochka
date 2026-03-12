@@ -14,13 +14,9 @@ const ProfileLayout = async ({
 
   return (
     <div className={styles.root}>
-      <h1>{t('title')}</h1>
+      <Menu />
 
-      <div className={styles.container}>
-        <Menu />
-
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

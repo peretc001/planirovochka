@@ -35,7 +35,8 @@ const RootLayout = async ({
             <div className="layout-container">
               <Header />
 
-              <main>{children}</main>
+              {children}
+
               <div>footer</div>
             </div>
 
