@@ -1,6 +1,5 @@
 .root {
-  width: 100%;
-  max-width: 1440px;
+  @include max-container;
   display: flex;
   gap: 24px;
   margin: 0 auto;
