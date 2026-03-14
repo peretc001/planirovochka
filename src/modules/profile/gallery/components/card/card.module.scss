@@ -10,15 +10,15 @@
 
     .delete {
       position: absolute;
-      top: -8px;
-      right: -8px;
-      width: 24px;
-      height: 24px;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
       display: none;
       align-items: center;
       justify-content: center;
       background: var(--main-black);
-      border-radius: 50%;
+      border-radius: var(--rounded-md);
       cursor: pointer;
       z-index: 1;
 

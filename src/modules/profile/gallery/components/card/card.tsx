@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { TrashIcon } from '@heroicons/react/24/outline'
 
 import { IGallery } from '@/shared/interfaces'
 
@@ -39,7 +39,7 @@ const Card: FC<ICard> = ({ card }) => {
     <div key={card.id} className={styles.root}>
       <div className={styles.preview}>
         <div className={styles.delete} onClick={handleRemove}>
-          <XMarkIcon className={styles.icon} />
+          <TrashIcon className={styles.icon} />
         </div>
 
         <div className={styles.type}>{card.type === 'visual' ? 'визуал' : 'объект'}</div>
