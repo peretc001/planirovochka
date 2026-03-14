@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 import { IProfile } from '@/shared/interfaces'
 
+import CardDescription from '@/modules/home/list/components/cardDescription/cardDescription'
 import CardGallery from '@/modules/home/list/components/cardGallery/cardGallery'
 
 import styles from './card.module.scss'
@@ -24,7 +25,8 @@ const Card: FC<ICard> = ({ card }) => (
         </div>
       </div>
     </div>
-    <div className={styles.description} dangerouslySetInnerHTML={{ __html: card.description }} />
+
+    <CardDescription description={card.description} />
 
     <CardGallery gallery={card.gallery} />
   </div>

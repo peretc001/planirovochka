@@ -70,7 +70,7 @@
     }
 
     label {
-      @include typography.text-xs;
+      @include typography.text-sm;
       @include typography.semibold;
       color: var(--gray-600);
     }

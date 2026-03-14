@@ -4,6 +4,9 @@
   flex: none;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  border-bottom: 1px dashed var(--gray-300);
+  padding-bottom: 16px;
 
   .header {
     display: flex;
@@ -29,7 +32,7 @@
       gap: 8px;
 
       .name {
-        @include typography.text-md;
+        @include typography.text-lg;
         @include typography.semibold;
       }
     }
