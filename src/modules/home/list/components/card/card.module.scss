@@ -21,6 +21,11 @@
       overflow: hidden;
       object-fit: cover;
 
+      @media screen and (max-width: 576px) {
+        width: 60px;
+        height: 60px;
+      }
+
       &:empty {
         background: var(--gray-100);
       }
@@ -34,17 +39,26 @@
       .name {
         @include typography.text-lg;
         @include typography.semibold;
+
+        @media screen and (max-width: 576px) {
+          @include typography.text-md;
+        }
       }
     }
 
     .about {
       display: flex;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 4px 16px;
 
       .city, .experience, .status {
         @include typography.text-sm;
         @include typography.semibold;
         color: var(--gray-500);
+
+        @media screen and (max-width: 576px) {
+          @include typography.text-xs;
+        }
       }
     }
 
