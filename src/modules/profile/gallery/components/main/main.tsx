@@ -4,6 +4,8 @@ import React from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
+import Loader from '@/shared/components/loader/loader'
+
 import { getGalleryApi } from '@/modules/profile/gallery/api/getGalleryApi'
 import List from '@/modules/profile/gallery/components/list/list'
 
@@ -17,7 +19,9 @@ const Main = () => {
 
   return (
     <div className={styles.root}>
-      <List isLoading={isFetching} list={data} />
+      {isFetching ? <Loader isFull /> : null}
+
+      <List list={data} />
     </div>
   )
 }

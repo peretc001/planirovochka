@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl'
 
 import { PlusIcon } from '@heroicons/react/24/outline'
 
-import Loader from '@/shared/components/loader/loader'
 import { IGallery } from '@/shared/interfaces'
 
 import Add from '@/modules/profile/gallery/components/add/add'
@@ -13,11 +12,10 @@ import Card from '@/modules/profile/gallery/components/card/card'
 import styles from './list.module.scss'
 
 interface IGalleryList {
-  readonly isLoading: boolean
   readonly list: IGallery[]
 }
 
-const List: FC<IGalleryList> = ({ isLoading, list }) => {
+const List: FC<IGalleryList> = ({ list }) => {
   const t = useTranslations('profile')
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -32,8 +30,6 @@ const List: FC<IGalleryList> = ({ isLoading, list }) => {
 
   return (
     <div className={styles.root}>
-      {isLoading ? <Loader isFull /> : null}
-
       <div>
         <Button type="primary" onClick={handleOpenAddModal}>
           <PlusIcon className={styles.icon} />
