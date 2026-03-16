@@ -8,6 +8,7 @@ export const paths = {
     index: '/profile',
     payment: '/profile/payment',
     portfolio: '/profile/portfolio',
+    prices: '/profile/prices',
   }
 }
 

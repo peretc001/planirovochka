@@ -163,15 +163,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
         ) : null}
       </div>
 
-      <Form.Item
-        className={styles.editor}
-        label={t('about.description.label')}
-        name="description"
-        rules={[{ message: t('require'), required: true }]}
-      >
-        <SimpleEditor defaultContent={profile?.description} onChange={handleChangeContent} />
-      </Form.Item>
-
+      <div id="types" />
       <Form.Item
         label={t.rich('about.types.label', {
           em: getHtmlChunks
@@ -226,6 +218,15 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
         rules={[{ message: t('require'), required: true }]}
       >
         <Select options={DESIGN_STATUS} placeholder={t('about.status.placeholder')} />
+      </Form.Item>
+
+      <Form.Item
+        className={styles.editor}
+        label={t('about.description.label')}
+        name="description"
+        rules={[{ message: t('require'), required: true }]}
+      >
+        <SimpleEditor defaultContent={profile?.description} onChange={handleChangeContent} />
       </Form.Item>
 
       <Form.Item>
