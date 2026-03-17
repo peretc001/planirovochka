@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { IGallery } from '@/shared/interfaces'
 
-import useFancybox from '@/modules/home/list/components/cardGallery/useFancybox'
+import useFancybox from '@/lib/useFancybox'
 
 import styles from './cardGallery.module.scss'
 

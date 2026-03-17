@@ -6,6 +6,8 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 
 import { IGallery } from '@/shared/interfaces'
 
+import useFancybox from '@/lib/useFancybox'
+
 import Add from '@/modules/profile/gallery/components/add/add'
 import Card from '@/modules/profile/gallery/components/card/card'
 
@@ -17,6 +19,8 @@ interface IGalleryList {
 
 const List: FC<IGalleryList> = ({ list }) => {
   const t = useTranslations('profile')
+
+  const [fancyboxRef] = useFancybox()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -37,9 +41,16 @@ const List: FC<IGalleryList> = ({ list }) => {
         </Button>
       </div>
 
-      <div className={styles.list}>
+      <div ref={fancyboxRef} className={styles.list}>
         {list?.map(card => (
-          <Card key={card.id} card={card} />
+          <a
+            key={card.id}
+            data-caption={card.description}
+            data-fancybox="gallery"
+            href={process.env.NEXT_PUBLIC_URL + card.url}
+          >
+            <Card card={card} />
+          </a>
         ))}
       </div>
 
