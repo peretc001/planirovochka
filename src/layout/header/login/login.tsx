@@ -2,10 +2,13 @@
 
 import React from 'react'
 import { Button } from 'antd'
+import { useTranslations } from 'next-intl'
 
 import { openSignupModal } from '@/lib/openSignupModal'
 
 const Login = () => {
+  const t = useTranslations('header')
+
   const handleSignup = () => {
     const actionSuccess = () => () => {
       // TODO: подумать, может заменить потом
@@ -15,7 +18,11 @@ const Login = () => {
     openSignupModal(actionSuccess)
   }
 
-  return <Button onClick={handleSignup}>signup</Button>
+  return (
+    <Button type="primary" onClick={handleSignup}>
+      {t('account')}
+    </Button>
+  )
 }
 
 export default Login

@@ -1,7 +1,8 @@
 {
   "header": {
     "login": "Войти",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "account": "Кабинет дизайнера"
   },
   "auth": {
     "signin": "Вход",

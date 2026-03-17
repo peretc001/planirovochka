@@ -37,7 +37,7 @@ const User = () => {
   const items: MenuProps['items'] = [
     {
       key: '1',
-      label: <Link href={paths.profile.index}>{t('menu.index')}</Link>
+      label: <Link href={paths.profile.about}>{t('menu.index')}</Link>
     },
     {
       type: 'divider'
