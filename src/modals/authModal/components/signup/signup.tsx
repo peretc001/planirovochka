@@ -19,12 +19,20 @@ const SignupPage: FC<ISignupPage> = ({ actionClose, actionSuccess }) => {
   const [form] = Form.useForm()
   const [checkPolicy, setCheckPolicy] = useState(true)
 
+  const handleSuccess = () => {
+    actionClose()
+    if (actionSuccess) actionSuccess()
+  }
+
   const { isLoading, mutate: save } = useMutation({
     mutationFn: (values: any) => signupApi(values),
     onError: () => message.error(t('status.error')),
     onSuccess: status => {
-      if (status) actionClose()
-      else message.error(t('status.exist'))
+      if (status) {
+        handleSuccess()
+      } else {
+        message.error(t('status.exist'))
+      }
     }
   })
 
@@ -32,14 +40,9 @@ const SignupPage: FC<ISignupPage> = ({ actionClose, actionSuccess }) => {
     setCheckPolicy(e.target.checked)
   }
 
-  const onFinish = async (values: any) => {
-    await save(values)
-    if (actionSuccess) actionSuccess()
-  }
-
   return (
     <div className={styles.root}>
-      <Form className={styles.form} form={form} layout="vertical" name="signup" onFinish={onFinish}>
+      <Form className={styles.form} form={form} layout="vertical" name="signup" onFinish={save}>
         <Form.Item
           label={t('email.label')}
           name="email"
