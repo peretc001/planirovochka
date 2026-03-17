@@ -51,7 +51,7 @@ const numberFormatter: NumberFormatter = (number, isCut = false) => {
   }
 
   // Вставляем запятые между тысячами
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
   return parts.join('.')
 }
