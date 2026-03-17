@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@ant-design/static-style-extract": "^2.0.4",
+    "@fancyapps/ui": "^6.1.13",
     "@heroicons/react": "^2.2.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash.throttle": "^4.1.9",
