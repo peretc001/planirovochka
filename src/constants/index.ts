@@ -35,7 +35,7 @@ export const DESIGN_TYPES = [
   },
   {
     label: 'Авторский надзор',
-    value: 'autor'
+    value: 'author'
   }
 ]
 

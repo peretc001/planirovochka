@@ -6,11 +6,10 @@ import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
 
-import { IGallery } from '@/shared/interfaces'
+import { IGallery, ITypes } from '@/shared/interfaces'
 
 import { DESIGN_TYPES, paths } from '@/constants'
 
-import { addProfileApi } from '@/modules/profile/about/api/addProfileApi'
 import { addPricesApi } from '@/modules/profile/prices/api/addPricesApi'
 
 import styles from './list.module.scss'
@@ -23,9 +22,12 @@ interface IPricesList {
 const List: FC<IPricesList> = ({ prices, types }) => {
   const t = useTranslations('profile')
 
+  const getHtmlChunks = (chunks: any) => <sup>{chunks}</sup>
+
   const [form] = Form.useForm()
 
-  const allowed = DESIGN_TYPES.filter(t => types?.includes(t.value))
+  // @ts-expect-error: it works
+  const allowed = DESIGN_TYPES.filter((t: ITypes) => types.includes(t.value))
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: values => addPricesApi(values),
@@ -64,10 +66,7 @@ const List: FC<IPricesList> = ({ prices, types }) => {
           >
             <Input id={type.value + '_max'} type="number" />
           </Form.Item>
-          <div className={styles.type}>
-            {t('prices.column.price_type')}
-            <sup>2</sup>
-          </div>
+          <div className={styles.type}>{t.rich('prices.type', { sup: getHtmlChunks })}</div>
         </div>
       ))}
 

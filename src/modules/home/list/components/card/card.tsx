@@ -4,6 +4,7 @@ import { IProfile } from '@/shared/interfaces'
 
 import CardDescription from '@/modules/home/list/components/cardDescription/cardDescription'
 import CardGallery from '@/modules/home/list/components/cardGallery/cardGallery'
+import CardPrices from '@/modules/home/list/components/cardPrices/cardPrices'
 
 import styles from './card.module.scss'
 
@@ -29,6 +30,8 @@ const Card: FC<ICard> = ({ card }) => (
     <CardDescription description={card.description} />
 
     <CardGallery gallery={card.gallery} />
+
+    <CardPrices prices={card.prices} types={card.types} />
   </div>
 )
 
