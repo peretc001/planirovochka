@@ -52,20 +52,20 @@ const List: FC<IPricesList> = ({ prices, types }) => {
         <div key={type.value} className={styles.row}>
           <div className={styles.title}>{type.label}</div>
 
-          <Form.Item
-            className={cns(styles.price, styles.min)}
-            name={type.value + '_min'}
-            rules={[{ message: t('require') }]}
-          >
-            <Input id={type.value + '_min'} type="number" />
-          </Form.Item>
-          <Form.Item
-            className={cns(styles.price, styles.max)}
-            name={type.value + '_max'}
-            rules={[{ message: t('require') }]}
-          >
-            <Input id={type.value + '_max'} type="number" />
-          </Form.Item>
+          <div className={cns(styles.price, styles.min)}>
+            {t('prices.from')}
+            <Form.Item name={type.value + '_min'} rules={[{ message: t('require') }]}>
+              <Input id={type.value + '_min'} type="number" />
+            </Form.Item>
+          </div>
+
+          <div className={cns(styles.price, styles.max)}>
+            {t('prices.to')}
+            <Form.Item name={type.value + '_max'} rules={[{ message: t('require') }]}>
+              <Input id={type.value + '_max'} type="number" />
+            </Form.Item>
+          </div>
+
           <div className={styles.type}>{t.rich('prices.type', { sup: getHtmlChunks })}</div>
         </div>
       ))}

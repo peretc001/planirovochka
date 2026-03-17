@@ -29,7 +29,7 @@
     }
 
     .title {
-      @include typography.text-md;
+      @include typography.text-sm;
       @include typography.semibold;
       color: var(--main-black);
     }

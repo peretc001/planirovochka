@@ -36,6 +36,8 @@
       gap: 8px;
       width: 120px;
       text-align: center;
+      @include typography.text-sm;
+      color: var(--gray-400);
 
       @media screen and (max-width: 576px) {
         flex: 1;
@@ -49,26 +51,12 @@
           grid-area: 2 / 2 / 3 / 3;
         }
       }
-
-      &.min:before {
-        content: 'от';
-      }
-
-      &.max:before {
-        content: 'до';
-      }
-
-      &.min, &.max {
-        &:before {
-          flex: none;
-          @include typography.text-sm;
-          color: var(--gray-400);
-        }
-      }
     }
 
     .type {
       width: 80px;
+      @include typography.text-sm;
+      color: var(--gray-400);
 
       @media screen and (max-width: 576px) {
         grid-area: 2 / 3 / 3 / 4;
