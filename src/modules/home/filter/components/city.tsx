@@ -18,7 +18,7 @@ const City = () => {
     const params = new URLSearchParams(searchParams)
 
     if (city.id) {
-      params.set('city', city.id)
+      params.set('city', city.label)
     } else {
       params.delete('city')
     }
