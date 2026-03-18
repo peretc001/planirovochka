@@ -1,5 +1,5 @@
-import React, { FC, useCallback } from 'react'
-import { Button, Checkbox, Form, Input, message } from 'antd'
+import React, { FC } from 'react'
+import { Button, Form, Input, message } from 'antd'
 import cns from 'classnames'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
@@ -54,14 +54,14 @@ const List: FC<IPricesList> = ({ prices, types }) => {
 
           <div className={cns(styles.price, styles.min)}>
             {t('prices.from')}
-            <Form.Item name={type.value + '_min'} rules={[{ message: t('require') }]}>
+            <Form.Item name={type.value + '_min'}>
               <Input id={type.value + '_min'} type="number" />
             </Form.Item>
           </div>
 
           <div className={cns(styles.price, styles.max)}>
             {t('prices.to')}
-            <Form.Item name={type.value + '_max'} rules={[{ message: t('require') }]}>
+            <Form.Item name={type.value + '_max'}>
               <Input id={type.value + '_max'} type="number" />
             </Form.Item>
           </div>
