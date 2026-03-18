@@ -2,32 +2,17 @@
 
 .root {
   flex: none;
-  width: 300px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
+  background: var(--blue-50);
+  border-radius: var(--rounded-md);
+  border-bottom: none;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   @media screen and (max-width: 991px) {
     display: none;
-  }
-
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    background: var(--blue-50);
-    border-radius: var(--rounded-md);
-    border: 1px solid var(--blue-50);
-    border-bottom: none;
-
-    @media screen and (max-width: 1199px) {
-      margin-top: -12px;
-    }
-  }
-
-  .mobile {
-    flex: none;
-    min-height: 40px;
-    @include typography.text-xs;
-    color: var(--gray-400);
   }
 
   .search {

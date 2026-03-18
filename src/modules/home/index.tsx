@@ -7,8 +7,10 @@ import styles from './home.module.scss'
 
 const Home = () => (
   <div className={styles.root}>
-    <Filter />
-    <List />
+    <div className={styles.wrapper}>
+      <Filter />
+      <List />
+    </div>
   </div>
 )
 

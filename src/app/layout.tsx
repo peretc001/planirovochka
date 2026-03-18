@@ -36,8 +36,6 @@ const RootLayout = async ({
               <Header />
 
               {children}
-
-              <div>footer</div>
             </div>
 
             <AuthModal />

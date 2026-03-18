@@ -63,3 +63,29 @@ h3 {
     @include typography.text-sm;
   }
 }
+
+
+/* Для WebKit браузеров (Chrome, Safari, Opera, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a6a9b5; /* цвет ползунка */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38393f; /* цвет ползунка при наведении */
+}
+
+/* Для Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a6a9b5 #f1f1f1; /* ползунок трек */
+}
