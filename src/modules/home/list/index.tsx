@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation'
 
 import { useQuery } from '@tanstack/react-query'
 
+import Loader from '@/shared/components/loader/loader'
+
 import { getProfilesApi } from '@/modules/home/list/api/getProfilesApi'
 import Cards from '@/modules/home/list/components/cards/cards'
 
@@ -28,7 +30,7 @@ const List = () => {
 
   return (
     <div className={cssStyles.root}>
-      {isLoading ? 'loading' : null}
+      {isLoading ? <Loader className={cssStyles.loader} isFull /> : null}
 
       {data?.length > 0 && <Cards cards={data} />}
     </div>
