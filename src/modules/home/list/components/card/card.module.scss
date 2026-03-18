@@ -53,8 +53,6 @@
 
       .city, .experience, .status {
         @include typography.text-sm;
-        @include typography.semibold;
-        color: var(--gray-500);
 
         @media screen and (max-width: 576px) {
           @include typography.text-xs;

@@ -1,3 +1,5 @@
+@use "@/styles/typography";
+
 .root {
   display: flex;
   align-items: center;
@@ -10,12 +12,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    padding: 0 16px 0 24px;
   }
 
   .logo {
     flex: none;
-    width: 220px;
-    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      width: 40px;
+      height: auto;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+
+      .caption {
+        font-size: 18px;
+        @include typography.bold;
+        text-transform: uppercase;
+      }
+
+      .description {
+        @include typography.text-xs;
+        letter-spacing: -0.2;
+        color: var(--gray-400);
+        margin-top: -4px;
+      }
+    }
   }
 }

@@ -16,6 +16,10 @@ const Header = async () => {
       <div className={styles.container}>
         <Link className={styles.logo} href="/">
           <img alt="" src="/logo.png" />
+          <div className={styles.title}>
+            <div className={styles.caption}>ПЛАНИРОВОЧКА</div>
+            <div className={styles.description}>Расставим все по полочкам</div>
+          </div>
         </Link>
 
         <Auth isAuth={!!user?.id} />
