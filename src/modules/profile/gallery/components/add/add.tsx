@@ -56,7 +56,7 @@ const Add: FC<IGalleryAdd> = ({ onCancel }) => {
   const handleLoadPreview = async (files: any) => {
     const preview = await getBase64(files.file)
     if (preview) setPreview(preview)
-    buttonRef.current.focus()
+    if (buttonRef.current) buttonRef.current.focus()
   }
 
   const props: UploadProps = {
