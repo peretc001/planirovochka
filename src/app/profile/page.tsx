@@ -1,4 +1,5 @@
 import React from 'react'
+import { Metadata } from 'next'
 
 import Info from '@/modules/profile/user'
 
