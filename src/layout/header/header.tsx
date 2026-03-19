@@ -17,8 +17,8 @@ const Header = async () => {
         <Link className={styles.logo} href="/">
           <img alt="" src="/logo.png" />
           <div className={styles.title}>
-            <div className={styles.caption}>ПЛАНИРОВОЧКА</div>
-            <div className={styles.description}>Расставим все по полочкам</div>
+            <div className={styles.caption}>{process.env.NEXT_PUBLIC_NAME}</div>
+            <div className={styles.description}>{process.env.NEXT_PUBLIC_DESCRIPTION}</div>
           </div>
         </Link>
 
