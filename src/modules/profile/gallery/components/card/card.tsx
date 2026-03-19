@@ -31,10 +31,7 @@ const Card: FC<ICard> = ({ card }) => {
     }
   })
 
-  const handleRemove = (e: MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-
+  const handleRemove = () => {
     deleteFile(card.id)
   }
 
