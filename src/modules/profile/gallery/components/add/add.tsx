@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { Button, Form, message, Radio, Upload, UploadFile, UploadProps } from 'antd'
 import { useTranslations } from 'next-intl'
 
@@ -33,6 +33,8 @@ const Add: FC<IGalleryAdd> = ({ onCancel }) => {
 
   const queryClient = useQueryClient()
 
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
   const [form] = Form.useForm()
 
   const [fileList, setFileList] = useState<UploadFile[]>([])
@@ -54,6 +56,7 @@ const Add: FC<IGalleryAdd> = ({ onCancel }) => {
   const handleLoadPreview = async (files: any) => {
     const preview = await getBase64(files.file)
     if (preview) setPreview(preview)
+    buttonRef.current.focus()
   }
 
   const props: UploadProps = {
@@ -135,7 +138,7 @@ const Add: FC<IGalleryAdd> = ({ onCancel }) => {
       </Form.Item>
 
       <Form.Item>
-        <Button htmlType="submit" loading={isUploadLoading} type="primary">
+        <Button ref={buttonRef} htmlType="submit" loading={isUploadLoading} type="primary">
           {t('save')}
         </Button>
       </Form.Item>
