@@ -2,39 +2,40 @@
 
 .root {
   flex: 1;
+  display: flex;
+  position: relative;
+
+  .delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-black);
+    border-radius: var(--rounded-md);
+    cursor: pointer;
+    z-index: 1;
+
+    .icon {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      color: var(--main-white);
+    }
+  }
+
+  &:hover {
+    .delete {
+      display: flex;
+    }
+  }
 
   .preview {
     flex: 1;
     display: flex;
-    position: relative;
-
-    .delete {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 32px;
-      height: 32px;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: var(--main-black);
-      border-radius: var(--rounded-md);
-      cursor: pointer;
-      z-index: 1;
-
-      .icon {
-        flex: none;
-        width: 16px;
-        height: 16px;
-        color: var(--main-white);
-      }
-    }
-
-    &:hover {
-      .delete {
-        display: flex;
-      }
-    }
 
     .type, .description {
       position: absolute;

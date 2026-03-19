@@ -39,12 +39,18 @@ const Card: FC<ICard> = ({ card }) => {
   }
 
   return (
-    <div key={card.id} className={styles.root}>
-      <div className={styles.preview}>
-        <div className={styles.delete} onClick={handleRemove}>
-          <TrashIcon className={styles.icon} />
-        </div>
+    <div className={styles.root}>
+      <div className={styles.delete} onClick={handleRemove}>
+        <TrashIcon className={styles.icon} />
+      </div>
 
+      <a
+        key={card.id}
+        className={styles.preview}
+        data-caption={card.description}
+        data-fancybox="gallery"
+        href={process.env.NEXT_PUBLIC_URL + card.url}
+      >
         <div className={styles.type}>{card.type === 'visual' ? 'визуал' : 'объект'}</div>
 
         {card.description ? (
@@ -57,7 +63,7 @@ const Card: FC<ICard> = ({ card }) => {
         <picture className={styles.picture}>
           <img alt={card.description} src={process.env.NEXT_PUBLIC_URL + card.url} />
         </picture>
-      </div>
+      </a>
     </div>
   )
 }

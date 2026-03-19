@@ -43,14 +43,7 @@ const List: FC<IGalleryList> = ({ list }) => {
 
       <div ref={fancyboxRef} className={styles.list}>
         {list?.map(card => (
-          <a
-            key={card.id}
-            data-caption={card.description}
-            data-fancybox="gallery"
-            href={process.env.NEXT_PUBLIC_URL + card.url}
-          >
-            <Card card={card} />
-          </a>
+          <Card card={card} />
         ))}
       </div>
 
