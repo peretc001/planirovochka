@@ -70,14 +70,14 @@ const Menu = () => {
           <PhotoIcon className={styles.icon} />
           {t('menu.gallery')}
         </Link>
-        <Link
-          className={cns(styles.item, pathname === paths.profile.portfolio && styles.active)}
-          aria-label={paths.profile.portfolio}
-          href={paths.profile.portfolio}
-        >
-          <BriefcaseIcon className={styles.icon} />
-          {t('menu.portfolio')}
-        </Link>
+        {/*<Link*/}
+        {/*  className={cns(styles.item, pathname === paths.profile.portfolio && styles.active)}*/}
+        {/*  aria-label={paths.profile.portfolio}*/}
+        {/*  href={paths.profile.portfolio}*/}
+        {/*>*/}
+        {/*  <BriefcaseIcon className={styles.icon} />*/}
+        {/*  {t('menu.portfolio')}*/}
+        {/*</Link>*/}
       </div>
     </div>
   )
