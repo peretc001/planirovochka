@@ -43,7 +43,7 @@ const List: FC<IGalleryList> = ({ list }) => {
 
       <div ref={fancyboxRef} className={styles.list}>
         {list?.map(card => (
-          <Card card={card} />
+          <Card key={card.id} card={card} />
         ))}
       </div>
 
