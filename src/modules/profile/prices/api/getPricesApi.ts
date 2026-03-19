@@ -2,7 +2,7 @@ import serverApi from '@/lib/serverApi'
 
 export const getPricesApi = async () => {
   try {
-    const response = await serverApi.post('prices/get.php')
+    const response = await serverApi.post('profile/prices/get.php')
 
     return response?.data
   } catch (err) {

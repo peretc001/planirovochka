@@ -2,7 +2,7 @@ import serverApi from '@/lib/serverApi'
 
 export const deleteGalleryApi = async (id: number) => {
   try {
-    const response = await serverApi.post('gallery/delete.php', {
+    const response = await serverApi.post('profile/gallery/delete.php', {
       id
     })
 

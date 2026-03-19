@@ -18,7 +18,7 @@ export const addGalleryApi = async ({
 
     const token = getToken()
 
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'gallery/add.php', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'profile/gallery/add.php', {
       body: formData,
       headers: {
         Authorization: `Bearer ${token}`
