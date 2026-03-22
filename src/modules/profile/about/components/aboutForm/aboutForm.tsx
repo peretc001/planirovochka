@@ -8,6 +8,7 @@ import CityAutocomplete from '@/shared/components/cityAutocomplete/cityAutocompl
 import { ICityOption } from '@/shared/components/cityAutocomplete/interface'
 import FileUpload from '@/shared/components/fileUpload/fileUpload'
 import Loader from '@/shared/components/loader/loader'
+import { IProfile } from '@/shared/interfaces'
 
 import {
   DESIGN_EXPERIENCE,
@@ -26,7 +27,7 @@ import SimpleEditor from '@/components/tiptap-templates/simple/simple-editor'
 import styles from './aboutForm.module.scss'
 
 interface IAboutForm {
-  readonly profile: any
+  readonly profile: IProfile | null | undefined
 }
 
 const AboutForm: FC<IAboutForm> = ({ profile }) => {

@@ -1,3 +1,5 @@
+import { IProfile } from '@/shared/interfaces'
+
 export const getProfileApi = async () => {
   try {
     const response = await fetch('/api/profile/about', { credentials: 'include' })
@@ -6,9 +8,11 @@ export const getProfileApi = async () => {
       return null
     }
 
-    const json = (await response.json()) as { data?: Record<string, unknown> | null }
+    const json = await response.json()
 
-    return json.data ?? null
+    if (json.data) return json.data as IProfile
+
+    return null
   } catch {
     return null
   }
