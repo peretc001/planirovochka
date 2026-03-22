@@ -11,17 +11,10 @@ import styles from './authModal.module.scss'
 import SigninPage from './components/signin/signin'
 import SignupPage from './components/signup/signup'
 
-interface IOpenModalEvent extends Event {
-  detail: {
-    actionSuccess?: () => void
-  }
-}
-
 const AuthModal = () => {
   const t = useTranslations('auth')
 
   const [type, setType] = useState('signin')
-  const [actionSuccess, setActionSuccess] = useState<(() => void) | undefined>(undefined)
 
   const { isMobileMD } = useMatchMedia()
 
@@ -35,13 +28,8 @@ const AuthModal = () => {
   const handleLogin = () => setType('signin')
 
   useEffect(() => {
-    const handleShowModal = (e: IOpenModalEvent) => {
+    const handleShowModal = () => {
       setIsModalOpen(true)
-
-      if (e.detail.actionSuccess) {
-        const { actionSuccess } = e.detail
-        setActionSuccess(actionSuccess)
-      }
     }
 
     document.addEventListener('openSignupModal', handleShowModal as EventListener)
@@ -62,9 +50,9 @@ const AuthModal = () => {
 
         <Suspense>
           {type === 'signin' ? (
-            <SigninPage actionClose={hideModal} actionSuccess={actionSuccess} />
+            <SigninPage actionClose={hideModal} />
           ) : (
-            <SignupPage actionClose={hideModal} actionSuccess={actionSuccess} />
+            <SignupPage actionClose={hideModal} />
           )}
         </Suspense>
 

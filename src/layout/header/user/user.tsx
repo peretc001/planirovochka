@@ -6,32 +6,27 @@ import cns from 'classnames'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
-import { useQuery } from '@tanstack/react-query'
-
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+import { IUser } from '@/shared/interfaces'
 
 import { paths } from '@/constants'
 
-import { removeToken } from '@/lib/cookie'
-
-import { getUserApi } from '@/modules/profile/user/api/getUserApi'
-
 import styles from './user.module.scss'
 
-const User = () => {
-  const t = useTranslations('profile')
+import { signout } from '@/app/actions/auth'
 
-  const { data: user } = useQuery({
-    queryFn: getUserApi,
-    queryKey: ['user']
-  })
+interface IUserProps {
+  readonly user: IUser
+}
+
+const User: FC<IUserProps> = ({ user }) => {
+  const t = useTranslations('profile')
 
   const { avatar, email } = user || {}
 
-  const handleLogout = () => {
-    removeToken()
-    // TODO: подумать, может заменить потом
-    setTimeout(() => window.location.reload(), 500)
+  const handleLogout = async () => {
+    await signout()
   }
 
   const items: MenuProps['items'] = [

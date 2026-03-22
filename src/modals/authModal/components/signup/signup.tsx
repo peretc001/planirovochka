@@ -1,48 +1,56 @@
-import React, { FC, useState } from 'react'
-import { Button, Checkbox, CheckboxProps, Form, Input, message } from 'antd'
+import React, { FC, startTransition, useActionState, useEffect, useState } from 'react'
+import { Alert, Button, Checkbox, CheckboxProps, Form, Input } from 'antd'
 import { useTranslations } from 'next-intl'
 
-import { useMutation } from '@tanstack/react-query'
-
-import { signupApi } from '@/modals/authModal/api/signupApi'
+import Loader from '@/shared/components/loader/loader'
 
 import styles from './signup.module.scss'
 
+import { signup } from '@/app/actions/auth'
+
 interface ISignupPage {
   readonly actionClose: () => void
-  readonly actionSuccess?: () => void
 }
 
-const SignupPage: FC<ISignupPage> = ({ actionClose, actionSuccess }) => {
+const initialState: { error?: string; status?: boolean } = {}
+
+const SignupPage: FC<ISignupPage> = ({ actionClose }) => {
   const t = useTranslations('auth')
+
+  const [state, formAction, isPending] = useActionState(signup, initialState)
 
   const [form] = Form.useForm()
   const [checkPolicy, setCheckPolicy] = useState(true)
 
-  const handleSuccess = () => {
-    actionClose()
-    if (actionSuccess) actionSuccess()
-  }
-
-  const { isLoading, mutate: save } = useMutation({
-    mutationFn: (values: any) => signupApi(values),
-    onError: () => message.error(t('status.error')),
-    onSuccess: status => {
-      if (status) {
-        handleSuccess()
-      } else {
-        message.error(t('status.exist'))
-      }
-    }
-  })
+  const getError = state?.error === 422 ? t('status.exist') : t('status.error')
 
   const handleChangePolicy: CheckboxProps['onChange'] = e => {
     setCheckPolicy(e.target.checked)
   }
 
+  const handleFinish = (values: { email: string; password: string }) => {
+    startTransition(() => {
+      formAction(values)
+    })
+  }
+
+  useEffect(() => {
+    if (state?.status) {
+      actionClose()
+    }
+  }, [state?.status])
+
   return (
     <div className={styles.root}>
-      <Form className={styles.form} form={form} layout="vertical" name="signup" onFinish={save}>
+      {isPending ? <Loader className={styles.loader} /> : null}
+
+      <Form
+        className={styles.form}
+        form={form}
+        layout="vertical"
+        name="signup"
+        onFinish={handleFinish}
+      >
         <Form.Item
           label={t('email.label')}
           name="email"
@@ -76,13 +84,9 @@ const SignupPage: FC<ISignupPage> = ({ actionClose, actionSuccess }) => {
           })}
         </Checkbox>
 
-        <Button
-          className={styles.submit}
-          disabled={!checkPolicy}
-          htmlType="submit"
-          loading={isLoading}
-          type="primary"
-        >
+        {state?.error ? <Alert title={getError} type="error" /> : null}
+
+        <Button className={styles.submit} disabled={!checkPolicy} htmlType="submit" type="primary">
           {t('submit')}
         </Button>
       </Form>

@@ -1,43 +1,52 @@
-import React, { FC, useState } from 'react'
-import { Button, Form, Input, message } from 'antd'
+import React, { FC, startTransition, useActionState, useEffect } from 'react'
+import { Alert, Button, Form, Input } from 'antd'
 import { useTranslations } from 'next-intl'
 
-import { useMutation } from '@tanstack/react-query'
-
-import { signinApi } from '@/modals/authModal/api/signinApi'
+import Loader from '@/shared/components/loader/loader'
 
 import styles from './signin.module.scss'
 
+import { signin } from '@/app/actions/auth'
+
 interface ISigninPage {
   readonly actionClose: () => void
-  readonly actionSuccess?: () => void
 }
 
-const SigninPage: FC<ISigninPage> = ({ actionClose, actionSuccess }) => {
+const initialState: { error?: string; status?: boolean } = {}
+
+const SigninPage: FC<ISigninPage> = ({ actionClose }) => {
   const t = useTranslations('auth')
+
+  const [state, formAction, isPending] = useActionState(signin, initialState)
 
   const [form] = Form.useForm()
 
-  const handleSuccess = () => {
-    actionClose()
-    if (actionSuccess) actionSuccess()
+  const getError = state?.error === 400 ? t('status.incorrect') : t('status.error')
+
+  const handleFinish = (values: { email: string; password: string }) => {
+    startTransition(() => {
+      formAction(values)
+    })
   }
 
-  const { isLoading, mutate: save } = useMutation({
-    mutationFn: (values: any) => signinApi(values),
-    onError: () => message.error(t('status.error')),
-    onSuccess: status => {
-      if (status) {
-        handleSuccess()
-      } else {
-        message.error(t('status.empty'))
-      }
+  useEffect(() => {
+    if (state?.status) {
+      actionClose()
     }
-  })
+  }, [state?.status])
 
   return (
     <div className={styles.root}>
-      <Form className={styles.form} form={form} layout="vertical" name="signup" onFinish={save}>
+      {isPending ? <Loader className={styles.loader} /> : null}
+
+      <Form
+        className={styles.form}
+        disabled={isPending}
+        form={form}
+        layout="vertical"
+        name="signin"
+        onFinish={handleFinish}
+      >
         <Form.Item
           label={t('email.label')}
           name="email"
@@ -61,7 +70,9 @@ const SigninPage: FC<ISigninPage> = ({ actionClose, actionSuccess }) => {
           <Input.Password placeholder={t('password.placeholder')} />
         </Form.Item>
 
-        <Button className={styles.submit} htmlType="submit" loading={isLoading} type="primary">
+        {state?.error ? <Alert title={getError} type="error" /> : null}
+
+        <Button className={styles.submit} htmlType="submit" type="primary">
           {t('confirm')}
         </Button>
       </Form>

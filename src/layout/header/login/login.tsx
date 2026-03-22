@@ -14,12 +14,7 @@ const Login = () => {
   const t = useTranslations('header')
 
   const handleSignup = () => {
-    const actionSuccess = () => () => {
-      // TODO: подумать, может заменить потом
-      setTimeout(() => window.location.reload(), 1000)
-    }
-
-    openSignupModal(actionSuccess)
+    openSignupModal()
   }
 
   return (

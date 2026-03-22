@@ -1,15 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { jwtPayloadToUser, verifyJwtOnServer } from '@/lib/verifyJwtOnServer'
+import { createClient } from '@/lib/supabaseServer'
 
 import Auth from '@/layout/header/auth/auth'
 
 import styles from './header.module.scss'
 
 const Header = async () => {
-  const payload = await verifyJwtOnServer()
-  const user = jwtPayloadToUser(payload)
+  const supabase = await createClient()
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser()
 
   return (
     <div className={styles.root}>
@@ -22,7 +25,7 @@ const Header = async () => {
           </div>
         </Link>
 
-        <Auth isAuth={!!user?.id} />
+        <Auth user={user} />
       </div>
     </div>
   )
