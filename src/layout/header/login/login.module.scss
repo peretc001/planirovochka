@@ -1,0 +1,18 @@
+.icon {
+  display: none;
+  flex: none;
+  width: 16px;
+  height: 16px;
+
+  @media screen and (max-width: 576px) {
+    display: block;
+  }
+}
+
+.text {
+  display: block;
+
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
+}
