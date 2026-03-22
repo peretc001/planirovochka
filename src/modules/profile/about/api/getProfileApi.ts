@@ -1,13 +1,15 @@
-import serverApi from '@/lib/serverApi'
-
 export const getProfileApi = async () => {
   try {
-    const response = await serverApi.post('profile/about/get.php')
+    const response = await fetch('/api/profile/about', { credentials: 'include' })
 
-    return response?.data
-  } catch (err) {
-    console.log('getProfileApi', err)
+    if (!response.ok) {
+      return null
+    }
 
+    const json = (await response.json()) as { data?: Record<string, unknown> | null }
+
+    return json.data ?? null
+  } catch {
     return null
   }
 }

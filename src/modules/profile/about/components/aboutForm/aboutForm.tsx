@@ -36,18 +36,18 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
 
   const [form] = Form.useForm()
 
-  const telegram = Form.useWatch('telegram', form)
-  const telegramUrlRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]{3,}$/
+  // const telegram = Form.useWatch('telegram', form)
+  // const telegramUrlRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]{3,}$/
 
   const { isLoading, mutate: save } = useMutation({
-    mutationFn: values => addProfileApi(values),
+    mutationFn: (values: Record<string, unknown>) => addProfileApi(values),
     onError: () => message.error(t('error')),
     onSuccess: status => (status ? message.success(t('success')) : message.error(t('error')))
   })
 
   const { isLoading: isUploadLoading, mutate: uploadFile } = useMutation({
     mutationFn: (file: File) => addAvatarApi(file),
-    onError: () => message.error(t('info.error')),
+    onError: () => message.error(t('about.error')),
     onSuccess: url => {
       if (url) {
         form.setFieldValue('avatar', url)
@@ -58,7 +58,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
 
   const { mutate: deleteFile } = useMutation({
     mutationFn: () => deleteAvatarApi(),
-    onError: () => message.error(t('info.error')),
+    onError: () => message.error(t('about.error')),
     onSuccess: status => {
       if (status) {
         form.resetFields(['avatar'])
@@ -102,32 +102,56 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
           onDelete={deleteFile}
           onUpload={uploadFile}
         />
-        <p>{t('info.avatar')}</p>
+        <p>{t('about.avatar')}</p>
+      </div>
+
+      <div className={styles.name}>
+        <Form.Item
+          label={t('about.last_name.label')}
+          name="last_name"
+          rules={[
+            { message: t('require'), required: true },
+            { message: t('about.city.length'), min: 3 }
+          ]}
+        >
+          <Input maxLength={255} placeholder={t('about.last_name.placeholder')} />
+        </Form.Item>
+
+        <Form.Item
+          label={t('about.first_name.label')}
+          name="first_name"
+          rules={[
+            { message: t('require'), required: true },
+            { message: t('about.city.length'), min: 3 }
+          ]}
+        >
+          <Input maxLength={255} placeholder={t('about.first_name.placeholder')} />
+        </Form.Item>
+
+        <Form.Item
+          label={t('about.middle_name.label')}
+          name="middle_name"
+          rules={[
+            { message: t('require'), required: true },
+            { message: t('about.city.length'), min: 3 }
+          ]}
+        >
+          <Input maxLength={255} placeholder={t('about.middle_name.placeholder')} />
+        </Form.Item>
       </div>
 
       <Form.Item
-        label={t('info.name.label')}
-        name="name"
-        rules={[
-          { message: t('require'), required: true },
-          { message: t('info.city.length'), min: 3 }
-        ]}
-      >
-        <Input maxLength={255} placeholder={t('info.name.placeholder')} />
-      </Form.Item>
-
-      <Form.Item
-        label={t.rich('info.city.label', { em: getHtmlChunks })}
+        label={t.rich('about.city.label', { em: getHtmlChunks })}
         name="city"
         rules={[
           { message: t('require'), required: true },
-          { message: t('info.city.length'), min: 3 },
+          { message: t('about.city.length'), min: 3 },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (value && getFieldValue('city_code') !== '') {
                 return Promise.resolve()
               }
-              return Promise.reject(new Error(t('info.city.placeholder')))
+              return Promise.reject(new Error(t('about.city.placeholder')))
             }
           })
         ]}
@@ -139,29 +163,29 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
         <Input />
       </Form.Item>
 
-      <div className={styles.telegram}>
-        <Form.Item
-          label={t.rich('info.telegram.label', { em: getHtmlChunks })}
-          name="telegram"
-          rules={[
-            { message: t('require'), required: true },
-            { message: t('info.telegram.length'), min: 3 }
-          ]}
-        >
-          <Input placeholder={t('info.telegram.placeholder')} />
-        </Form.Item>
+      {/*<div className={styles.telegram}>*/}
+      {/*  <Form.Item*/}
+      {/*    label={t.rich('about.telegram.label', { em: getHtmlChunks })}*/}
+      {/*    name="telegram"*/}
+      {/*    rules={[*/}
+      {/*      { message: t('require'), required: true },*/}
+      {/*      { message: t('about.telegram.length'), min: 3 }*/}
+      {/*    ]}*/}
+      {/*  >*/}
+      {/*    <Input placeholder={t('about.telegram.placeholder')} />*/}
+      {/*  </Form.Item>*/}
 
-        {telegram && telegramUrlRegex.test(telegram) ? (
-          <a
-            className={styles.test}
-            href={`${telegram}?text=test`}
-            rel="noreferrer"
-            target="_blank"
-          >
-            {t('info.telegram.test')}
-          </a>
-        ) : null}
-      </div>
+      {/*  {telegram && telegramUrlRegex.test(telegram) ? (*/}
+      {/*    <a*/}
+      {/*      className={styles.test}*/}
+      {/*      href={`${telegram}?text=test`}*/}
+      {/*      rel="noreferrer"*/}
+      {/*      target="_blank"*/}
+      {/*    >*/}
+      {/*      {t('about.telegram.test')}*/}
+      {/*    </a>*/}
+      {/*  ) : null}*/}
+      {/*</div>*/}
 
       <div id="types" />
       <Form.Item

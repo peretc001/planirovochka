@@ -86,11 +86,19 @@
       "notifications": "Уведомления",
       "payment": "Платежи"
     },
-    "info": {
-      "avatar": "Фото профиля",
-      "name": {
-        "label": "ФИО",
-        "placeholder": "Введите ФИО"
+    "about": {
+      "avatar": "Ваше фото",
+      "first_name": {
+        "label": "Имя",
+        "placeholder": "Введите имя"
+      },
+      "middle_name": {
+        "label": "Отчество",
+        "placeholder": "Введите отчество"
+      },
+      "last_name": {
+        "label": "Фамилия",
+        "placeholder": "Введите фамилию"
       },
       "telegram": {
         "label": "Telegram <em>(заказы будут приходить вам в ТГ)</em>",
@@ -103,9 +111,7 @@
         "length": "Минимум 3 символа",
         "notFound": "Город не найден",
         "placeholder": "Введите ваш город"
-      }
-    },
-    "about": {
+      },
       "description": {
         "label": "Расскажите о себе"
       },
@@ -154,6 +160,6 @@
     },
     "save": "Сохранить",
     "success": "Анкета успешно сохранена",
-    "error": "Опс... что-то сломалось"
+    "error": "Что-то сломалось. Попробуйте еще раз"
   }
 }

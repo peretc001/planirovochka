@@ -34,7 +34,7 @@ const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onS
 
   const loadCity = async (value: string) => mutate(value)
 
-  const getCityDebounced = useDebouncedCallback<(city: string) => void>(loadCity, 500)
+  const getCityDebounced = useDebouncedCallback<(city: string) => void>(loadCity, 200)
 
   const handleChangeCity = (value: string) => {
     setCity(value)
@@ -58,7 +58,7 @@ const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onS
       allowClear={!!onClearCity}
       maxLength={255}
       options={citiesList}
-      placeholder={t('info.city.placeholder')}
+      placeholder={t('about.city.placeholder')}
       value={city}
       onChange={handleChangeCity}
       onClear={onClearCity}

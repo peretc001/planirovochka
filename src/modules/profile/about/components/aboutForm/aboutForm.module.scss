@@ -12,6 +12,20 @@
     margin-bottom: 16px;
   }
 
+  .name {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+
+    :global(.ant-form-item) {
+      flex: 1;
+    }
+
+    @media screen and (max-width: 576px) {
+      flex-direction: column;
+    }
+  }
+
   .editor :global(.simple-editor-content) {
     min-height: 200px;
   }

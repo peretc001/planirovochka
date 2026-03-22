@@ -39,7 +39,7 @@ const FileUpload: FC<IFileUpload> = ({ isLoading, file, onDelete, onUpload }) =>
       setIsDragged(false)
     },
     onDropRejected: async () => {
-      message.error(t('info.upload.error'))
+      message.error(t('about.upload.error'))
       setIsDragged(false)
     }
   })

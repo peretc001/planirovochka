@@ -1,11 +1,20 @@
-import serverApi from '@/lib/serverApi'
-
-export const addProfileApi = async (values: any) => {
+export const addProfileApi = async (values: Record<string, unknown>) => {
   try {
-    const response = await serverApi.post('profile/about/add.php', values)
+    const response = await fetch('/api/profile/about', {
+      body: JSON.stringify(values),
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST'
+    })
 
-    return response?.status
-  } catch (err) {
-    console.log('addProfileApi', err)
+    const data = (await response.json()) as { status?: boolean }
+
+    if (!response.ok) {
+      return false
+    }
+
+    return data?.status === true
+  } catch {
+    return false
   }
 }
