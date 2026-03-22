@@ -20,7 +20,7 @@ export async function signup(
 
   if (user?.id) {
     revalidatePath('/')
-    return { status: true }
+    return { id: user.id }
   }
 
   return { error: error?.status }
@@ -41,7 +41,7 @@ export async function signin(
 
   if (user?.id) {
     revalidatePath('/')
-    return { status: true }
+    return { id: user.id }
   }
 
   return { error: error?.status }

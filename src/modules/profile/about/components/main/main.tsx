@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { FC } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -11,10 +11,14 @@ import AboutForm from '@/modules/profile/about/components/aboutForm/aboutForm'
 
 import styles from './main.module.scss'
 
-const Main = () => {
+interface IMain {
+  readonly userId: string | undefined
+}
+
+const Main: FC<IMain> = ({ userId }) => {
   const { isLoading, data } = useQuery({
     queryFn: getProfileApi,
-    queryKey: ['profile']
+    queryKey: ['profile', userId]
   })
 
   return (

@@ -12,7 +12,7 @@ interface ISigninPage {
   readonly actionClose: () => void
 }
 
-const initialState: { error?: string; status?: boolean } = {}
+const initialState: { id?: string; error?: string } = {}
 
 const SigninPage: FC<ISigninPage> = ({ actionClose }) => {
   const t = useTranslations('auth')
@@ -32,10 +32,8 @@ const SigninPage: FC<ISigninPage> = ({ actionClose }) => {
   }
 
   useEffect(() => {
-    if (state?.status) {
-      actionClose()
-    }
-  }, [state?.status])
+    if (state?.id) actionClose()
+  }, [state?.id])
 
   return (
     <div className={styles.root}>

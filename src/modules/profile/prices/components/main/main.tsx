@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { FC } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
 
@@ -11,10 +11,14 @@ import List from '@/modules/profile/prices/components/list/list'
 
 import styles from './main.module.scss'
 
-const Main = () => {
+interface IMain {
+  readonly userId: string | undefined
+}
+
+const Main: FC<IMain> = ({ userId }) => {
   const { isFetching, data } = useQuery({
     queryFn: getPricesApi,
-    queryKey: ['prices']
+    queryKey: ['prices', userId]
   })
 
   const { prices, types } = data || {}
