@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 
+import { IUser } from '@/shared/interfaces'
+
 import { createClient } from '@/lib/supabaseServer'
 
 import Auth from '@/layout/header/auth/auth'
@@ -10,9 +12,8 @@ import styles from './header.module.scss'
 const Header = async () => {
   const supabase = await createClient()
 
-  const {
-    data: { user }
-  } = await supabase.auth.getUser()
+  const { data } = await supabase.auth.getUser()
+  const user = data?.user as IUser | null
 
   return (
     <div className={styles.root}>

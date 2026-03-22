@@ -1,8 +1,8 @@
 export interface IUser {
-  id: number
-  avatar?: string | undefined
-  email: string
-  password?: string
+  id: string | undefined
+  avatar: string | undefined
+  email: string | undefined
+  password: string | undefined
 }
 
 export interface IProfile {
