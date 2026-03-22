@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
     types: toJsonArray(body.types)
   }
 
-  const { error } = await supabase.from('profiles').upsert(row, { onConflict: 'id' })
+  const { error } = await supabase.from('profiles').upsert(row, { onConflict: 'owner_id' })
 
   if (error) {
     return NextResponse.json({ error: error.message, status: false }, { status: 500 })
