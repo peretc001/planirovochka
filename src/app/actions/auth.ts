@@ -27,7 +27,6 @@ export async function signup(
 }
 
 export async function signin(
-  // @ts-expect-error: it works
   _prevState: { error?: string; status?: boolean } | undefined,
   values: { email: string; password: string }
 ) {

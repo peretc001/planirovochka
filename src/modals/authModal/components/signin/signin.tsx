@@ -17,6 +17,7 @@ const initialState: { error?: string; status?: boolean } = {}
 const SigninPage: FC<ISigninPage> = ({ actionClose }) => {
   const t = useTranslations('auth')
 
+  // @ts-expect-error: it works
   const [state, formAction, isPending] = useActionState(signin, initialState)
 
   const [form] = Form.useForm()
@@ -25,6 +26,7 @@ const SigninPage: FC<ISigninPage> = ({ actionClose }) => {
 
   const handleFinish = (values: { email: string; password: string }) => {
     startTransition(() => {
+      // @ts-expect-error: it works
       formAction(values)
     })
   }

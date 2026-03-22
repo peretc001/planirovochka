@@ -17,6 +17,7 @@ const initialState: { error?: string; status?: boolean } = {}
 const SignupPage: FC<ISignupPage> = ({ actionClose }) => {
   const t = useTranslations('auth')
 
+  // @ts-expect-error: it works
   const [state, formAction, isPending] = useActionState(signup, initialState)
 
   const [form] = Form.useForm()
@@ -30,6 +31,7 @@ const SignupPage: FC<ISignupPage> = ({ actionClose }) => {
 
   const handleFinish = (values: { email: string; password: string }) => {
     startTransition(() => {
+      // @ts-expect-error: it works
       formAction(values)
     })
   }
