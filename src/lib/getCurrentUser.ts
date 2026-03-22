@@ -1,10 +1,10 @@
+import { IUser } from '@/shared/interfaces'
+
 import { createClient } from '@/lib/supabaseServer'
 
 export const getCurrentUser = async () => {
   const supabase = await createClient()
-  const {
-    data: { user }
-  } = await supabase.auth.getUser()
+  const { data } = await supabase.auth.getUser()
 
-  return user
+  return data?.user as IUser | null
 }
