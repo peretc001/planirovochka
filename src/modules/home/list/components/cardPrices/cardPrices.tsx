@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useTranslations } from 'next-intl'
 
-import { IPrices, ITypes } from '@/shared/interfaces'
+import { IPrices, IType } from '@/shared/interfaces'
 
 import { DESIGN_TYPES } from '@/constants'
 
@@ -11,14 +11,13 @@ import styles from './cardPrices.module.scss'
 
 interface ICardPrices {
   readonly prices: IPrices
-  readonly types: ITypes[]
+  readonly types: string[]
 }
 
 const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
   const t = useTranslations('profile')
 
-  // @ts-expect-error: it works
-  const allowed = DESIGN_TYPES.filter((t: ITypes) => types.includes(t.value))
+  const allowed = DESIGN_TYPES.filter((designType: IType) => types.includes(designType.value))
 
   return (
     <div className={styles.root}>

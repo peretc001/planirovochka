@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
 
-import { IGallery, ITypes } from '@/shared/interfaces'
+import { IPrices, IType } from '@/shared/interfaces'
 
 import { DESIGN_TYPES, paths } from '@/constants'
 
@@ -15,8 +15,8 @@ import { addPricesApi } from '@/modules/profile/prices/api/addPricesApi'
 import styles from './list.module.scss'
 
 interface IPricesList {
-  readonly prices: IGallery[]
-  readonly types?: string[]
+  readonly prices: IPrices | undefined
+  readonly types: string[] | undefined
 }
 
 const List: FC<IPricesList> = ({ prices, types }) => {
@@ -26,8 +26,7 @@ const List: FC<IPricesList> = ({ prices, types }) => {
 
   const [form] = Form.useForm()
 
-  // @ts-expect-error: it works
-  const allowed = DESIGN_TYPES.filter((t: ITypes) => types?.includes(t.value))
+  const allowed = DESIGN_TYPES.filter((designType: IType) => types?.includes(designType.value))
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: values => addPricesApi(values),
@@ -70,15 +69,13 @@ const List: FC<IPricesList> = ({ prices, types }) => {
         </div>
       ))}
 
-      {allowed.length > 0 && (
-        <div className={styles.description}>
-          {t.rich('prices.description', {
-            a: text => <Link href={paths.profile.about + '#types'}>{text}</Link>
-          })}
-        </div>
-      )}
+      <div className={styles.description}>
+        {t.rich('prices.description', {
+          a: text => <Link href={paths.profile.about + '#types'}>{text}</Link>
+        })}
+      </div>
 
-      {allowed.length > 0 && (
+      {allowed?.length > 0 && (
         <Form.Item>
           <Button htmlType="submit" loading={isLoading} type="primary">
             {t('save')}

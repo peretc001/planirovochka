@@ -21,7 +21,7 @@ export interface IProfile {
   segments: string[]
   status: string
   telegram: string
-  types: ITypes[]
+  types: string[]
 }
 
 export interface IGallery {
@@ -33,7 +33,7 @@ export interface IGallery {
   url: string
 }
 
-export interface ITypes {
+export interface IType {
   label: string
   value: string
 }

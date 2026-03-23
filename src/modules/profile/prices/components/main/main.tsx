@@ -25,7 +25,11 @@ const Main: FC<IMain> = ({ userId }) => {
 
   return (
     <div className={styles.root}>
-      {isFetching ? <Loader isFull /> : <List prices={prices} types={types} />}
+      {isFetching ? (
+        <Loader isFull />
+      ) : (
+        <List prices={prices} types={types} />
+      )}
     </div>
   )
 }

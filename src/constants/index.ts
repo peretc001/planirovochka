@@ -1,3 +1,5 @@
+import { IType } from '@/shared/interfaces'
+
 export const STATUS_LOADING = 'loading'
 
 export const paths = {
@@ -12,7 +14,7 @@ export const paths = {
   }
 }
 
-export const DESIGN_TYPES = [
+export const DESIGN_TYPES: IType[] = [
   {
     label: 'Дизайн-проект под ключ',
     value: 'full'
