@@ -6,10 +6,10 @@ const addTailingSlash = (url: string = ''): string =>
 
 // Типы для параметров запроса и настроек Fetch
 interface FetchParams {
-  body?: string
+  body?: BodyInit
   credentials?: 'include' | 'omit' | 'same-origin'
   headers: Record<string, string>
-  method?: 'GET' | 'POST'
+  method?: 'DELETE' | 'GET' | 'POST'
   mode?: 'cors' | 'no-cors' | 'same-origin'
   signal?: AbortSignal
 }
@@ -68,6 +68,71 @@ class ServerApi {
       body: JSON.stringify(params),
       headers: FETCH_PARAMS.headers,
       method: 'POST',
+      signal
+    }
+
+    return fetch(addTailingSlash(host) + apiMethod, fetchParams)
+      .then(response =>
+        response.ok
+          ? response.json()
+          : response.json().then((body: any) => {
+              const msg =
+                body?.message ?? body?.error ?? response.statusText ?? String(response.status)
+              throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
+            })
+      )
+      .catch(err => {
+        throw err instanceof Error ? err : new Error(String(err))
+      })
+  }
+
+  static delete(
+    apiMethod: string,
+    params: Record<string, any> = {},
+    signal?: AbortSignal,
+    host: string = '/api/'
+  ): Promise<any> {
+    const fetchParams = { ...FETCH_PARAMS, method: 'DELETE' as const, signal }
+    const paramsStr = Object.keys(params)
+      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+      .join('&')
+
+    return fetch(
+      addTailingSlash(host) + apiMethod + (paramsStr ? `?${paramsStr}` : ''),
+      fetchParams
+    )
+      .then(response =>
+        response.ok
+          ? response.json()
+          : response.json().then((body: any) => {
+              const msg =
+                body?.message ?? body?.error ?? response.statusText ?? String(response.status)
+              throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
+            })
+      )
+      .catch(err => {
+        throw err instanceof Error ? err : new Error(String(err))
+      })
+  }
+
+  /**
+   * POST с multipart/form-data: не задаёт Content-Type — граница подставляется автоматически.
+   */
+  static file(
+    apiMethod: string,
+    formData: FormData,
+    signal?: AbortSignal,
+    host: string = '/api/'
+  ): Promise<any> {
+    const headers: Record<string, string> = { ...FETCH_PARAMS.headers }
+    delete headers['Content-Type']
+
+    const fetchParams: FetchParams = {
+      body: formData,
+      credentials: FETCH_PARAMS.credentials,
+      headers,
+      method: 'POST',
+      mode: FETCH_PARAMS.mode,
       signal
     }
 

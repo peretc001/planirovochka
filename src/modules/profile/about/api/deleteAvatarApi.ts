@@ -2,9 +2,9 @@ import serverApi from '@/lib/serverApi'
 
 export const deleteAvatarApi = async () => {
   try {
-    const response = await serverApi.post('profile/about/avatar_delete.php')
+    const response = await serverApi.delete('profile/about/avatar')
 
-    return response?.status
+    return Boolean(response?.status)
   } catch (err) {
     console.log('deleteAvatarApi', err)
   }

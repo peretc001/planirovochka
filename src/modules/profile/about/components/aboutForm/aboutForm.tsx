@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 import { Button, Form, Input, message, Select } from 'antd'
 import { useTranslations } from 'next-intl'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import CityAutocomplete from '@/shared/components/cityAutocomplete/cityAutocomplete'
 import { ICityOption } from '@/shared/components/cityAutocomplete/interface'
@@ -33,10 +33,9 @@ interface IAboutForm {
 const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const t = useTranslations('profile')
 
-  const queryClient = useQueryClient()
-
   const [form] = Form.useForm()
 
+  const avatar = Form.useWatch('avatar', form)
   // const telegram = Form.useWatch('telegram', form)
   // const telegramUrlRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]{3,}$/
 
@@ -52,18 +51,16 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
     onSuccess: url => {
       if (url) {
         form.setFieldValue('avatar', url)
-        queryClient.invalidateQueries({ queryKey: ['profile'] })
       }
     }
   })
 
-  const { mutate: deleteFile } = useMutation({
+  const { isLoading: isDeletLoading, mutate: deleteFile } = useMutation({
     mutationFn: () => deleteAvatarApi(),
     onError: () => message.error(t('about.error')),
     onSuccess: status => {
       if (status) {
         form.resetFields(['avatar'])
-        queryClient.invalidateQueries({ queryKey: ['profile'] })
       }
     }
   })
@@ -96,10 +93,14 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
     <Form className={styles.root} form={form} layout="vertical" name="about" onFinish={onFinish}>
       {isLoading ? <Loader isFull /> : null}
 
+      <Form.Item hidden name="avatar">
+        <Input />
+      </Form.Item>
+
       <div className={styles.avatar}>
         <FileUpload
-          isLoading={isUploadLoading}
-          file={profile?.avatar}
+          isLoading={isUploadLoading || isDeletLoading}
+          file={avatar}
           onDelete={deleteFile}
           onUpload={uploadFile}
         />
@@ -188,7 +189,8 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
       {/*  ) : null}*/}
       {/*</div>*/}
 
-      <div id="types" />
+      <div id="types" className={styles.separator} />
+
       <Form.Item
         label={t.rich('about.types.label', {
           em: getHtmlChunks
@@ -244,6 +246,8 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
       >
         <Select options={DESIGN_STATUS} placeholder={t('about.status.placeholder')} />
       </Form.Item>
+
+      <div className={styles.separator} />
 
       <Form.Item
         className={styles.editor}

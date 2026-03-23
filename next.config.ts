@@ -5,7 +5,10 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const path = require('path')
 
 const nextConfig: NextConfig = {
-  images: { unoptimized: true },
+  images: {
+    loader: 'custom',
+    loaderFile: './src/lib/s3-image-loader.ts'
+  },
   sassOptions: {
     additionalData: '@use "@/styles/mixins" as *;',
     includePaths: [path.join(__dirname, 'styles')]

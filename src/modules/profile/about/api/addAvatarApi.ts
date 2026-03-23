@@ -1,27 +1,17 @@
-import { getToken } from '@/lib/cookie'
+import serverApi from '@/lib/serverApi'
 
 export const addAvatarApi = async (file: File) => {
   try {
     const formData = new FormData()
     formData.append('file', file)
 
-    const token = getToken()
+    const response = await serverApi.file('profile/about/avatar', formData)
 
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + 'profile/about/avatar_upload.php', {
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      method: 'POST'
-    })
-
-    const data = await res.json()
-
-    if (!data.status) {
-      throw new Error(data.error ?? 'Upload failed')
+    if (!response?.status) {
+      throw new Error(response.error ?? 'Upload failed')
     }
 
-    return data?.url
+    return response.url
   } catch (err) {
     console.log('addAvatarApi', err)
   }

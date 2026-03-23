@@ -46,7 +46,9 @@ const FileUpload: FC<IFileUpload> = ({ isLoading, file, onDelete, onUpload }) =>
 
   return (
     <section className={styles.root}>
-      {file ? <FilePreview avatar={file} handleDeleteFile={onDelete} /> : null}
+      {file ? (
+        <FilePreview isLoading={isLoading} avatar={file} handleDeleteFile={onDelete} />
+      ) : null}
 
       {!file && (
         // eslint-disable-next-line

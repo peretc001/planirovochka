@@ -1,0 +1,105 @@
+import { NextResponse } from 'next/server'
+
+import { getCurrentUser } from '@/lib/getCurrentUser'
+import { s3DeleteObject, s3KeyFromStoredUrl, s3UploadFile } from '@/lib/s3'
+import { createClient } from '@/lib/supabaseServer'
+
+export async function POST(request: Request) {
+  try {
+    const user = await getCurrentUser()
+
+    if (!user?.id) {
+      return NextResponse.json({ error: 'Unauthorized', status: false }, { status: 401 })
+    }
+
+    const formData = await request.formData()
+    const file = formData.get('file')
+
+    if (!(file instanceof File)) {
+      return NextResponse.json({ error: 'File is required', status: false }, { status: 400 })
+    }
+
+    const userId = user.id
+
+    const ext = file.name.split('.').pop()?.toLowerCase()
+    const fileName = ext ? `${Date.now()}.${ext}` : String(Date.now())
+    const key = `${userId}/${fileName}`
+
+    const body = new Uint8Array(await file.arrayBuffer())
+
+    await s3UploadFile({
+      key,
+      body,
+      contentType: file.type || 'application/octet-stream'
+    })
+
+    const avatarUrl = `/${key}`
+    const supabase = await createClient()
+
+    const row = {
+      avatar: avatarUrl,
+      owner_id: userId
+    }
+
+    const { error: saveError } = await supabase
+      .from('profiles')
+      .upsert(row, { onConflict: 'owner_id' })
+
+    if (saveError) {
+      return NextResponse.json({ error: saveError.message, status: false }, { status: 500 })
+    }
+
+    return NextResponse.json({ status: true, url: avatarUrl })
+  } catch (err) {
+    return NextResponse.json({ error: String(err), status: false }, { status: 500 })
+  }
+}
+
+export async function DELETE() {
+  try {
+    const user = await getCurrentUser()
+
+    if (!user?.id) {
+      return NextResponse.json({ error: 'Unauthorized', status: false }, { status: 401 })
+    }
+
+    const userId = user.id
+
+    const supabase = await createClient()
+
+    const { data, error: profileError } = await supabase
+      .from('profiles')
+      .select('avatar')
+      .eq('owner_id', userId)
+      .maybeSingle()
+
+    if (profileError) {
+      return NextResponse.json({ error: profileError.message, status: false }, { status: 500 })
+    }
+
+    if (data?.avatar) {
+      const key = s3KeyFromStoredUrl(data.avatar)
+
+      if (key) {
+        await s3DeleteObject(key)
+      }
+    }
+
+    const row = {
+      avatar: null,
+      owner_id: userId
+    }
+
+    const { error: updateError } = await supabase
+      .from('profiles')
+      .upsert(row, { onConflict: 'owner_id' })
+
+    if (updateError) {
+      return NextResponse.json({ error: updateError.message, status: false }, { status: 500 })
+    }
+
+    return NextResponse.json({ status: true })
+  } catch (err) {
+    return NextResponse.json({ error: String(err), status: false }, { status: 500 })
+  }
+}
