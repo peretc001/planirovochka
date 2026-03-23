@@ -27,7 +27,7 @@ const List: FC<IPricesList> = ({ prices, types }) => {
   const [form] = Form.useForm()
 
   // @ts-expect-error: it works
-  const allowed = DESIGN_TYPES.filter((t: ITypes) => types.includes(t.value))
+  const allowed = DESIGN_TYPES.filter((t: ITypes) => types?.includes(t.value))
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: values => addPricesApi(values),
@@ -70,17 +70,21 @@ const List: FC<IPricesList> = ({ prices, types }) => {
         </div>
       ))}
 
-      <div className={styles.description}>
-        {t.rich('prices.description', {
-          a: text => <Link href={paths.profile.about + '#types'}>{text}</Link>
-        })}
-      </div>
+      {allowed.length > 0 && (
+        <div className={styles.description}>
+          {t.rich('prices.description', {
+            a: text => <Link href={paths.profile.about + '#types'}>{text}</Link>
+          })}
+        </div>
+      )}
 
-      <Form.Item>
-        <Button htmlType="submit" loading={isLoading} type="primary">
-          {t('save')}
-        </Button>
-      </Form.Item>
+      {allowed.length > 0 && (
+        <Form.Item>
+          <Button htmlType="submit" loading={isLoading} type="primary">
+            {t('save')}
+          </Button>
+        </Form.Item>
+      )}
     </Form>
   )
 }

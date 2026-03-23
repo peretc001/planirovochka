@@ -1,19 +1,14 @@
+import serverApi from '@/lib/serverApi'
+
 export const addProfileApi = async (values: Record<string, unknown>) => {
   try {
-    const response = await fetch('/api/profile/about', {
-      body: JSON.stringify(values),
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      method: 'POST'
-    })
+    const response = await serverApi.post('profile/about', values)
 
-    const data = (await response.json()) as { status?: boolean }
-
-    if (!response.ok) {
+    if (!response.status) {
       return false
     }
 
-    return data?.status === true
+    return response.status === true
   } catch {
     return false
   }

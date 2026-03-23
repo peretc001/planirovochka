@@ -1,18 +1,16 @@
 import { IProfile } from '@/shared/interfaces'
 
+import serverApi from '@/lib/serverApi'
+
 export const getProfileApi = async () => {
   try {
-    const response = await fetch('/api/profile/about', { credentials: 'include' })
+    const response = await serverApi.get('profile/about')
 
-    if (!response.ok) {
+    if (!response.data) {
       return null
     }
 
-    const json = await response.json()
-
-    if (json.data) return json.data as IProfile
-
-    return null
+    return response.data as IProfile | null
   } catch {
     return null
   }
