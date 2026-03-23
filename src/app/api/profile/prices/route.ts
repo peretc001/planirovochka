@@ -2,17 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { createClient } from '@/lib/supabaseServer'
 
-function toJsonArray(value: unknown): string[] {
-  if (!Array.isArray(value)) return []
-  return value.filter((item): item is string => typeof item === 'string')
-}
-
-function toOptionalText(value: unknown): null | string {
-  if (value === undefined || value === null) return null
-  const s = typeof value === 'string' ? value : String(value)
-  return s === '' ? null : s
-}
-
 export async function GET() {
   const supabase = await createClient()
 
@@ -27,7 +16,7 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from('profiles')
-    .select('*')
+    .select('prices, types')
     .eq('owner_id', user.id)
     .maybeSingle()
 
@@ -40,17 +29,7 @@ export async function GET() {
   }
 
   const profile = {
-    styles: data.styles,
-    avatar: data.avatar,
-    city: data.city,
-    city_code: data.city_code,
-    description: data.description,
-    experience: data.experience,
-    first_name: data.first_name,
-    last_name: data.last_name,
-    middle_name: data.middle_name,
-    segments: data.segments,
-    status: data.status,
+    prices: data.prices,
     types: data.types
   }
 
@@ -72,19 +51,8 @@ export async function POST(request: NextRequest) {
   const body = await request.json()
 
   const row = {
-    styles: toJsonArray(body.styles),
-    avatar: body.avatar ?? null,
-    city: toOptionalText(body.city),
-    city_code: toOptionalText(body.city_code),
-    description: toOptionalText(body.description),
-    experience: toOptionalText(body.experience),
-    first_name: toOptionalText(body.first_name),
-    last_name: toOptionalText(body.last_name),
-    middle_name: toOptionalText(body.middle_name),
     owner_id: user.id,
-    segments: toJsonArray(body.segments),
-    status: toOptionalText(body.status),
-    types: toJsonArray(body.types)
+    prices: body?.prices ?? {}
   }
 
   const { error } = await supabase.from('profiles').upsert(row, { onConflict: 'owner_id' })

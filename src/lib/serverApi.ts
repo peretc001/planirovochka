@@ -32,7 +32,7 @@ class ServerApi {
     apiMethod: string,
     params: Record<string, any> = {},
     signal?: AbortSignal,
-    host: string = 'https://planirovochka.io/api/'
+    host: string = '/api/'
   ): Promise<any> {
     const fetchParams = { ...FETCH_PARAMS, method: 'GET', signal }
     const paramsStr = Object.keys(params)
@@ -47,9 +47,6 @@ class ServerApi {
         response.ok
           ? response.json()
           : response.json().then((body: any) => {
-              // TODO: временная обработка ошибки 401
-              // if (response.status === 401) window.location.href = '/'
-
               const msg =
                 body?.message ?? body?.error ?? response.statusText ?? String(response.status)
               throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
@@ -65,7 +62,7 @@ class ServerApi {
     apiMethod: string,
     params: Record<string, any> = {},
     signal?: AbortSignal,
-    host: string = 'https://planirovochka.io/api/'
+    host: string = '/api/'
   ): Promise<any> {
     const fetchParams: FetchParams = {
       body: JSON.stringify(params),
@@ -79,9 +76,6 @@ class ServerApi {
         response.ok
           ? response.json()
           : response.json().then((body: any) => {
-              // TODO: временная обработка ошибки 401
-              // if (response.status === 401) window.location.href = '/'
-
               const msg =
                 body?.message ?? body?.error ?? response.statusText ?? String(response.status)
               throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
