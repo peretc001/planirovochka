@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server'
+import sharp from 'sharp'
 
 import { getCurrentUser } from '@/lib/getCurrentUser'
 import { s3DeleteObject, s3KeyFromStoredUrl, s3UploadFile } from '@/lib/s3'
 import { createClient } from '@/lib/supabaseServer'
+
+const AVATAR_SIZE = 100
 
 export async function POST(request: Request) {
   try {
@@ -21,16 +24,27 @@ export async function POST(request: Request) {
 
     const userId = user.id
 
-    const ext = file.name.split('.').pop()?.toLowerCase()
-    const fileName = ext ? `${Date.now()}.${ext}` : String(Date.now())
+    const fileName = `${Date.now()}.jpg`
     const key = `${userId}/${fileName}`
 
-    const body = new Uint8Array(await file.arrayBuffer())
+    let body: Uint8Array
+
+    try {
+      const processed = await sharp(Buffer.from(await file.arrayBuffer()))
+        .rotate()
+        .resize(AVATAR_SIZE, AVATAR_SIZE, { fit: 'cover', position: 'centre' })
+        .jpeg({ mozjpeg: true, quality: 85 })
+        .toBuffer()
+
+      body = new Uint8Array(processed)
+    } catch {
+      return NextResponse.json({ error: 'Invalid image', status: false }, { status: 400 })
+    }
 
     await s3UploadFile({
       key,
       body,
-      contentType: file.type || 'application/octet-stream'
+      contentType: 'image/jpeg'
     })
 
     const avatarUrl = `/${key}`
