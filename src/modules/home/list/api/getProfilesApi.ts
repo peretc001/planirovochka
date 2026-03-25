@@ -10,7 +10,7 @@ export const getProfilesApi = async (
   status: string[] | undefined
 ) => {
   try {
-    const response = await serverApi.post('list/get.php', {
+    const response = await serverApi.post('profiles/list', {
       styles,
       city,
       experience,

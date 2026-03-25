@@ -14,7 +14,7 @@ interface ICard {
 const Card: FC<ICard> = ({ card }) => (
   <div className={styles.root}>
     <div className={styles.header}>
-      <img className={styles.avatar} src={process.env.NEXT_PUBLIC_URL + card.avatar} />
+      <img className={styles.avatar} src={process.env.NEXT_PUBLIC_S3_PATH + card.avatar} />
 
       <div className={styles.info}>
         <div className={styles.name}>{card.name}</div>
