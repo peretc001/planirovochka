@@ -7,7 +7,6 @@ import { ArrowLeftIcon } from '@/components/tiptap-icons/arrow-left-icon'
 import { HighlighterIcon } from '@/components/tiptap-icons/highlighter-icon'
 import { LinkIcon } from '@/components/tiptap-icons/link-icon'
 import { HorizontalRule } from '@/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension'
-// --- Components ---
 import { BlockquoteButton } from '@/components/tiptap-ui/blockquote-button'
 import {
   ColorHighlightPopover,
@@ -35,15 +34,15 @@ import '@/components/tiptap-node/paragraph-node/paragraph-node.scss'
 // --- Styles ---
 import '@/components/tiptap-templates/simple/simple-editor.scss'
 
-import { useCursorVisibility } from '@/hooks/use-cursor-visibility'
 // --- Hooks ---
 import { useIsBreakpoint } from '@/hooks/use-is-breakpoint'
-import { useWindowSize } from '@/hooks/use-window-size'
 import { Highlight } from '@tiptap/extension-highlight'
 import { Image } from '@tiptap/extension-image'
 import { TaskItem, TaskList } from '@tiptap/extension-list'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { Typography } from '@tiptap/extension-typography'
+// --- Components ---
+import { CharacterCount } from '@tiptap/extensions'
 import { Selection } from '@tiptap/extensions'
 import { EditorContent, EditorContext, useEditor } from '@tiptap/react'
 // --- Tiptap Core Extensions ---
@@ -126,13 +125,16 @@ const MobileToolbarContent = ({
 
 interface IEditor {
   readonly defaultContent: React.ReactNode
+  readonly limit?: number
   readonly onChange: (value: React.ReactNode) => void
 }
 
-const SimpleEditor: FC<IEditor> = ({ defaultContent, onChange }) => {
+const SimpleEditor: FC<IEditor> = ({ defaultContent, limit, onChange }) => {
   const isMobile = useIsBreakpoint()
   const [mobileView, setMobileView] = useState<'highlighter' | 'link' | 'main'>('main')
   const toolbarRef = useRef<HTMLDivElement>(null)
+
+  const textLimit = limit || 1000
 
   const editor = useEditor({
     // @ts-ignore
@@ -153,6 +155,9 @@ const SimpleEditor: FC<IEditor> = ({ defaultContent, onChange }) => {
           enableClickSelection: true,
           openOnClick: false
         }
+      }),
+      CharacterCount.configure({
+        limit: textLimit
       }),
       HorizontalRule,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),

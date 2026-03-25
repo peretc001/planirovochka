@@ -46,7 +46,7 @@ const Card: FC<ICard> = ({ card }) => {
         className={styles.preview}
         data-caption={card.description}
         data-fancybox="gallery"
-        href={process.env.NEXT_PUBLIC_URL + card.url}
+        href={process.env.NEXT_PUBLIC_S3_PATH + card.url}
       >
         <div className={styles.type}>{card.type === 'visual' ? 'визуал' : 'объект'}</div>
 
@@ -58,7 +58,7 @@ const Card: FC<ICard> = ({ card }) => {
         ) : null}
 
         <picture className={styles.picture}>
-          <img alt={card.description} src={process.env.NEXT_PUBLIC_URL + card.url} />
+          <img alt={card.description} src={process.env.NEXT_PUBLIC_S3_PATH + card.url} />
         </picture>
       </a>
     </div>

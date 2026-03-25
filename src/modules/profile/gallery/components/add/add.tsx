@@ -134,7 +134,7 @@ const Add: FC<IGalleryAdd> = ({ onCancel }) => {
       </Form.Item>
 
       <Form.Item className={styles.editor} label={t('gallery.description')} name="description">
-        <SimpleEditor defaultContent={description} onChange={handleChangeContent} />
+        <SimpleEditor defaultContent={description} limit={100} onChange={handleChangeContent} />
       </Form.Item>
 
       <Form.Item>

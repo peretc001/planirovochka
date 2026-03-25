@@ -1,15 +1,13 @@
 import serverApi from '@/lib/serverApi'
 
 export const deleteGalleryApi = async (id: number) => {
-  try {
-    const response = await serverApi.post('profile/gallery/delete.php', {
-      id
-    })
+  const response = await serverApi.delete('profile/gallery', { id })
 
-    return response?.status
-  } catch (err: any) {
-    console.log('deleteGalleryApi', err)
-
-    throw new Error(err)
+  if (!response?.status) {
+    throw new Error(
+      typeof response?.error === 'string' ? response.error : 'Delete failed'
+    )
   }
+
+  return response.status as boolean
 }

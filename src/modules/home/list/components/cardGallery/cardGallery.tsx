@@ -20,10 +20,10 @@ const CardGallery: FC<IGalleryList> = ({ gallery }) => {
           key={photo.id}
           data-caption={photo.description}
           data-fancybox="gallery"
-          href={process.env.NEXT_PUBLIC_URL + photo.url}
+          href={process.env.NEXT_PUBLIC_S3_PATH + photo.url}
         >
           <picture className={styles.picture}>
-            <img alt={photo.description} src={process.env.NEXT_PUBLIC_URL + photo.url} />
+            <img alt={photo.description} src={process.env.NEXT_PUBLIC_S3_PATH + photo.url} />
           </picture>
         </a>
       ))}
