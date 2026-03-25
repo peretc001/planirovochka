@@ -35,7 +35,8 @@ const List = () => {
 
       {data?.length > 0 && <Cards cards={data} />}
 
-      {(!isLoading || isError) && data?.length === 0 ? <Empty /> : null}
+      {!isLoading && data?.length === 0 ? <Empty /> : null}
+      {isError && !data?.length ? <Empty /> : null}
     </div>
   )
 }
