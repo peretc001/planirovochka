@@ -27,9 +27,9 @@ const Card: FC<ICard> = ({ card }) => (
       </div>
     </div>
 
-    <CardDescription description={card.description} />
+    {card.description ? <CardDescription description={card.description} /> : null}
 
-    <CardGallery gallery={card.gallery} />
+    {card.gallery.length > 0 && <CardGallery gallery={card.gallery} />}
 
     <CardPrices prices={card.prices} types={card.types} />
   </div>

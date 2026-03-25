@@ -9,6 +9,7 @@ import Loader from '@/shared/components/loader/loader'
 
 import { getProfilesApi } from '@/modules/home/list/api/getProfilesApi'
 import Cards from '@/modules/home/list/components/cards/cards'
+import Empty from '@/modules/home/list/components/empty/empty'
 
 import cssStyles from './list.module.scss'
 
@@ -33,6 +34,8 @@ const List = () => {
       {isLoading ? <Loader className={cssStyles.loader} isFull /> : null}
 
       {data?.length > 0 && <Cards cards={data} />}
+
+      {!isLoading && data?.length === 0 && <Empty />}
     </div>
   )
 }

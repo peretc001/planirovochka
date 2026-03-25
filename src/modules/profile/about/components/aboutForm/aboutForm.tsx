@@ -249,12 +249,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
 
       <div className={styles.separator} />
 
-      <Form.Item
-        className={styles.editor}
-        label={t('about.description.label')}
-        name="description"
-        rules={[{ message: t('require'), required: true }]}
-      >
+      <Form.Item className={styles.editor} label={t('about.description.label')} name="description">
         <SimpleEditor defaultContent={profile?.description} onChange={handleChangeContent} />
       </Form.Item>
 
