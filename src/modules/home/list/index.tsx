@@ -24,7 +24,7 @@ const List = () => {
   const experience = searchParams.get('experience')?.split(',') ?? undefined
   const status = searchParams.get('status')?.split(',') ?? undefined
 
-  const { isLoading, data } = useQuery({
+  const { isError, isLoading, data } = useQuery({
     queryFn: () => getProfilesApi(name, city, types, styles, segments, experience, status),
     queryKey: ['profiles_list', name, city, types, styles, segments, experience, status]
   })
@@ -35,7 +35,7 @@ const List = () => {
 
       {data?.length > 0 && <Cards cards={data} />}
 
-      {!isLoading && data?.length === 0 && <Empty />}
+      {(!isLoading || isError) && data?.length === 0 ? <Empty /> : null}
     </div>
   )
 }
