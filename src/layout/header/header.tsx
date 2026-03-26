@@ -1,4 +1,5 @@
 import React from 'react'
+import { Tooltip } from 'antd'
 import Link from 'next/link'
 
 import { getCurrentUser } from '@/lib/getCurrentUser'
@@ -20,6 +21,11 @@ const Header = async () => {
             <div className={styles.description}>{process.env.NEXT_PUBLIC_DESCRIPTION}</div>
           </div>
         </Link>
+
+        <div className={styles.description}>
+          <div className={styles.beta}>beta</div>
+          <div className={styles.text}>Сервис находится в стадии разработки</div>
+        </div>
 
         <Auth user={user} />
       </div>

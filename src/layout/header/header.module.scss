@@ -12,7 +12,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     padding: 0 16px 0 24px;
+
+    @media screen and (max-width: 576px) {
+      justify-content: flex-start;
+    }
   }
 
   .logo {
@@ -43,6 +48,40 @@
         letter-spacing: -0.2;
         color: var(--gray-400);
         margin-top: -4px;
+      }
+    }
+  }
+
+  .description {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @media screen and (max-width: 767px) {
+      margin-right: auto;
+      align-items: flex-end;
+    }
+
+    .beta {
+      @include typography.text-xxs;
+      @include typography.semibold;
+      background: var(--main-blue);
+      color: var(--main-white);
+      text-transform: uppercase;
+      padding: 6px;
+      border-radius: var(--rounded-xs);
+
+      @media screen and (max-width: 576px) {
+        font-size: 8px;
+      }
+    }
+
+    .text {
+      @include typography.text-xs;
+      color: var(--gray-500);
+
+      @media screen and (max-width: 576px) {
+        display: none;
       }
     }
   }
