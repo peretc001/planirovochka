@@ -1,7 +1,5 @@
 import { IType } from '@/shared/interfaces'
 
-export const STATUS_LOADING = 'loading'
-
 export const paths = {
   home: '/',
   profile: {
@@ -17,27 +15,47 @@ export const paths = {
 export const DESIGN_TYPES: IType[] = [
   {
     label: 'Дизайн-проект под ключ',
-    value: 'full'
-  },
-  {
-    label: 'Обмерный план',
-    value: 'measurement'
-  },
-  {
-    label: 'Планировка и зонирование',
-    value: 'plane'
-  },
-  {
-    label: 'Визуализация',
-    value: 'visual'
-  },
-  {
-    label: 'Расстановка мебели',
-    value: 'furniture'
+    value: 'dizayn-proekt'
   },
   {
     label: 'Авторский надзор',
-    value: 'author'
+    value: 'avtorskiy-nadzor'
+  },
+  {
+    label: 'Интерьерный коллаж',
+    value: 'interernyy-kollazh'
+  },
+  {
+    label: 'Визуализация',
+    value: 'vizualizatsiya'
+  },
+  {
+    label: 'Хоумстейджинг',
+    value: 'khoumsteydzhin'
+  },
+  {
+    label: 'Расстановка мебели',
+    value: 'rasstanovka-mebeli'
+  },
+  {
+    label: 'Комплектация',
+    value: 'komplektatsiya'
+  },
+  {
+    label: 'Декорирование',
+    value: 'dekorinovanie'
+  },
+  {
+    label: 'Обмерный план',
+    value: 'obmernyy-plan'
+  },
+  {
+    label: 'Консультация',
+    value: 'consultation'
+  },
+  {
+    label: 'Обучение',
+    value: 'education'
   }
 ]
 
@@ -45,6 +63,14 @@ export const DESIGN_STYLES = [
   {
     label: 'Минимализм',
     value: 'minimal'
+  },
+  {
+    label: 'Классический',
+    value: 'classic'
+  },
+  {
+    label: 'Современный',
+    value: 'modern'
   },
   {
     label: 'Скандинавский',
@@ -61,6 +87,10 @@ export const DESIGN_STYLES = [
   {
     label: 'Бохо',
     value: 'boho'
+  },
+  {
+    label: 'Eco-дизайн',
+    value: 'eco'
   },
   {
     label: 'Неоклассика',
