@@ -7,11 +7,14 @@ import { useTranslations } from 'next-intl'
 import { UserIcon } from '@heroicons/react/24/outline'
 
 import { openSignupModal } from '@/lib/openSignupModal'
+import { useMatchMedia } from '@/lib/useMatchMedia'
 
 import styles from './login.module.scss'
 
 const Login = () => {
   const t = useTranslations('header')
+
+  const { isMobileMD } = useMatchMedia()
 
   const handleSignup = () => {
     openSignupModal()
@@ -19,8 +22,7 @@ const Login = () => {
 
   return (
     <Button type="primary" onClick={handleSignup}>
-      <UserIcon className={styles.icon} />
-      <div className={styles.text}>{t('account')}</div>
+      {isMobileMD ? <UserIcon className={styles.icon} /> : t('account')}
     </Button>
   )
 }

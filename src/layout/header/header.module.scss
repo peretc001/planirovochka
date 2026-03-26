@@ -59,13 +59,16 @@
 
     @media screen and (max-width: 767px) {
       margin-right: auto;
+    }
+
+    @media screen and (max-width: 576px) {
       align-items: flex-end;
     }
 
     .beta {
       @include typography.text-xxs;
       @include typography.semibold;
-      background: var(--main-blue);
+      background: var(--status-warning);
       color: var(--main-white);
       text-transform: uppercase;
       padding: 6px;
