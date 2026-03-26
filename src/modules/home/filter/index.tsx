@@ -1,7 +1,7 @@
 'use client'
 
-import React from 'react'
-import { useTranslations } from 'next-intl'
+import React, { FC } from 'react'
+import cns from 'classnames'
 
 import City from '@/modules/home/filter/components/city'
 import Groups from '@/modules/home/filter/components/groups'
@@ -9,16 +9,16 @@ import Name from '@/modules/home/filter/components/name'
 
 import styles from './filter.module.scss'
 
-const Filter = () => {
-  const t = useTranslations('filter')
-
-  return (
-    <div className={styles.root}>
-      <Name />
-      <City />
-      <Groups />
-    </div>
-  )
+interface IFilter {
+  readonly isMobile: boolean
 }
+
+const Filter: FC<IFilter> = ({ isMobile }) => (
+  <div className={cns(styles.root, isMobile && styles.mobile)}>
+    <Name />
+    <City />
+    <Groups />
+  </div>
+)
 
 export default Filter

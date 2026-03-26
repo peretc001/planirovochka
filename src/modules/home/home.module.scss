@@ -21,5 +21,9 @@
     @media screen and (max-width: 1439px) {
       gap: 16px;
     }
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
   }
 }

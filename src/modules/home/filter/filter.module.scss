@@ -11,8 +11,15 @@
   overflow-x: hidden;
   overflow-y: auto;
 
-  @media screen and (max-width: 991px) {
+  @media screen and (max-width: 767px) {
     display: none;
+  }
+
+  &.mobile {
+    display: flex;
+    max-width: 100%;
+    background: var(--main-white);
+    border-radius: none;
   }
 
   .search {
