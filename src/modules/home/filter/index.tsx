@@ -10,7 +10,7 @@ import Name from '@/modules/home/filter/components/name'
 import styles from './filter.module.scss'
 
 interface IFilter {
-  readonly isMobile: boolean
+  readonly isMobile?: boolean
 }
 
 const Filter: FC<IFilter> = ({ isMobile }) => (
