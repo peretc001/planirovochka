@@ -1,5 +1,6 @@
 .root {
   display: flex;
+  flex-direction: column;
   height: calc(100dvh - 64px);
   background: var(--gray-100);
   overflow: hidden;
@@ -12,11 +13,13 @@
   }
 
   .wrapper {
+    flex: 1;
     @include max-container;
     display: flex;
     margin: 0 auto;
     gap: 32px;
     padding: 16px;
+    overflow: hidden;
 
     @media screen and (max-width: 1439px) {
       gap: 16px;
