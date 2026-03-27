@@ -67,4 +67,12 @@
       color: var(--gray-500);
     }
   }
+
+  .more {
+    display: inline-flex;
+    align-self: flex-start;
+    @include typography.text-sm;
+    color: var(--main-blue);
+
+  }
 }
