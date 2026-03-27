@@ -1,63 +1,7 @@
-@use "@/styles/typography";
-
 .root {
   flex: none;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding-bottom: 32px;
-
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    .avatar {
-      flex: none;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      object-fit: cover;
-
-      @media screen and (max-width: 576px) {
-        width: 60px;
-        height: 60px;
-      }
-
-      &:empty {
-        background: var(--gray-100);
-      }
-    }
-
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-
-      .name {
-        @include typography.text-lg;
-        @include typography.semibold;
-
-        @media screen and (max-width: 576px) {
-          @include typography.text-md;
-        }
-      }
-    }
-
-    .about {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px 16px;
-
-      .city, .experience, .status {
-        @include typography.text-sm;
-
-        @media screen and (max-width: 576px) {
-          @include typography.text-xs;
-        }
-      }
-    }
-
-  }
 }

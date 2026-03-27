@@ -110,11 +110,13 @@ function formatProfileRow(
   return {
     ...r,
     styles: parsed.styles,
-    experience: experienceLabel(experienceRaw),
+    experience: experienceRaw,
+    experienceLabel: experienceLabel(experienceRaw),
     name: buildDisplayName(r),
     prices: parsePrices(r.prices),
     segments: parsed.segments,
-    status: statusLabel(statusRaw),
+    status: statusRaw,
+    statusLabel: statusLabel(statusRaw),
     types: parsed.types
   }
 }

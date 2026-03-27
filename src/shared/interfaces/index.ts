@@ -14,12 +14,14 @@ export interface IProfile {
   created_at: string
   description: string
   experience: string
+  experienceLabel: string
   gallery: IGallery[]
   name: string
   owner_id: number
   prices: IPrices
   segments: string[]
   status: string
+  statusLabel: string
   telegram: string
   types: string[]
 }
