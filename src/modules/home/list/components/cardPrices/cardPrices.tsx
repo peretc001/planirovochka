@@ -15,6 +15,7 @@ interface ICardPrices {
   readonly types: string[]
 }
 
+// кол-во выводимых цен по умолчанию
 const limit = 3
 
 const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
