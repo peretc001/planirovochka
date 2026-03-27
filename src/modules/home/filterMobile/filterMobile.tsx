@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Modal } from 'antd'
+import { Button, Modal } from 'antd'
 import { useTranslations } from 'next-intl'
 
 import { FunnelIcon } from '@heroicons/react/24/outline'
@@ -30,7 +30,11 @@ const FilterMobile = () => {
 
       <Modal
         className={styles.modal}
-        footer={null}
+        footer={
+          <Button type="primary" onClick={hideModal}>
+            {t('button')}
+          </Button>
+        }
         open={isModalOpen}
         title={t('title')}
         width="100%"
