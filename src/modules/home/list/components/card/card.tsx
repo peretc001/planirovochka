@@ -6,6 +6,7 @@ import CardDescription from '@/modules/home/list/components/cardDescription/card
 import CardGallery from '@/modules/home/list/components/cardGallery/cardGallery'
 import CardInfo from '@/modules/home/list/components/cardInfo/cardInfo'
 import CardPrices from '@/modules/home/list/components/cardPrices/cardPrices'
+import CardStyles from '@/modules/home/list/components/cardStyles/cardStyles'
 
 import styles from './card.module.scss'
 
@@ -15,6 +16,8 @@ interface ICard {
 const Card: FC<ICard> = ({ card }) => (
   <div className={styles.root}>
     <CardInfo card={card} />
+
+    {card.stylesLabel.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
 
     {card.description ? <CardDescription description={card.description} /> : null}
 

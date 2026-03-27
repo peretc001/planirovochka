@@ -1,4 +1,6 @@
-import { DESIGN_EXPERIENCE, DESIGN_STATUS } from '@/constants'
+import { IType } from '@/shared/interfaces'
+
+import { DESIGN_EXPERIENCE, DESIGN_STATUS, DESIGN_STYLES, DESIGN_TYPES } from '@/constants'
 
 import type { SupabaseClient } from '@supabase/supabase-js'
 
@@ -70,6 +72,10 @@ function statusLabel(value: string): string {
   return DESIGN_STATUS.find(s => s.value === v)?.label ?? v
 }
 
+function stylesLabel(styles: string[]): IType[] {
+  return DESIGN_STYLES.filter(e => styles.includes(e.value)) ?? []
+}
+
 function jsonOverlap(profileVals: string[], filterVals: string[]): boolean {
   return filterVals.some(f => profileVals.includes(f))
 }
@@ -110,6 +116,7 @@ function formatProfileRow(
   return {
     ...r,
     styles: parsed.styles,
+    stylesLabel: stylesLabel(parsed.styles),
     experience: experienceRaw,
     experienceLabel: experienceLabel(experienceRaw),
     name: buildDisplayName(r),

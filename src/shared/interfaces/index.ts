@@ -8,6 +8,7 @@ export interface IUser {
 export interface IProfile {
   id: number
   styles: string[]
+  stylesLabel: IType[]
   avatar: string
   city: string
   city_code: string

@@ -28,8 +28,9 @@ const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
 
   const [count, setCount] = useState(limit)
 
-  // сортировка, сначала те что в поиске, потом все остальные
   const allowed = DESIGN_TYPES.filter((designType: IType) => types.includes(designType.value))
+
+  // сортировка, сначала те что в поиске, потом все остальные
   const sortedAllowed = [...allowed].sort((a, b) => {
     const aInUrlTypes = urlTypesSet.has(a.value)
     const bInUrlTypes = urlTypesSet.has(b.value)
@@ -39,6 +40,7 @@ const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
     return aInUrlTypes ? -1 : 1
   })
 
+  // итоговый спсиок с учетом сортировки и лимитом
   const list = sortedAllowed.slice(0, count)
 
   const handleShow = () => setCount(allowed.length)
