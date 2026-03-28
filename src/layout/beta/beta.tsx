@@ -36,12 +36,26 @@ const Beta = () => {
           <p>🚀 Сервис в стадии активной разработки.</p>
           <p>Но Вы уже можете добавить свой профиль.</p>
           <p>Если у вас есть вопросы или идеи, пишите:</p>
-          <div className={styles.contact}>
-            👉
-            <a href="https://t.me/planirovochka_io" rel="noreferrer" target="_blank">
-              t.me/planirovochka_io
-            </a>
-          </div>
+
+          <a
+            className={styles.contact}
+            href="https://t.me/planirovochka_io"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <img alt="" src="/icons/socials/telegram.svg" />
+            Написать в ТГ
+          </a>
+
+          <a
+            className={styles.contact}
+            href="https://max.ru/u/f9LHodD0cOL4b1mEHv1WgU1vavXAfY2QK002Qrgd0YcCdO0PRgHaGArPhjw"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <img alt="" src="/icons/socials/max.svg" />
+            Написать в Мах
+          </a>
         </div>
       </Modal>
     </>

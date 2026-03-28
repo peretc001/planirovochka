@@ -59,10 +59,13 @@
     .contact {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 8px;
+      color: var(--main-blue);
 
-      a {
-        color: var(--main-blue);
+      img {
+        flex: none;
+        width: 16px;
+        height: 16px;
       }
     }
   }
