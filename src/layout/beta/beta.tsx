@@ -39,7 +39,7 @@ const Beta = () => {
           <div className={styles.contact}>
             👉
             <a href="https://t.me/planirovochka_io" rel="noreferrer" target="_blank">
-              t.me/planirovochka.io
+              t.me/planirovochka_io
             </a>
           </div>
         </div>
