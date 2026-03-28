@@ -36,11 +36,9 @@ const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, unit, value }) => 
         <div className={styles.empty}>{t('prices.above')}</div>
       ) : (
         <div className={styles.price}>
-          {min && max ? t('prices.from') : null}
-          {min && !max ? t('prices.from') : null}
           {min > 0 ? <div className={styles.min}>{numberFormatter(min)}</div> : null}
-          {min && max ? t('prices.to') : null}
           {!min && max ? t('prices.to') : null}
+          {min && max ? '–' : null}
           {max ? <div className={styles.min}>{numberFormatter(max)}</div> : null}
           <div className={styles.currency}>
             {t('prices.currency')}/{t.rich('prices.' + unit, { sup: getHtmlChunks })}
