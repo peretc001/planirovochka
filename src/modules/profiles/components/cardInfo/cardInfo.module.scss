@@ -27,10 +27,15 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    overflow: hidden;
 
     .name {
+      flex: 1;
       @include typography.text-lg;
       @include typography.semibold;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 

@@ -15,7 +15,9 @@ interface ICardInfo {
 
 const CardInfo: FC<ICardInfo> = ({ card }) => (
   <div className={styles.root}>
-    <img className={styles.avatar} src={process.env.NEXT_PUBLIC_S3_PATH + card.avatar} />
+    <div className={styles.avatar}>
+      <img src={process.env.NEXT_PUBLIC_S3_PATH + card.avatar} />
+    </div>
 
     <div className={styles.info}>
       <div className={styles.name}>{card.name}</div>

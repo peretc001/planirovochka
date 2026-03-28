@@ -1,6 +1,9 @@
 import React, { FC } from 'react'
+import Link from 'next/link'
 
 import { IProfile } from '@/shared/interfaces'
+
+import { paths } from '@/constants'
 
 import CardDescription from '@/modules/profiles/components/cardDescription/cardDescription'
 import CardGallery from '@/modules/profiles/components/cardGallery/cardGallery'
@@ -15,15 +18,21 @@ interface ICard {
 }
 const Card: FC<ICard> = ({ card }) => (
   <div className={styles.root}>
-    <CardInfo card={card} />
+    <div className={styles.breadcrumbs}>
+      <Link href={paths.home}>Профили</Link> / {card.name}
+    </div>
 
-    {card.stylesLabel.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
+    <div className={styles.container}>
+      <CardInfo card={card} />
 
-    {card.description ? <CardDescription description={card.description} /> : null}
+      {card.stylesLabel.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
 
-    {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
+      {card.description ? <CardDescription description={card.description} /> : null}
 
-    <CardPrices prices={card.prices} types={card.types} />
+      {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
+
+      <CardPrices prices={card.prices} types={card.types} />
+    </div>
   </div>
 )
 

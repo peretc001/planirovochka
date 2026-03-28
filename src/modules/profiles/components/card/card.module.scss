@@ -1,3 +1,5 @@
+@use "@/styles/typography";
+
 .root {
   @include max-container;
   display: flex;
@@ -5,8 +7,35 @@
   gap: 16px;
   padding: 24px;
   margin: 0 auto;
+  background: var(--gray-100);
 
   @media screen and (max-width: 767px) {
     padding: 16px;
+  }
+
+  .breadcrumbs {
+    width: 100%;
+    @include typography.text-xs;
+    color: var(--gray-400);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    a {
+      color: var(--main-black);
+    }
+  }
+
+  .container {
+    background: var(--main-white);
+    border-radius: var(--rounded-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media screen and (max-width: 767px) {
+      padding: 16px;
+    }
   }
 }
