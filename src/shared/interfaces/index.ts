@@ -23,7 +23,7 @@ export interface IProfile {
   last_name: string
   middle_name: string
   name: string
-  owner_id: number
+  owner_id: string
   prices: IPrices
   segments: string[]
   status: string

@@ -23,7 +23,7 @@ const Card: FC<ICard> = ({ card }) => (
       <CardDescription description={card.description} slug={card.owner_id} />
     ) : null}
 
-    {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
+    {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} slug={card.owner_id} />}
 
     <CardPrices prices={card.prices} types={card.types} />
   </div>

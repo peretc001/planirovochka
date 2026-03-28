@@ -14,7 +14,7 @@ export type ProfileListFilters = {
   types: string[]
 }
 
-const GALLERY_LIMIT = 10
+const GALLERY_LIMIT = 100
 
 function normalizeFilterArray(v: unknown): string[] {
   let arr: unknown = v
