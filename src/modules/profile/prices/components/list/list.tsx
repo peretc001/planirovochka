@@ -65,7 +65,9 @@ const List: FC<IPricesList> = ({ prices, types }) => {
             </Form.Item>
           </div>
 
-          <div className={styles.type}>{t.rich('prices.type', { sup: getHtmlChunks })}</div>
+          <div className={styles.type}>
+            {t('prices.currency')}/{t.rich('prices.' + type.unit, { sup: getHtmlChunks })}
+          </div>
         </div>
       ))}
 

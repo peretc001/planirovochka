@@ -1,3 +1,5 @@
+import { DESIGN_TYPES } from '@/constants'
+
 export interface IUser {
   id: string | undefined
   avatar: string | undefined
@@ -38,20 +40,19 @@ export interface IGallery {
 
 export interface IType {
   label: string
+  unit: string
   value: string
 }
 
-export interface IPrices {
-  author_max: string | undefined
-  author_min: string | undefined
-  full_max: string | undefined
-  full_min: string | undefined
-  furniture_max: string | undefined
-  furniture_min: string | undefined
-  measurement_max: string | undefined
-  measurement_min: string | undefined
-  plane_max: string | undefined
-  plane_min: string | undefined
-  visual_max: string | undefined
-  visual_min: string
+export interface IOption {
+  label: string
+  value: string
+}
+
+type DesignTypeValue = (typeof DESIGN_TYPES)[number]['value']
+
+type PriceSuffix = 'max' | 'min'
+
+export type IPrices = {
+  [K in DesignTypeValue as `${K}_${PriceSuffix}`]?: string | undefined
 }

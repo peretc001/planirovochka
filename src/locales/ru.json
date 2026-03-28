@@ -149,7 +149,9 @@
       "above": "По договоренности",
       "from": "от",
       "to": "до",
-      "type": "pуб. за м<sup>2</sup>"
+      "currency": "pуб.",
+      "meter": "м<sup>2</sup>",
+      "hour": "час"
     },
     "gallery": {
       "title": "Добавить файл",

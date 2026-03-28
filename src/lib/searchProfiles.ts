@@ -1,6 +1,6 @@
-import { IType } from '@/shared/interfaces'
+import { IOption } from '@/shared/interfaces'
 
-import { DESIGN_EXPERIENCE, DESIGN_STATUS, DESIGN_STYLES, DESIGN_TYPES } from '@/constants'
+import { DESIGN_EXPERIENCE, DESIGN_STATUS, DESIGN_STYLES } from '@/constants'
 
 import type { SupabaseClient } from '@supabase/supabase-js'
 
@@ -72,7 +72,7 @@ function statusLabel(value: string): string {
   return DESIGN_STATUS.find(s => s.value === v)?.label ?? v
 }
 
-function stylesLabel(styles: string[]): IType[] {
+function stylesLabel(styles: string[]): IOption[] {
   return DESIGN_STYLES.filter(e => styles.includes(e.value)) ?? []
 }
 

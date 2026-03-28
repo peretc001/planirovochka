@@ -51,7 +51,13 @@ const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
       <h3>{t('prices.caption')}</h3>
 
       {list?.map(type => (
-        <CardPricesItem key={type.value} label={type.label} prices={prices} value={type.value} />
+        <CardPricesItem
+          key={type.value}
+          label={type.label}
+          prices={prices}
+          unit={type.unit}
+          value={type.value}
+        />
       ))}
 
       {allowed.length >= limit ? (

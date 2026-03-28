@@ -15,46 +15,57 @@ export const paths = {
 export const DESIGN_TYPES: IType[] = [
   {
     label: 'Дизайн-проект под ключ',
+    unit: 'meter',
     value: 'dizayn-proekt'
   },
   {
     label: 'Авторский надзор',
+    unit: 'meter',
     value: 'avtorskiy-nadzor'
   },
   {
     label: 'Интерьерный коллаж',
+    unit: 'meter',
     value: 'interernyy-kollazh'
   },
   {
     label: 'Визуализация',
+    unit: 'meter',
     value: 'vizualizatsiya'
   },
   {
     label: 'Хоумстейджинг',
+    unit: 'meter',
     value: 'khoumsteydzhin'
   },
   {
     label: 'Расстановка мебели',
+    unit: 'meter',
     value: 'rasstanovka-mebeli'
   },
   {
     label: 'Комплектация',
+    unit: 'meter',
     value: 'komplektatsiya'
   },
   {
     label: 'Декорирование',
+    unit: 'meter',
     value: 'dekorinovanie'
   },
   {
     label: 'Обмерный план',
+    unit: 'meter',
     value: 'obmernyy-plan'
   },
   {
     label: 'Консультация',
+    unit: 'hour',
     value: 'consultation'
   },
   {
     label: 'Обучение',
+    unit: 'hour',
     value: 'education'
   }
 ]

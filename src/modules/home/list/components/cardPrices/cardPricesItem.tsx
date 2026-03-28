@@ -10,10 +10,11 @@ import styles from '@/modules/home/list/components/cardPrices/cardPrices.module.
 interface ICardPricesItem {
   readonly label: string
   readonly prices: IPrices
+  readonly unit: string
   readonly value: string
 }
 
-const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, value }) => {
+const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, unit, value }) => {
   const t = useTranslations('profile')
 
   const getHtmlChunks = (chunks: any) => <sup>{chunks}</sup>
@@ -41,7 +42,9 @@ const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, value }) => {
           {min && max ? t('prices.to') : null}
           {!min && max ? t('prices.to') : null}
           {max ? <div className={styles.min}>{numberFormatter(max)}</div> : null}
-          <div className={styles.currency}>{t.rich('prices.type', { sup: getHtmlChunks })}</div>
+          <div className={styles.currency}>
+            {t('prices.currency')}/{t.rich('prices.' + unit, { sup: getHtmlChunks })}
+          </div>
         </div>
       )}
     </div>
