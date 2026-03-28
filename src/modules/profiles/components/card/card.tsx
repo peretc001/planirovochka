@@ -18,20 +18,22 @@ interface ICard {
 }
 const Card: FC<ICard> = ({ card }) => (
   <div className={styles.root}>
-    <div className={styles.breadcrumbs}>
-      <Link href={paths.home}>Профили</Link> / {card.name}
-    </div>
+    <div className={styles.wrapper}>
+      <div className={styles.breadcrumbs}>
+        <Link href={paths.home}>Профили</Link> / {card.name}
+      </div>
 
-    <div className={styles.container}>
-      <CardInfo card={card} />
+      <div className={styles.container}>
+        <CardInfo card={card} />
 
-      {card.stylesLabel.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
+        {card.stylesLabel.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
 
-      {card.description ? <CardDescription description={card.description} /> : null}
+        {card.description ? <CardDescription description={card.description} /> : null}
 
-      {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
+        {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
 
-      <CardPrices prices={card.prices} types={card.types} />
+        <CardPrices prices={card.prices} types={card.types} />
+      </div>
     </div>
   </div>
 )
