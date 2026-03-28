@@ -19,7 +19,9 @@ const Card: FC<ICard> = ({ card }) => (
 
     {card.stylesLabel?.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
 
-    {card.description ? <CardDescription description={card.description} /> : null}
+    {card.description ? (
+      <CardDescription description={card.description} slug={card.owner_id} />
+    ) : null}
 
     {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
 
