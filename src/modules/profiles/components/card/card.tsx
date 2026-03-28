@@ -5,6 +5,7 @@ import { IProfile } from '@/shared/interfaces'
 
 import { paths } from '@/constants'
 
+import CardContacts from '@/modules/profiles/components/cardContacts/cardContacts'
 import CardDescription from '@/modules/profiles/components/cardDescription/cardDescription'
 import CardGallery from '@/modules/profiles/components/cardGallery/cardGallery'
 import CardInfo from '@/modules/profiles/components/cardInfo/cardInfo'
@@ -32,7 +33,10 @@ const Card: FC<ICard> = ({ card }) => (
 
         {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
 
-        <CardPrices prices={card.prices} types={card.types} />
+        <div className={styles.column}>
+          <CardPrices prices={card.prices} types={card.types} />
+          {card.contacts ? <CardContacts contacts={card.contacts} /> : null}
+        </div>
       </div>
     </div>
   </div>

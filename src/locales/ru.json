@@ -150,6 +150,8 @@
     },
     "contacts": {
       "messengers": "Контакты для связи",
+      "socials": "Социальные сети",
+      "write": "Написать в ",
       "telegram": {
         "label": "Telegram",
         "length": "Минимум 3 символа",
@@ -160,7 +162,6 @@
         "length": "Минимум 3 символа",
         "placeholder": "https://max.ru/u/[длинный хеш]"
       },
-      "socials": "Социальные сети",
       "instagram": {
         "label": "Instagram",
         "length": "Минимум 3 символа",

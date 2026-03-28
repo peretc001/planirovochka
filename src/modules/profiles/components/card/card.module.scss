@@ -44,5 +44,19 @@
     @media screen and (max-width: 767px) {
       padding: 16px;
     }
+
+    .column {
+      display: flex;
+      gap: 80px;
+
+      @media screen and (max-width: 1199px) {
+        gap: 48px;
+      }
+
+      @media screen and (max-width: 767px) {
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
   }
 }
