@@ -84,6 +84,7 @@
       "index": "Профиль",
       "about": "О себе",
       "prices": "Цены",
+      "contacts": "Контакты",
       "gallery": "Галерея",
       "portfolio": "Портфолио",
       "notifications": "Уведомления",
@@ -102,12 +103,6 @@
       "last_name": {
         "label": "Фамилия",
         "placeholder": "Введите фамилию"
-      },
-      "telegram": {
-        "label": "Telegram <em>(заказы будут приходить вам в ТГ)</em>",
-        "length": "Минимум 3 символа",
-        "placeholder": "https://t.me/name",
-        "test": "Отправить тестовое сообщение"
       },
       "city": {
         "label": "Город",
@@ -152,6 +147,30 @@
       "currency": "pуб.",
       "meter": "м<sup>2</sup>",
       "hour": "час"
+    },
+    "contacts": {
+      "messengers": "Контакты для связи",
+      "telegram": {
+        "label": "Telegram",
+        "length": "Минимум 3 символа",
+        "placeholder": "https://t.me/[nickname]"
+      },
+      "max": {
+        "label": "Max",
+        "length": "Минимум 3 символа",
+        "placeholder": "https://max.ru/u/[длинный хеш]"
+      },
+      "socials": "Социальные сети",
+      "instagram": {
+        "label": "Instagram",
+        "length": "Минимум 3 символа",
+        "placeholder": "https://instagram.com/[nickname]"
+      },
+      "pinterest": {
+        "label": "Pinterest",
+        "length": "Минимум 3 символа",
+        "placeholder": "https://pin.it/[хеш]"
+      }
     },
     "gallery": {
       "title": "Добавить файл",

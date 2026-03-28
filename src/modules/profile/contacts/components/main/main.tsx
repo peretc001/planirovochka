@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 
 import Loader from '@/shared/components/loader/loader'
 
-import { getPricesApi } from '@/modules/profile/prices/api/getPricesApi'
-import List from '@/modules/profile/prices/components/list/list'
+import { getContactsApi } from '@/modules/profile/contacts/api/getContactsApi'
+import ContactsForm from '@/modules/profile/contacts/components/contactsForm/contactsForm'
 
 import styles from './main.module.scss'
 
@@ -16,16 +16,16 @@ interface IMain {
 }
 
 const Main: FC<IMain> = ({ userId }) => {
-  const { isLoading, data } = useQuery({
-    queryFn: getPricesApi,
-    queryKey: ['prices', userId]
+  const { isFetching, data } = useQuery({
+    queryFn: getContactsApi,
+    queryKey: ['contacts', userId]
   })
 
-  const { prices, types } = data || {}
+  const { contacts } = data || {}
 
   return (
     <div className={styles.root}>
-      {isLoading ? <Loader isFull /> : <List prices={prices} types={types} />}
+      {isFetching ? <Loader isFull /> : <ContactsForm contacts={contacts} />}
     </div>
   )
 }

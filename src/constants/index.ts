@@ -4,6 +4,7 @@ export const paths = {
   home: '/',
   profile: {
     about: '/profile/about',
+    contacts: '/profile/contacts',
     gallery: '/profile/gallery',
     index: '/profile',
     payment: '/profile/payment',

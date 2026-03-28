@@ -14,6 +14,7 @@ export interface IProfile {
   avatar: string
   city: string
   city_code: string
+  contacts: IContacts
   created_at: string
   description: string
   experience: string
@@ -50,6 +51,13 @@ export interface IType {
 export interface IOption {
   label: string
   value: string
+}
+
+export interface IContacts {
+  instagram: string | undefined
+  max: string | undefined
+  pinterest: string | undefined
+  telegram: string | undefined
 }
 
 type DesignTypeValue = (typeof DESIGN_TYPES)[number]['value']

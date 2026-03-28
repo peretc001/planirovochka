@@ -33,16 +33,4 @@
   .editor :global(.simple-editor-content) {
     min-height: 200px;
   }
-
-  .telegram {
-    display: flex;
-    align-items: flex-end;
-    gap: 16px;
-
-    .test {
-      align-self: flex-end;
-      color: var(--main-blue);
-      padding-bottom: 6px;
-    }
-  }
 }

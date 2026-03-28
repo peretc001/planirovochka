@@ -36,8 +36,6 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const [form] = Form.useForm()
 
   const avatar = Form.useWatch('avatar', form)
-  // const telegram = Form.useWatch('telegram', form)
-  // const telegramUrlRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]{3,}$/
 
   const { isLoading, mutate: save } = useMutation({
     mutationFn: (values: Record<string, unknown>) => addProfileApi(values),
@@ -164,30 +162,6 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
       <Form.Item hidden name="city_code">
         <Input />
       </Form.Item>
-
-      {/*<div className={styles.telegram}>*/}
-      {/*  <Form.Item*/}
-      {/*    label={t.rich('about.telegram.label', { em: getHtmlChunks })}*/}
-      {/*    name="telegram"*/}
-      {/*    rules={[*/}
-      {/*      { message: t('require'), required: true },*/}
-      {/*      { message: t('about.telegram.length'), min: 3 }*/}
-      {/*    ]}*/}
-      {/*  >*/}
-      {/*    <Input placeholder={t('about.telegram.placeholder')} />*/}
-      {/*  </Form.Item>*/}
-
-      {/*  {telegram && telegramUrlRegex.test(telegram) ? (*/}
-      {/*    <a*/}
-      {/*      className={styles.test}*/}
-      {/*      href={`${telegram}?text=test`}*/}
-      {/*      rel="noreferrer"*/}
-      {/*      target="_blank"*/}
-      {/*    >*/}
-      {/*      {t('about.telegram.test')}*/}
-      {/*    </a>*/}
-      {/*  ) : null}*/}
-      {/*</div>*/}
 
       <div id="types" className={styles.separator} />
 

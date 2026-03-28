@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import {
+  AtSymbolIcon,
   BanknotesIcon,
   BriefcaseIcon,
   DocumentTextIcon,
@@ -61,6 +62,14 @@ const Menu = () => {
         >
           <BanknotesIcon className={styles.icon} />
           {t('menu.prices')}
+        </Link>
+        <Link
+          className={cns(styles.item, pathname === paths.profile.contacts && styles.active)}
+          aria-label={paths.profile.contacts}
+          href={paths.profile.contacts}
+        >
+          <AtSymbolIcon className={styles.icon} />
+          {t('menu.contacts')}
         </Link>
         <Link
           className={cns(styles.item, pathname === paths.profile.gallery && styles.active)}

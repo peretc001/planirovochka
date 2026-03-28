@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
 
+import Loader from '@/shared/components/loader/loader'
 import { IPrices, IType } from '@/shared/interfaces'
 
 import { DESIGN_TYPES, paths } from '@/constants'
@@ -47,6 +48,8 @@ const List: FC<IPricesList> = ({ prices, types }) => {
       name="prices"
       onFinish={onFinish}
     >
+      {isLoading ? <Loader isFull /> : null}
+
       {allowed?.map(type => (
         <div key={type.value} className={styles.row}>
           <div className={styles.title}>{type.label}</div>
