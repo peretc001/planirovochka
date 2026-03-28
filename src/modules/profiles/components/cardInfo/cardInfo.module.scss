@@ -1,0 +1,126 @@
+@use "@/styles/typography";
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .avatar {
+    flex: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+
+    @media screen and (max-width: 576px) {
+      width: 60px;
+      height: 60px;
+    }
+
+    &:empty {
+      background: var(--gray-100);
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .name {
+      @include typography.text-lg;
+      @include typography.semibold;
+    }
+  }
+
+  .about {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+
+    @media screen and (max-width: 576px) {
+      gap: 8px;
+    }
+  }
+
+
+  .city, .experience, .status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    @include typography.text-sm;
+
+    .icon {
+      flex: none;
+      width: 20px;
+      height: 20px;
+    }
+
+    @media screen and (max-width: 576px) {
+      @include typography.text-xs;
+    }
+  }
+
+  .experience {
+    gap: 6px;
+
+    .points {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 2px;
+
+      .point {
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: var(--gray-200);
+        border-radius: 50%;
+
+        &.active {
+          background: var(--main-blue);
+        }
+      }
+    }
+  }
+
+  .status {
+    .icon_wrapper {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: var(--rounded-xs);
+
+      .icon {
+        flex: none;
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &.individual {
+      .icon_wrapper {
+        background: var(--status-success);
+        color: var(--main-white);
+      }
+    }
+
+    &.studio {
+      .icon_wrapper {
+        background: var(--blue-300);
+        color: var(--main-white);
+      }
+    }
+
+    &.company {
+      .icon_wrapper {
+        background: var(--red-300);
+        color: var(--main-white);
+      }
+    }
+  }
+}

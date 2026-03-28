@@ -1,16 +1,11 @@
-import React, { Suspense, useCallback, useState } from 'react'
+'use client'
+
+import React, { useCallback, useState } from 'react'
 import { Modal } from 'antd'
-
-import { useMatchMedia } from '@/lib/useMatchMedia'
-
-import SigninPage from '@/modals/authModal/components/signin/signin'
-import SignupPage from '@/modals/authModal/components/signup/signup'
 
 import styles from './beta.module.scss'
 
 const Beta = () => {
-  const { isMobileMD } = useMatchMedia()
-
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const hideShow = () => {
@@ -40,7 +35,7 @@ const Beta = () => {
         <div className={styles.description}>
           <p>🚀 Сервис в стадии активной разработки.</p>
           <p>Но Вы уже можете добавить свой профиль.</p>
-          <p>Если у вас есть вопросы или идеи, пишите в поддержку:</p>
+          <p>Если у вас есть вопросы или идеи, пишите:</p>
           <div className={styles.contact}>
             👉
             <a href="https://t.me/planirovochka_io" rel="noreferrer" target="_blank">

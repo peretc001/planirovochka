@@ -1,14 +1,11 @@
 import React, { FC } from 'react'
-import Link from 'next/link'
 
 import { MapPinIcon } from '@heroicons/react/24/outline'
 
 import { IProfile } from '@/shared/interfaces'
 
-import { paths } from '@/constants'
-
-import CardInfoExperience from '@/modules/home/list/components/cardInfo/cardInfoExperience'
-import CardInfoStatus from '@/modules/home/list/components/cardInfo/cardInfoStatus'
+import CardInfoExperience from '@/modules/profiles/components/cardInfo/cardInfoExperience'
+import CardInfoStatus from '@/modules/profiles/components/cardInfo/cardInfoStatus'
 
 import styles from './cardInfo.module.scss'
 
@@ -18,14 +15,10 @@ interface ICardInfo {
 
 const CardInfo: FC<ICardInfo> = ({ card }) => (
   <div className={styles.root}>
-    <Link href={paths.profiles + card.owner_id}>
-      <img className={styles.avatar} src={process.env.NEXT_PUBLIC_S3_PATH + card.avatar} />
-    </Link>
+    <img className={styles.avatar} src={process.env.NEXT_PUBLIC_S3_PATH + card.avatar} />
 
     <div className={styles.info}>
-      <Link href={paths.profiles + card.owner_id}>
-        <div className={styles.name}>{card.name}</div>
-      </Link>
+      <div className={styles.name}>{card.name}</div>
 
       <div className={styles.about}>
         <div className={styles.city}>

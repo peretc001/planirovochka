@@ -1,0 +1,18 @@
+@use "@/styles/typography";
+
+.root {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  .item {
+    flex: none;
+    white-space: nowrap;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    @include typography.text-xs;
+    padding: 4px 8px;
+    border-radius: var(--rounded-xs);
+  }
+}

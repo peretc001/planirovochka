@@ -1,0 +1,12 @@
+.root {
+  @include max-container;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    padding: 16px;
+  }
+}

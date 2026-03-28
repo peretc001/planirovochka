@@ -9,7 +9,8 @@ export const paths = {
     payment: '/profile/payment',
     portfolio: '/profile/portfolio',
     prices: '/profile/prices',
-  }
+  },
+  profiles: '/profiles/'
 }
 
 export const DESIGN_TYPES: IType[] = [

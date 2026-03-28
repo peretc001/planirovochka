@@ -2,11 +2,11 @@ import React, { FC } from 'react'
 
 import { IProfile } from '@/shared/interfaces'
 
-import CardDescription from '@/modules/home/list/components/cardDescription/cardDescription'
-import CardGallery from '@/modules/home/list/components/cardGallery/cardGallery'
-import CardInfo from '@/modules/home/list/components/cardInfo/cardInfo'
-import CardPrices from '@/modules/home/list/components/cardPrices/cardPrices'
-import CardStyles from '@/modules/home/list/components/cardStyles/cardStyles'
+import CardDescription from '@/modules/profiles/components/cardDescription/cardDescription'
+import CardGallery from '@/modules/profiles/components/cardGallery/cardGallery'
+import CardInfo from '@/modules/profiles/components/cardInfo/cardInfo'
+import CardPrices from '@/modules/profiles/components/cardPrices/cardPrices'
+import CardStyles from '@/modules/profiles/components/cardStyles/cardStyles'
 
 import styles from './card.module.scss'
 
@@ -17,7 +17,7 @@ const Card: FC<ICard> = ({ card }) => (
   <div className={styles.root}>
     <CardInfo card={card} />
 
-    {card.stylesLabel?.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
+    {card.stylesLabel.length > 0 ? <CardStyles stylesLabel={card.stylesLabel} /> : null}
 
     {card.description ? <CardDescription description={card.description} /> : null}
 

@@ -1,8 +1,10 @@
 import { getToken } from '@/lib/cookie'
 
-// Функция для добавления завершающего слэша к URL
-const addTailingSlash = (url: string = ''): string =>
-  url[url.length - 1] === '/' ? url : `${url}/`
+/** Абсолютный host из env; на сервере относительный путь в fetch недопустим. */
+const DEFAULT_API_HOST =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/'
+    : (process.env.NEXT_PUBLIC_API_URL as string)
 
 // Типы для параметров запроса и настроек Fetch
 interface FetchParams {
@@ -27,80 +29,18 @@ if (token) {
 }
 
 class ServerApi {
-  // Метод GET запроса
-  static get(
-    apiMethod: string,
-    params: Record<string, any> = {},
-    signal?: AbortSignal,
-    host: string = '/api/'
-  ): Promise<any> {
-    const fetchParams = { ...FETCH_PARAMS, method: 'GET', signal }
-    const paramsStr = Object.keys(params)
-      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-      .join('&')
-
-    return fetch(
-      addTailingSlash(host) + apiMethod + (paramsStr ? `?${paramsStr}` : ''),
-      fetchParams
-    )
-      .then(response =>
-        response.ok
-          ? response.json()
-          : response.json().then((body: any) => {
-              const msg =
-                body?.message ?? body?.error ?? response.statusText ?? String(response.status)
-              throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
-            })
-      )
-      .catch(err => {
-        throw err instanceof Error ? err : new Error(String(err))
-      })
-  }
-
-  // Метод POST запроса
-  static post(
-    apiMethod: string,
-    params: Record<string, any> = {},
-    signal?: AbortSignal,
-    host: string = '/api/'
-  ): Promise<any> {
-    const fetchParams: FetchParams = {
-      body: JSON.stringify(params),
-      headers: FETCH_PARAMS.headers,
-      method: 'POST',
-      signal
-    }
-
-    return fetch(addTailingSlash(host) + apiMethod, fetchParams)
-      .then(response =>
-        response.ok
-          ? response.json()
-          : response.json().then((body: any) => {
-              const msg =
-                body?.message ?? body?.error ?? response.statusText ?? String(response.status)
-              throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
-            })
-      )
-      .catch(err => {
-        throw err instanceof Error ? err : new Error(String(err))
-      })
-  }
-
   static delete(
     apiMethod: string,
     params: Record<string, any> = {},
     signal?: AbortSignal,
-    host: string = '/api/'
+    host: string = DEFAULT_API_HOST
   ): Promise<any> {
     const fetchParams = { ...FETCH_PARAMS, method: 'DELETE' as const, signal }
     const paramsStr = Object.keys(params)
       .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
       .join('&')
 
-    return fetch(
-      addTailingSlash(host) + apiMethod + (paramsStr ? `?${paramsStr}` : ''),
-      fetchParams
-    )
+    return fetch(host + apiMethod + (paramsStr ? `?${paramsStr}` : ''), fetchParams)
       .then(response =>
         response.ok
           ? response.json()
@@ -122,7 +62,7 @@ class ServerApi {
     apiMethod: string,
     formData: FormData,
     signal?: AbortSignal,
-    host: string = '/api/'
+    host: string = DEFAULT_API_HOST
   ): Promise<any> {
     const headers: Record<string, string> = { ...FETCH_PARAMS.headers }
     delete headers['Content-Type']
@@ -136,7 +76,63 @@ class ServerApi {
       signal
     }
 
-    return fetch(addTailingSlash(host) + apiMethod, fetchParams)
+    return fetch(host + apiMethod, fetchParams)
+      .then(response =>
+        response.ok
+          ? response.json()
+          : response.json().then((body: any) => {
+              const msg =
+                body?.message ?? body?.error ?? response.statusText ?? String(response.status)
+              throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
+            })
+      )
+      .catch(err => {
+        throw err instanceof Error ? err : new Error(String(err))
+      })
+  }
+
+  // Метод GET запроса
+  static get(
+    apiMethod: string,
+    params: Record<string, any> = {},
+    signal?: AbortSignal,
+    host: string = DEFAULT_API_HOST
+  ): Promise<any> {
+    const fetchParams = { ...FETCH_PARAMS, method: 'GET', signal }
+    const paramsStr = Object.keys(params)
+      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+      .join('&')
+
+    return fetch(host + apiMethod + (paramsStr ? `?${paramsStr}` : ''), fetchParams)
+      .then(response =>
+        response.ok
+          ? response.json()
+          : response.json().then((body: any) => {
+              const msg =
+                body?.message ?? body?.error ?? response.statusText ?? String(response.status)
+              throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg))
+            })
+      )
+      .catch(err => {
+        throw err instanceof Error ? err : new Error(String(err))
+      })
+  }
+
+  // Метод POST запроса
+  static post(
+    apiMethod: string,
+    params: Record<string, any> = {},
+    signal?: AbortSignal,
+    host: string = DEFAULT_API_HOST
+  ): Promise<any> {
+    const fetchParams: FetchParams = {
+      body: JSON.stringify(params),
+      headers: FETCH_PARAMS.headers,
+      method: 'POST',
+      signal
+    }
+
+    return fetch(host + apiMethod, fetchParams)
       .then(response =>
         response.ok
           ? response.json()

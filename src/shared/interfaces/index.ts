@@ -18,7 +18,10 @@ export interface IProfile {
   description: string
   experience: string
   experienceLabel: string
+  first_name: string
   gallery: IGallery[]
+  last_name: string
+  middle_name: string
   name: string
   owner_id: number
   prices: IPrices

@@ -5,6 +5,7 @@ import { getLocale } from 'next-intl/server'
 
 import UseQueryProviders from '@/lib/useQueryProviders'
 
+import Beta from '@/layout/beta/beta'
 import Header from '@/layout/header/header'
 
 import AuthModal from '@/modals/authModal'
@@ -34,6 +35,7 @@ const RootLayout = async ({
           <UseQueryProviders>
             <div className="layout-container">
               <Header />
+              <Beta />
 
               {children}
             </div>
