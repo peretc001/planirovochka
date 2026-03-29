@@ -22,7 +22,7 @@ export const DESIGN_TYPES: IType[] = [
   },
   {
     label: 'Авторский надзор',
-    unit: 'meter',
+    unit: 'month',
     value: 'avtorskiy-nadzor'
   },
   {
