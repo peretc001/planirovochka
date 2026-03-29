@@ -71,6 +71,12 @@
       width: 24px;
       height: 24px;
 
+      .icon {
+        flex: none;
+        width: 24px;
+        height: 24px;
+      }
+
       &.disabled {
         opacity: 0.3;
         pointer-events: none;
