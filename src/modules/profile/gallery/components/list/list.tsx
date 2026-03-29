@@ -9,6 +9,7 @@ import { IGallery } from '@/shared/interfaces'
 import useFancybox from '@/lib/useFancybox'
 
 import Add from '@/modules/profile/gallery/components/add/add'
+import AddMulti from '@/modules/profile/gallery/components/addMulti/addMulti'
 import Card from '@/modules/profile/gallery/components/card/card'
 
 import styles from './list.module.scss'
@@ -23,6 +24,7 @@ const List: FC<IGalleryList> = ({ list }) => {
   const [fancyboxRef] = useFancybox()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalMultiOpen, setIsModalMultiOpen] = useState(false)
 
   const handleOpenAddModal = () => {
     setIsModalOpen(true)
@@ -32,12 +34,24 @@ const List: FC<IGalleryList> = ({ list }) => {
     setIsModalOpen(false)
   }, [])
 
+  const handleOpenAddMultiModal = () => {
+    setIsModalMultiOpen(true)
+  }
+
+  const handleCloseAddMultiModal = useCallback(() => {
+    setIsModalMultiOpen(false)
+  }, [])
+
   return (
     <div className={styles.root}>
-      <div>
+      <div className={styles.add}>
         <Button type="primary" onClick={handleOpenAddModal}>
           <PlusIcon className={styles.icon} />
           {t('gallery.title')}
+        </Button>
+
+        <Button color="primary" variant="outlined" onClick={handleOpenAddMultiModal}>
+          {t('gallery.multi')}
         </Button>
       </div>
 
@@ -55,6 +69,17 @@ const List: FC<IGalleryList> = ({ list }) => {
           onCancel={handleCloseAddModal}
         >
           <Add onCancel={handleCloseAddModal} />
+        </Modal>
+      ) : null}
+
+      {isModalMultiOpen ? (
+        <Modal
+          className={styles.modal}
+          footer={null}
+          open={isModalMultiOpen}
+          onCancel={handleCloseAddMultiModal}
+        >
+          <AddMulti onCancel={handleCloseAddMultiModal} />
         </Modal>
       ) : null}
     </div>

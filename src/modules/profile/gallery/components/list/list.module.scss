@@ -4,10 +4,16 @@
   flex-direction: column;
   gap: 16px;
 
-  .icon {
-    flex: none;
-    width: 16px;
-    height: 16px;
+  .add {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .icon {
+      flex: none;
+      width: 16px;
+      height: 16px;
+    }
   }
 
   .list {
