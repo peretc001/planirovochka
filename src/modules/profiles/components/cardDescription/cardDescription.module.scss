@@ -5,6 +5,51 @@
   color: var(--main-black);
 
   p {
+    display: block;
     margin: 8px 0;
+
+    &:empty {
+      min-height: 16px;
+    }
+  }
+
+  ul, ol {
+    margin: 16px 0 16px 24px;
+  }
+
+  ul li {
+    list-style: square;
+  }
+
+  [data-type="taskItem"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  [data-checked="true"] {
+    text-decoration: line-through;
+    color: var(--gray-500);
+  }
+
+  code {
+    display: inline-block;
+    background-color: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--rounded-xs);
+    padding: 2px 4px;
+    color: var(--main-black);
+  }
+
+  mark {
+    display: inline-block;
+    border-radius: var(--rounded-xs);
+    padding: 4px;
+  }
+
+  blockquote {
+    margin: 16px 0;
+    padding: 0 0 0 12px;
+    border-left: 3px solid var(--main-black);
   }
 }
