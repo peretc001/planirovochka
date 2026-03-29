@@ -239,6 +239,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
       <Form.Item className={styles.editor} label={t('about.description.label')} name="description">
         <SimpleEditor defaultContent={profile?.description} onChange={handleChangeContent} />
       </Form.Item>
+      <span className={styles.limit}>{t('about.description.limit')}</span>
 
       <Form.Item>
         <Button htmlType="submit" type="primary">

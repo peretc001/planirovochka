@@ -67,7 +67,7 @@ const MainToolbarContent = ({
 
     <ToolbarGroup>
       <HeadingDropdownMenu levels={[1, 2, 3, 4]} portal={isMobile} />
-      <ListDropdownMenu portal={isMobile} types={['bulletList', 'orderedList', 'taskList']} />
+      <ListDropdownMenu portal={isMobile} types={['bulletList', 'orderedList']} />
       <BlockquoteButton />
     </ToolbarGroup>
 
@@ -84,17 +84,17 @@ const MainToolbarContent = ({
       ) : (
         <ColorHighlightPopoverButton onClick={onHighlighterClick} />
       )}
-      {!isMobile ? <LinkPopover /> : <LinkButton onClick={onLinkClick} />}
+      {/*{!isMobile ? <LinkPopover /> : <LinkButton onClick={onLinkClick} />}*/}
     </ToolbarGroup>
 
-    <ToolbarSeparator />
+    {/*<ToolbarSeparator />*/}
 
-    <ToolbarGroup>
-      <TextAlignButton align="left" />
-      <TextAlignButton align="center" />
-      <TextAlignButton align="right" />
-      <TextAlignButton align="justify" />
-    </ToolbarGroup>
+    {/*<ToolbarGroup>*/}
+    {/*  <TextAlignButton align="left" />*/}
+    {/*  <TextAlignButton align="center" />*/}
+    {/*  <TextAlignButton align="right" />*/}
+    {/*  <TextAlignButton align="justify" />*/}
+    {/*</ToolbarGroup>*/}
   </>
 )
 
@@ -134,7 +134,7 @@ const SimpleEditor: FC<IEditor> = ({ defaultContent, limit, onChange }) => {
   const [mobileView, setMobileView] = useState<'highlighter' | 'link' | 'main'>('main')
   const toolbarRef = useRef<HTMLDivElement>(null)
 
-  const textLimit = limit || 1000
+  const textLimit = limit || 2000
 
   const editor = useEditor({
     // @ts-ignore

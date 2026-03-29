@@ -33,4 +33,11 @@
   .editor :global(.simple-editor-content) {
     min-height: 200px;
   }
+
+  .limit {
+    color: var(--gray-400);
+    font-size: 10px;
+    text-align: right;
+    margin-top: -8px;
+  }
 }
