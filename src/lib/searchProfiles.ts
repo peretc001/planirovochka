@@ -194,7 +194,7 @@ export async function listProfilesForCatalog(
   supabase: SupabaseClient,
   filters: ProfileListFilters
 ): Promise<{ data: Record<string, unknown>[]; error?: string }> {
-  let query = supabase.from('profiles').select('*')
+  let query = supabase.from('profiles').select('*').eq('approved', true)
 
   if (filters.experience.length) {
     query = query.in('experience', filters.experience)
