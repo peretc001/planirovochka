@@ -138,6 +138,37 @@ export const DESIGN_SEGMENT = [
   }
 ]
 
+export const DESIGN_SPACES = [
+  {
+    label: 'Квартиры',
+    value: 'flat'
+  },
+  {
+    label: 'Дома',
+    value: 'home'
+  },
+  {
+    label: 'Офисы',
+    value: 'office'
+  },
+  {
+    label: 'Кафе и рестораны',
+    value: 'cafe'
+  },
+  {
+    label: 'Магазины и бутики',
+    value: 'shop'
+  },
+  {
+    label: 'Отели и апартаменты',
+    value: 'hotel'
+  },
+  {
+    label: 'Выставки и шоурумы',
+    value: 'expo'
+  }
+]
+
 export const DESIGN_EXPERIENCE = [
   {
     label: 'До 1 года',

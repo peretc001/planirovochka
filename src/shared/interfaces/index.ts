@@ -27,6 +27,7 @@ export interface IProfile {
   owner_id: string
   prices: IPrices
   segments: string[]
+  spaces: string[]
   status: string
   statusLabel: string
   telegram: string

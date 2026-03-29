@@ -50,6 +50,7 @@ export async function GET() {
     last_name: data.last_name,
     middle_name: data.middle_name,
     segments: data.segments,
+    spaces: data.spaces,
     status: data.status,
     types: data.types
   }
@@ -83,6 +84,7 @@ export async function POST(request: NextRequest) {
     middle_name: toOptionalText(body.middle_name),
     owner_id: user.id,
     segments: toJsonArray(body.segments),
+    spaces: toJsonArray(body.spaces),
     status: toOptionalText(body.status),
     types: toJsonArray(body.types)
   }

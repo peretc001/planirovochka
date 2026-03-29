@@ -13,6 +13,7 @@ import { IProfile } from '@/shared/interfaces'
 import {
   DESIGN_EXPERIENCE,
   DESIGN_SEGMENT,
+  DESIGN_SPACES,
   DESIGN_STATUS,
   DESIGN_STYLES,
   DESIGN_TYPES
@@ -202,6 +203,18 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
           mode="multiple"
           options={DESIGN_SEGMENT}
           placeholder={t('about.segments.placeholder')}
+        />
+      </Form.Item>
+
+      <Form.Item
+        label={t.rich('about.spaces.label', { em: getHtmlChunks })}
+        name="spaces"
+        rules={[{ message: t('require'), required: true }]}
+      >
+        <Select
+          mode="multiple"
+          options={DESIGN_SPACES}
+          placeholder={t('about.spaces.placeholder')}
         />
       </Form.Item>
 
