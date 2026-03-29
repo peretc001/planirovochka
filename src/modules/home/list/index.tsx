@@ -1,19 +1,25 @@
 'use client'
 
 import React from 'react'
+import { Button } from 'antd'
 import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 
 import Loader from '@/shared/components/loader/loader'
 
-import { getProfilesApi } from '@/modules/home/list/api/getProfilesApi'
+import { PROFILE_LIST_LIMIT } from '@/constants'
+
+import { getProfilesApi, type ProfilesListResponse } from '@/modules/home/list/api/getProfilesApi'
 import Cards from '@/modules/home/list/components/cards/cards'
 import Empty from '@/modules/home/list/components/empty/empty'
 
 import cssStyles from './list.module.scss'
 
 const List = () => {
+  const t = useTranslations('home')
+
   const searchParams = useSearchParams() as URLSearchParams
 
   const name = searchParams.get('query') ?? undefined
@@ -24,19 +30,52 @@ const List = () => {
   const experience = searchParams.get('experience')?.split(',') ?? undefined
   const status = searchParams.get('status')?.split(',') ?? undefined
 
-  const { isError, isLoading, data } = useQuery({
-    queryFn: () => getProfilesApi(name, city, types, styles, segments, experience, status),
-    queryKey: ['profiles_list', name, city, types, styles, segments, experience, status]
-  })
+  const { hasNextPage, isError, isFetchingNextPage, isLoading, data, fetchNextPage } =
+    useInfiniteQuery<ProfilesListResponse>({
+      getNextPageParam: lastPage =>
+        lastPage.currentPage * PROFILE_LIST_LIMIT < lastPage.total
+          ? lastPage.currentPage + 1
+          : undefined,
+      queryFn: async ({ pageParam }) => {
+        const page = typeof pageParam === 'number' ? pageParam : 1
+        const res = await getProfilesApi(
+          page,
+          PROFILE_LIST_LIMIT,
+          name,
+          city,
+          types,
+          styles,
+          segments,
+          experience,
+          status
+        )
+        return res ?? { currentPage: page, list: [], total: 0 }
+      },
+      queryKey: ['profiles_list', name, city, types, styles, segments, experience, status]
+    })
+
+  const cards = data?.pages.flatMap(p => p.list) ?? []
+
+  const handleShowMore = () => {
+    fetchNextPage()
+  }
 
   return (
     <div className={cssStyles.root}>
       {isLoading ? <Loader className={cssStyles.loader} isFull /> : null}
 
-      {data?.length > 0 && <Cards cards={data} />}
+      {cards.length > 0 && <Cards cards={cards} />}
 
-      {!isLoading && data?.length === 0 ? <Empty /> : null}
-      {isError && !data?.length ? <Empty /> : null}
+      {hasNextPage ? (
+        <div className={cssStyles.show}>
+          <Button loading={isFetchingNextPage} type="primary" onClick={handleShowMore}>
+            {t.rich('show', { count: PROFILE_LIST_LIMIT })}
+          </Button>
+        </div>
+      ) : null}
+
+      {!isLoading && cards.length === 0 ? <Empty /> : null}
+      {isError && cards.length === 0 ? <Empty /> : null}
     </div>
   )
 }

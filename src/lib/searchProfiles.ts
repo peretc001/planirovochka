@@ -1,13 +1,15 @@
 import { IOption } from '@/shared/interfaces'
 
-import { DESIGN_EXPERIENCE, DESIGN_STATUS, DESIGN_STYLES } from '@/constants'
+import { DESIGN_EXPERIENCE, DESIGN_STATUS, DESIGN_STYLES, PROFILE_LIST_LIMIT } from '@/constants'
 
 import type { SupabaseClient } from '@supabase/supabase-js'
 
 export type ProfileListFilters = {
   styles: string[]
   city: string
+  currentPage: number /** Номер страницы, с 1. */
   experience: string[]
+  limit: number /** Размер страницы (сколько карточек в `list`). */
   name: string
   segments: string[]
   status: string[]
@@ -142,11 +144,28 @@ export async function readJsonBody(request: Request): Promise<Record<string, unk
   return {}
 }
 
+function parsePositiveInt(v: unknown, fallback: number): number {
+  if (typeof v === 'number' && Number.isFinite(v) && v > 0) return Math.floor(v)
+  if (typeof v === 'string' && v.trim() !== '') {
+    const n = Number.parseInt(v, 10)
+    if (Number.isFinite(n) && n > 0) return n
+  }
+  return fallback
+}
+
+function parsePage(v: unknown): number {
+  const n = parsePositiveInt(v, 1)
+  return n >= 1 ? n : 1
+}
+
 export function buildFilters(payload: Record<string, unknown>): ProfileListFilters {
+  const limitRaw = parsePositiveInt(payload.limit, PROFILE_LIST_LIMIT)
   return {
     styles: normalizeFilterArray(payload.styles),
     city: typeof payload.city === 'string' ? payload.city.trim() : '',
+    currentPage: parsePage(payload.currentPage ?? payload.page),
     experience: normalizeFilterArray(payload.experience),
+    limit: Math.min(limitRaw, PROFILE_LIST_LIMIT),
     name: typeof payload.name === 'string' ? payload.name.trim() : '',
     segments: normalizeFilterArray(payload.segments),
     status: normalizeFilterArray(payload.status),
@@ -190,10 +209,16 @@ async function loadGalleryByOwnerIds(
 /**
  * Список профилей для каталога: скалярные фильтры в SQL, JSON/имя — в памяти, затем галерея.
  */
+export type ProfilesCatalogPage = {
+  currentPage: number
+  list: Record<string, unknown>[]
+  total: number
+}
+
 export async function listProfilesForCatalog(
   supabase: SupabaseClient,
   filters: ProfileListFilters
-): Promise<{ data: Record<string, unknown>[]; error?: string }> {
+): Promise<{ data: ProfilesCatalogPage; error?: string }> {
   let query = supabase.from('profiles').select('*').eq('approved', true)
 
   if (filters.experience.length) {
@@ -208,7 +233,10 @@ export async function listProfilesForCatalog(
 
   const { data: rawRows, error } = await query
   if (error) {
-    return { data: [], error: error.message }
+    return {
+      data: { currentPage: filters.currentPage, list: [], total: 0 },
+      error: error.message
+    }
   }
 
   const mapped: Record<string, unknown>[] = []
@@ -222,10 +250,15 @@ export async function listProfilesForCatalog(
     mapped.push(formatProfileRow(r, { styles, segments, types }))
   }
 
-  const ownerIds = [...new Set(mapped.map(m => m.owner_id).filter(Boolean))] as string[]
+  const total = mapped.length
+  const { currentPage, limit } = filters
+  const start = (currentPage - 1) * limit
+  const pageSlice = mapped.slice(start, start + limit)
+
+  const ownerIds = [...new Set(pageSlice.map(m => m.owner_id).filter(Boolean))] as string[]
   const galleryByOwner = await loadGalleryByOwnerIds(supabase, ownerIds)
 
-  const data = mapped.map(row => {
+  const list = pageSlice.map(row => {
     const oid = row.owner_id != null ? String(row.owner_id) : ''
     return {
       ...row,
@@ -233,5 +266,5 @@ export async function listProfilesForCatalog(
     }
   })
 
-  return { data }
+  return { data: { currentPage, list, total } }
 }

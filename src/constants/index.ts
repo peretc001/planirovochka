@@ -14,6 +14,9 @@ export const paths = {
   profiles: '/profiles/'
 }
 
+/** Размер страницы каталога: значение по умолчанию и максимум за один запрос. */
+export const PROFILE_LIST_LIMIT = 20
+
 export const DESIGN_TYPES: IType[] = [
   {
     label: 'Дизайн-проект под ключ',
