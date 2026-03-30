@@ -91,7 +91,7 @@ function matchesJsonOrGroup(
   if (filters.styles.length) parts.push(jsonOverlap(row.styles, filters.styles))
   if (filters.segments.length) parts.push(jsonOverlap(row.segments, filters.segments))
   if (parts.length === 0) return true
-  return parts.some(Boolean)
+  return parts.every(Boolean)
 }
 
 function buildDisplayName(row: Record<string, unknown>): string {
