@@ -26,6 +26,8 @@ export async function signup(
   return { error: error?.status }
 }
 
+// При регистрации отправляется supabase Auth before create hook
+// на krasovsky23.ru/webhooks/planirovochka_auth.php
 export async function signin(
   _prevState: { error?: string; status?: boolean } | undefined,
   values: { email: string; password: string }
