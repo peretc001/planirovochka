@@ -21,19 +21,6 @@
     }
   }
 
-  .breadcrumbs {
-    width: 100%;
-    @include typography.text-xs;
-    color: var(--gray-400);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    a {
-      color: var(--main-black);
-    }
-  }
-
   .container {
     background: var(--main-white);
     border-radius: var(--rounded-md);

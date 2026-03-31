@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Gallery from '@/modules/profile/gallery'
+import Portfolio from '@/modules/profile/portfolio'
 
-const Page = () => <Gallery />
+const Page = () => <Portfolio />
 
 export default Page

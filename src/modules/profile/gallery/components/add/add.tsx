@@ -8,6 +8,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 
 import { GALLERY_TYPES } from '@/constants'
 
+import { getBase64 } from '@/lib/getBase64'
+
 import { addGalleryApi } from '@/modules/profile/gallery/api/addGalleryApi'
 
 import SimpleEditor from '@/components/tiptap-templates/simple/simple-editor'
@@ -15,14 +17,6 @@ import SimpleEditor from '@/components/tiptap-templates/simple/simple-editor'
 import styles from './add.module.scss'
 
 import { UploadOutlined } from '@ant-design/icons'
-
-const getBase64 = (file: File): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as string)
-    reader.onerror = error => reject(error)
-  })
 
 interface IGalleryAdd {
   readonly onCancel: () => void

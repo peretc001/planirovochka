@@ -43,6 +43,17 @@ export interface IGallery {
   url: string
 }
 
+export interface IPortfolio {
+  id: number
+  created_at: string
+  description: string
+  owner_id: number
+  photos: string[]
+  price: string
+  title: string
+  type: string
+}
+
 export interface IType {
   label: string
   unit: string

@@ -64,6 +64,19 @@ h3 {
   }
 }
 
+.breadcrumbs {
+  width: 100%;
+  @include typography.text-xs;
+  color: var(--gray-400);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  a {
+    color: var(--main-black);
+  }
+}
+
 
 /* Для WebKit браузеров (Chrome, Safari, Opera, Edge) */
 ::-webkit-scrollbar {

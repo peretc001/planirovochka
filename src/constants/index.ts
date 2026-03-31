@@ -8,7 +8,10 @@ export const paths = {
     gallery: '/profile/gallery',
     index: '/profile',
     payment: '/profile/payment',
-    portfolio: '/profile/portfolio',
+    portfolio: {
+      add: '/profile/portfolio/add',
+      index: '/profile/portfolio'
+    },
     prices: '/profile/prices',
   },
   profiles: '/profiles/'

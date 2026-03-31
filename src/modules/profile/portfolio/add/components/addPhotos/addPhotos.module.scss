@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 0 24px 0;
+
+  .limit {
+    color: var(--gray-400);
+    font-size: 12px;
+  }
+
+  .previewList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+
+    @media screen and (max-width: 1199px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+  }
+}

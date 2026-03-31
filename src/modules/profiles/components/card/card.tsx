@@ -20,7 +20,7 @@ interface ICard {
 const Card: FC<ICard> = ({ card }) => (
   <div className={styles.root}>
     <div className={styles.wrapper}>
-      <div className={styles.breadcrumbs}>
+      <div className="breadcrumbs">
         <Link href={paths.home}>Профили</Link> / {card.name}
       </div>
 

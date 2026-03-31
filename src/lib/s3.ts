@@ -1,4 +1,10 @@
-import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import {
+  DeleteObjectCommand,
+  DeleteObjectsCommand,
+  ListObjectsV2Command,
+  PutObjectCommand,
+  S3Client
+} from '@aws-sdk/client-s3'
 
 const bucket = process.env.S3_BUCKET_NAME!
 const endpoint = process.env.S3_ENDPOINT!
@@ -40,6 +46,38 @@ export async function s3DeleteObject(key: string) {
       Key: key
     })
   )
+}
+
+/** Удаляет все объекты с префиксом (как «папку» в S3). */
+export async function s3DeletePrefix(prefix: string) {
+  const normalized = prefix.replace(/\/+$/, '') + '/'
+  let continuationToken: string | undefined
+
+  do {
+    const list = await s3.send(
+      new ListObjectsV2Command({
+        Bucket: bucket,
+        ContinuationToken: continuationToken,
+        Prefix: normalized
+      })
+    )
+
+    const keys = (list.Contents ?? []).map(o => o.Key).filter((k): k is string => Boolean(k))
+
+    if (keys.length > 0) {
+      await s3.send(
+        new DeleteObjectsCommand({
+          Bucket: bucket,
+          Delete: {
+            Objects: keys.map(Key => ({ Key })),
+            Quiet: true
+          }
+        })
+      )
+    }
+
+    continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
+  } while (continuationToken)
 }
 
 export function s3KeyFromStoredUrl(url: string): null | string {
