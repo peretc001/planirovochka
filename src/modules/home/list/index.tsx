@@ -29,6 +29,7 @@ const List = () => {
   const segments = searchParams.get('segments')?.split(',') ?? undefined
   const experience = searchParams.get('experience')?.split(',') ?? undefined
   const status = searchParams.get('status')?.split(',') ?? undefined
+  const portfolio = searchParams.get('portfolio') ?? undefined
 
   const { hasNextPage, isError, isFetchingNextPage, isLoading, data, fetchNextPage } =
     useInfiniteQuery<ProfilesListResponse>({
@@ -47,11 +48,12 @@ const List = () => {
           styles,
           segments,
           experience,
-          status
+          status,
+          portfolio
         )
         return res ?? { currentPage: page, list: [], total: 0 }
       },
-      queryKey: ['profiles_list', name, city, types, styles, segments, experience, status]
+      queryKey: ['profiles_list', name, city, types, styles, segments, experience, status, portfolio]
     })
 
   const cards = data?.pages.flatMap(p => p.list) ?? []

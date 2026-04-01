@@ -23,7 +23,8 @@ export const getProfilesApi = async (
   styles: string[] | undefined,
   segments: string[] | undefined,
   experience: string[] | undefined,
-  status: string[] | undefined
+  status: string[] | undefined,
+  portfolio: string | undefined
 ): Promise<ProfilesListResponse | undefined> => {
   try {
     const response = (await serverApi.post('profiles/list', {
@@ -33,6 +34,7 @@ export const getProfilesApi = async (
       experience,
       limit,
       name,
+      portfolio,
       segments,
       status,
       types

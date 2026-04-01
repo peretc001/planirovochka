@@ -11,6 +11,8 @@ export type ProfileListFilters = {
   experience: string[]
   limit: number /** Размер страницы (сколько карточек в `list`). */
   name: string
+  /** Только профили с хотя бы одной записью в таблице `portfolio`. */
+  portfolioOnly: boolean
   segments: string[]
   status: string[]
   types: string[]
@@ -159,6 +161,20 @@ function parsePage(v: unknown): number {
   return n >= 1 ? n : 1
 }
 
+function parsePortfolioOnlyFlag(raw: unknown): boolean {
+  if (raw === true || raw === 1) return true
+  if (typeof raw === 'string') {
+    const s = raw.trim()
+    if (s === '1' || s === 'true') return true
+    return s
+      .split(',')
+      .map(x => x.trim())
+      .includes('1')
+  }
+  if (Array.isArray(raw)) return raw.some(x => String(x).trim() === '1')
+  return false
+}
+
 export function buildFilters(payload: Record<string, unknown>): ProfileListFilters {
   const limitRaw = parsePositiveInt(payload.limit, PROFILE_LIST_LIMIT)
   return {
@@ -168,6 +184,7 @@ export function buildFilters(payload: Record<string, unknown>): ProfileListFilte
     experience: normalizeFilterArray(payload.experience),
     limit: Math.min(limitRaw, PROFILE_LIST_LIMIT),
     name: typeof payload.name === 'string' ? payload.name.trim() : '',
+    portfolioOnly: parsePortfolioOnlyFlag(payload.portfolio),
     segments: normalizeFilterArray(payload.segments),
     status: normalizeFilterArray(payload.status),
     types: normalizeFilterArray(payload.types)
@@ -284,10 +301,31 @@ export async function listProfilesForCatalog(
     mapped.push(formatProfileRow(r, { styles, segments, types }))
   }
 
-  const total = mapped.length
+  let eligible = mapped
+  if (filters.portfolioOnly && mapped.length > 0) {
+    const ownerIds = [...new Set(mapped.map(m => String(m.owner_id ?? '')).filter(Boolean))]
+    const { data: portfolioRows, error: portfolioErr } = await supabase
+      .from('portfolio')
+      .select('owner_id')
+      .in('owner_id', ownerIds)
+
+    if (portfolioErr) {
+      return {
+        data: { currentPage: filters.currentPage, list: [], total: 0 },
+        error: portfolioErr.message
+      }
+    }
+
+    const withPortfolio = new Set(
+      (portfolioRows ?? []).map((row: { owner_id: unknown }) => String(row.owner_id ?? ''))
+    )
+    eligible = mapped.filter(m => withPortfolio.has(String(m.owner_id ?? '')))
+  }
+
+  const total = eligible.length
   const { currentPage, limit } = filters
   const start = (currentPage - 1) * limit
-  const pageSlice = mapped.slice(start, start + limit)
+  const pageSlice = eligible.slice(start, start + limit)
 
   const ownerIds = [...new Set(pageSlice.map(m => m.owner_id).filter(Boolean))] as string[]
   const [galleryByOwner, portfolioByOwner] = await Promise.all([
