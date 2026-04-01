@@ -1,4 +1,5 @@
 @use "@/styles/typography";
+
 .root {
   width: 100%;
   display: flex;
@@ -39,6 +40,15 @@
       border-radius: var(--rounded-xs);
       overflow: hidden;
       scroll-snap-align: start;
+      cursor: pointer;
+
+      @media screen and (max-width: 1199px) {
+        width: 300px;
+      }
+
+      @media screen and (max-width: 375px) {
+        width: 250px;
+      }
 
       .preview {
         flex: 1;
@@ -126,3 +136,53 @@
     }
   }
 }
+
+.modal {
+  width: 100% !important;
+  max-width: 800px;
+  overflow: hidden;
+
+  :global(.ant-modal-close) {
+    background-color: var(--main-black);
+    color: var(--main-white);
+    outline: none;
+    user-select: none;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--main-black);
+        color: var(--main-white);
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    margin: 0 !important;
+    max-width: 100% !important;
+    top: 0;
+    bottom: 0;
+    height: 100dvh;
+    overflow: hidden;
+
+
+
+    :global(.ant-modal-container) {
+      display: flex;
+      height: 100%;
+      padding: 0;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    :global(.ant-modal-body) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}
+
