@@ -6,9 +6,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { TrashIcon } from '@heroicons/react/24/outline'
 
-import { IGallery, IPortfolio } from '@/shared/interfaces'
+import { IPortfolio } from '@/shared/interfaces'
 
-import { deleteGalleryApi } from '@/modules/profile/gallery/api/deleteGalleryApi'
+import { CURRENCY } from '@/constants'
+
+import numberFormatter from '@/lib/numberFormatter'
+
 import { deletePortfolioApi } from '@/modules/profile/portfolio/api/deletePortfolioApi'
 
 import styles from './card.module.scss'
@@ -22,7 +25,7 @@ const Card: FC<ICard> = ({ card }) => {
 
   const queryClient = useQueryClient()
 
-  const { mutate: deleteFile } = useMutation({
+  const { mutate: deletePortfolio } = useMutation({
     mutationFn: (id: number) => deletePortfolioApi(id),
     onError: () => message.error(t('error')),
     onSuccess: status => {
@@ -33,7 +36,7 @@ const Card: FC<ICard> = ({ card }) => {
   })
 
   const handleRemove = () => {
-    deleteFile(card.id)
+    deletePortfolio(card.id)
   }
 
   return (
@@ -42,21 +45,24 @@ const Card: FC<ICard> = ({ card }) => {
         <TrashIcon className={styles.icon} />
       </div>
 
-      <div className={styles.type}>{card.title}</div>
+      <picture className={styles.preview}>
+        <img src={process.env.NEXT_PUBLIC_S3_PATH + card.photos[0]} />
+        <div className={styles.count}>{card.photos.length}</div>
+      </picture>
 
-      {card.description ? (
-        <div
-          className={styles.description}
-          dangerouslySetInnerHTML={{ __html: card.description }}
-        />
-      ) : null}
+      <div className={styles.content}>
+        <div className={styles.title}>{card.title}</div>
 
-      <div className={styles.photos}>
-        {card.photos.map((file, index) => (
-          <picture key={index} className={styles.picture}>
-            <img src={process.env.NEXT_PUBLIC_S3_PATH + file} />
-          </picture>
-        ))}
+        {card.description ? (
+          <div
+            className={styles.description}
+            dangerouslySetInnerHTML={{ __html: card.description }}
+          />
+        ) : null}
+
+        <div className={styles.price}>
+          {numberFormatter(card.price)} {CURRENCY}
+        </div>
       </div>
     </div>
   )
