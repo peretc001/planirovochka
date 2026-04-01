@@ -17,6 +17,8 @@ export const paths = {
   profiles: '/profiles/'
 }
 
+export const CURRENCY = 'руб.'
+
 /** Размер страницы каталога: значение по умолчанию и максимум за один запрос. */
 export const PROFILE_LIST_LIMIT = 20
 

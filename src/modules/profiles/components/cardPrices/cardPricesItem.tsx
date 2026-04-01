@@ -3,6 +3,8 @@ import { useTranslations } from 'next-intl'
 
 import { IPrices } from '@/shared/interfaces'
 
+import { CURRENCY } from '@/constants'
+
 import numberFormatter from '@/lib/numberFormatter'
 
 import styles from './cardPrices.module.scss'
@@ -41,7 +43,7 @@ const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, unit, value }) => 
           {min && max ? '–' : null}
           {max ? <div className={styles.min}>{numberFormatter(max)}</div> : null}
           <div className={styles.currency}>
-            {t('prices.currency')}/{t.rich('prices.' + unit, { sup: getHtmlChunks })}
+            {CURRENCY}/{t.rich('prices.' + unit, { sup: getHtmlChunks })}
           </div>
         </div>
       )}

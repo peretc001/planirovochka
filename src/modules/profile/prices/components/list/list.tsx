@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query'
 import Loader from '@/shared/components/loader/loader'
 import { IPrices, IType } from '@/shared/interfaces'
 
-import { DESIGN_TYPES, paths } from '@/constants'
+import { CURRENCY, DESIGN_TYPES, paths } from '@/constants'
 
 import { addPricesApi } from '@/modules/profile/prices/api/addPricesApi'
 
@@ -69,7 +69,7 @@ const List: FC<IPricesList> = ({ prices, types }) => {
           </div>
 
           <div className={styles.type}>
-            {t('prices.currency')}/{t.rich('prices.' + type.unit, { sup: getHtmlChunks })}
+            {CURRENCY}/{t.rich('prices.' + type.unit, { sup: getHtmlChunks })}
           </div>
         </div>
       ))}
