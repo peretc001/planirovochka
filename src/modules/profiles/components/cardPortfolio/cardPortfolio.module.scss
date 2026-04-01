@@ -1,13 +1,23 @@
 @use "@/styles/typography";
 
 .root {
-  width: 100%;
+  width: calc(100% + 48px);
   display: flex;
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
   position: relative;
+  background: var(--gray-50);
+  margin-left: -24px;
+  margin-right: -24px;
   margin-bottom: 16px;
+  padding: 24px;
+
+  @media screen and (max-width: 767px) {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 24px 16px;
+  }
 
   h3 {
     display: inline-flex;
@@ -20,7 +30,7 @@
     flex: none;
     width: 100%;
     display: flex;
-    gap: 8px;
+    gap: 16px;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -32,11 +42,10 @@
 
     .portfolio {
       flex: none;
-      width: calc(100% / 4 - 8px);
+      width: calc(100% / 4 - 12px);
       display: flex;
       flex-direction: column;
       position: relative;
-      border: 1px solid var(--gray-200);
       border-radius: var(--rounded-xs);
       overflow: hidden;
       scroll-snap-align: start;
@@ -113,8 +122,8 @@
 
   .buttons {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 24px;
+    right: 24px;
     display: flex;
     z-index: 1;
 
@@ -145,8 +154,7 @@
   :global(.ant-modal-close) {
     background-color: var(--main-black);
     color: var(--main-white);
-    outline: none;
-    user-select: none;
+    outline: none !important;
 
     @media (hover: hover) {
       &:hover {
@@ -164,8 +172,6 @@
     bottom: 0;
     height: 100dvh;
     overflow: hidden;
-
-
 
     :global(.ant-modal-container) {
       display: flex;
