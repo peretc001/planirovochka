@@ -35,9 +35,7 @@ const Card: FC<ICard> = ({ card }) => (
 
         {card.gallery?.length > 0 && <CardGallery gallery={card.gallery} />}
 
-        {card.portfolio?.length > 0 && (
-          <CardPortfolio portfolio={card.portfolio} slug={card.owner_id} />
-        )}
+        {card.portfolio?.length > 0 && <CardPortfolio portfolio={card.portfolio} />}
 
         <div className={styles.column}>
           <CardPrices prices={card.prices} types={card.types} />
