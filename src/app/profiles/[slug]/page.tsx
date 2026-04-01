@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { notFound } from 'next/navigation'
 
+import { CURRENCY, DESIGN_EXPERIENCE, DESIGN_TYPES } from '@/constants'
+
 import serverApi from '@/lib/serverApi'
 
 import Profile from '@/modules/profiles'
@@ -17,9 +19,25 @@ export async function generateMetadata({ params }: Props) {
   const data = profile?.data
 
   const name = [data?.last_name, data?.first_name, data?.middle_name].join(' ')
+  const price = data?.prices?.['dizayn-proekt_min'] || data?.prices?.['dizayn-proekt_max']
+  const portfolio = data?.portfolio?.length
+  const experience = data?.experience
+
+  const generateDescription = (price, portfolio, experience) => {
+    let description
+
+    if (price) description = DESIGN_TYPES[0].label + ' - ' + price + ' ' + CURRENCY
+    if (portfolio) description = description + ' Более ' + portfolio + ' выполненных работ.'
+    if (experience)
+      description =
+        description + ' Опыт работы: ' + DESIGN_EXPERIENCE.find(x => x.value === experience)?.label
+    return description
+  }
+
+  const description = generateDescription(price, portfolio, experience)
 
   return {
-    description: data?.description,
+    description: description,
     title: name + ' - ' + data.statusLabel + ' на ' + process.env.NEXT_PUBLIC_NAME + '.io'
   }
 }
