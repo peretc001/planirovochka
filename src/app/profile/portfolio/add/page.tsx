@@ -1,4 +1,5 @@
 import React from 'react'
+import { Metadata } from 'next'
 
 import Add from '@/modules/profile/portfolio/add'
 
