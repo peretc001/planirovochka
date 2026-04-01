@@ -17,6 +17,7 @@ export type ProfileListFilters = {
 }
 
 const GALLERY_LIMIT = 100
+const PORTFOLIO_LIMIT = 100
 
 function normalizeFilterArray(v: unknown): string[] {
   let arr: unknown = v
@@ -206,6 +207,39 @@ async function loadGalleryByOwnerIds(
   return out
 }
 
+async function loadPortfolioByOwnerIds(
+  supabase: SupabaseClient,
+  ownerIds: string[]
+): Promise<Record<string, Record<string, unknown>[]>> {
+  if (ownerIds.length === 0) return {}
+
+  const { data: portfolioRows, error } = await supabase
+    .from('portfolio')
+    .select('*')
+    .in('owner_id', ownerIds)
+    .order('created_at', { ascending: false })
+
+  if (error || !portfolioRows) return {}
+
+  const byOwner: Record<string, Record<string, unknown>[]> = {}
+  for (const p of portfolioRows as Record<string, unknown>[]) {
+    const oid = String(p.owner_id ?? '')
+    if (!oid) continue
+    ;(byOwner[oid] ??= []).push(p)
+  }
+
+  const out: Record<string, Record<string, unknown>[]> = {}
+  for (const oid of ownerIds) {
+    const sorted = (byOwner[oid] ?? []).sort((a, b) => {
+      const ta = new Date(String(a.created_at ?? 0)).getTime()
+      const tb = new Date(String(b.created_at ?? 0)).getTime()
+      return tb - ta
+    })
+    out[oid] = sorted.slice(0, PORTFOLIO_LIMIT)
+  }
+  return out
+}
+
 /**
  * Список профилей для каталога: скалярные фильтры в SQL, JSON/имя — в памяти, затем галерея.
  */
@@ -256,13 +290,17 @@ export async function listProfilesForCatalog(
   const pageSlice = mapped.slice(start, start + limit)
 
   const ownerIds = [...new Set(pageSlice.map(m => m.owner_id).filter(Boolean))] as string[]
-  const galleryByOwner = await loadGalleryByOwnerIds(supabase, ownerIds)
+  const [galleryByOwner, portfolioByOwner] = await Promise.all([
+    loadGalleryByOwnerIds(supabase, ownerIds),
+    loadPortfolioByOwnerIds(supabase, ownerIds)
+  ])
 
   const list = pageSlice.map(row => {
     const oid = row.owner_id != null ? String(row.owner_id) : ''
     return {
       ...row,
-      gallery: oid ? (galleryByOwner[oid] ?? []) : []
+      gallery: oid ? (galleryByOwner[oid] ?? []) : [],
+      portfolio: oid ? (portfolioByOwner[oid] ?? []) : []
     }
   })
 

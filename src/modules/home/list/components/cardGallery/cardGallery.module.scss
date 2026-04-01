@@ -1,43 +1,66 @@
 @use "@/styles/typography";
 
 .root {
-  flex: none;
   width: 100%;
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 16px;
   overflow: hidden;
-  position: relative;
 
-  .picture {
-    flex: none;
-    width: 300px;
-    aspect-ratio: 16/9;
-    display: block;
-    overflow: hidden;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--rounded-md);
+  h3 {
+    display: inline-flex;
+    width: max-content;
     margin: 0;
-
-    @media screen and (max-width: 767px) {
-      width: 200px;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
+    border-bottom: 2px solid var(--main-blue);
   }
 
-  .more {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: var(--main-black);
-    border-radius: var(--rounded-xs);
-    @include typography.text-sm;
-    color: var(--main-white);
-    padding: 4px 8px;
+  .list {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    overflow: hidden;
+    position: relative;
+
+    .card {
+      max-width: calc(100% / 5);
+      overflow: hidden;
+
+      @media screen and (max-width: 767px) {
+        max-width: calc(100% / 3);
+      }
+
+      .picture {
+        flex: none;
+        width: 100%;
+        aspect-ratio: 16/9;
+        display: block;
+        overflow: hidden;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--rounded-xs);
+        margin: 0;
+
+        @media screen and (max-width: 767px) {
+          width: 200px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+
+      .more {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: var(--main-black);
+        border-radius: var(--rounded-xs);
+        @include typography.text-sm;
+        color: var(--main-white);
+        padding: 4px 8px;
+      }
+    }
   }
 }

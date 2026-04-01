@@ -2,6 +2,7 @@
 
 import React, { FC } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import { IGallery } from '@/shared/interfaces'
 
@@ -18,35 +19,37 @@ interface IGalleryList {
 }
 
 const CardGallery: FC<IGalleryList> = ({ gallery, slug }) => {
+  const t = useTranslations('profile')
+
   const [fancyboxRef] = useFancybox()
 
   const { isMobileSM } = useMatchMedia()
 
-  const limit = isMobileSM ? 2 : 4
-
-  const photos = gallery.length - 3
-  const count = photos > 99 ? 99 : photos
+  const limit = isMobileSM ? 3 : 5
 
   return (
-    <div ref={fancyboxRef} className={styles.root}>
-      {gallery.slice(0, limit).map(photo => (
-        <a
-          key={photo.id}
-          data-caption={photo.description}
-          data-fancybox="gallery"
-          href={process.env.NEXT_PUBLIC_S3_PATH + photo.url}
-        >
-          <picture className={styles.picture}>
-            <img alt={photo.description} src={process.env.NEXT_PUBLIC_S3_PATH + photo.url} />
-          </picture>
-        </a>
-      ))}
-
-      {gallery.length > 3 && (
-        <Link className={styles.more} href={paths.profiles + slug}>
-          +{count}
+    <div className={styles.root}>
+      <h3>
+        <Link href={paths.profiles + slug}>
+          {t('gallery.caption')} ({gallery.length})
         </Link>
-      )}
+      </h3>
+
+      <div ref={fancyboxRef} className={styles.list}>
+        {gallery.slice(0, limit).map(photo => (
+          <a
+            key={photo.id}
+            className={styles.card}
+            data-caption={photo.description}
+            data-fancybox="gallery"
+            href={process.env.NEXT_PUBLIC_S3_PATH + photo.url}
+          >
+            <picture className={styles.picture}>
+              <img alt={photo.description} src={process.env.NEXT_PUBLIC_S3_PATH + photo.url} />
+            </picture>
+          </a>
+        ))}
+      </div>
     </div>
   )
 }

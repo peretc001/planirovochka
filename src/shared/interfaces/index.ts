@@ -25,6 +25,7 @@ export interface IProfile {
   middle_name: string
   name: string
   owner_id: string
+  portfolio: IPortfolio[]
   prices: IPrices
   segments: string[]
   spaces: string[]
