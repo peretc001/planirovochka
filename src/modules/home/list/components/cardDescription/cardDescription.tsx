@@ -15,6 +15,7 @@ const CardDescription: FC<ICardDescription> = ({ description, slug }) => (
     className={styles.root}
     dangerouslySetInnerHTML={{ __html: description }}
     href={paths.profiles + slug}
+    target="_blank"
   />
 )
 

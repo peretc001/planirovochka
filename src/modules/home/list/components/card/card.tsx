@@ -30,7 +30,7 @@ const Card: FC<ICard> = ({ card }) => (
       <CardPortfolio portfolio={card.portfolio} slug={card.owner_id} />
     )}
 
-    <CardPrices prices={card.prices} types={card.types} />
+    <CardPrices prices={card.prices} slug={card.owner_id} types={card.types} />
   </div>
 )
 

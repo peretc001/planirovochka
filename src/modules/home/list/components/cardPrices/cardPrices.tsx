@@ -1,12 +1,13 @@
 'use client'
 
 import React, { FC, useState } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { IPrices, IType } from '@/shared/interfaces'
 
-import { DESIGN_TYPES } from '@/constants'
+import { DESIGN_TYPES, paths } from '@/constants'
 
 import CardPricesItem from '@/modules/home/list/components/cardPrices/cardPricesItem'
 
@@ -14,13 +15,14 @@ import styles from './cardPrices.module.scss'
 
 interface ICardPrices {
   readonly prices: IPrices
+  readonly slug: string
   readonly types: string[]
 }
 
 // кол-во выводимых цен по умолчанию
 const limit = 3
 
-const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
+const CardPrices: FC<ICardPrices> = ({ prices, slug, types }) => {
   const t = useTranslations('profile')
 
   const searchParams = useSearchParams() as URLSearchParams
@@ -50,7 +52,11 @@ const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
 
   return (
     <div className={styles.root}>
-      <h3>{t('prices.caption')}</h3>
+      <h3>
+        <Link href={paths.profiles + slug} target="_blank">
+          {t('prices.caption')}
+        </Link>
+      </h3>
 
       {list?.map(type => (
         <CardPricesItem

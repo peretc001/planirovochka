@@ -18,12 +18,12 @@ interface ICardInfo {
 
 const CardInfo: FC<ICardInfo> = ({ card }) => (
   <div className={styles.root}>
-    <Link className={styles.avatar} href={paths.profiles + card.owner_id}>
+    <Link className={styles.avatar} href={paths.profiles + card.owner_id} target="_blank">
       <img src={process.env.NEXT_PUBLIC_S3_PATH + card.avatar} />
     </Link>
 
     <div className={styles.info}>
-      <Link href={paths.profiles + card.owner_id}>
+      <Link href={paths.profiles + card.owner_id} target="_blank">
         <div className={styles.name}>{card.name}</div>
       </Link>
 

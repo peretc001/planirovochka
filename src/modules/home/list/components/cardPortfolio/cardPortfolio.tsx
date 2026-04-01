@@ -23,14 +23,14 @@ const CardPortfolio: FC<ICardPortfolio> = ({ portfolio, slug }) => {
   return (
     <div className={styles.root}>
       <h3>
-        <Link href={paths.profiles + slug}>
+        <Link href={paths.profiles + slug} target="_blank">
           {t('portfolio.title')} ({portfolio.length})
         </Link>
       </h3>
 
       <div className={styles.list}>
         {portfolio.slice(0, LIMIT).map(card => (
-          <Link key={card.id} href={paths.profiles + slug}>
+          <Link key={card.id} href={paths.profiles + slug} target="_blank">
             <CardPortfolioItem card={card} />
           </Link>
         ))}

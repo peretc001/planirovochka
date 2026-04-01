@@ -30,7 +30,7 @@ const CardGallery: FC<IGalleryList> = ({ gallery, slug }) => {
   return (
     <div className={styles.root}>
       <h3>
-        <Link href={paths.profiles + slug}>
+        <Link href={paths.profiles + slug} target="_blank">
           {t('gallery.caption')} ({gallery.length})
         </Link>
       </h3>
