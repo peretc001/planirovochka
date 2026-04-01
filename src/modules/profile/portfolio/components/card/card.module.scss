@@ -76,6 +76,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+      min-height: 60px;
       @include typography.text-sm;
       color: var(--gray-500);
     }

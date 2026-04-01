@@ -15,10 +15,15 @@ export async function GET(_request: NextRequest, context: RouteContext) {
 
     const supabase = supabaseClient()
 
-    const [profileRes, galleryRes] = await Promise.all([
+    const [profileRes, galleryRes, portfolioRes] = await Promise.all([
       supabase.from('profiles').select('*').eq('owner_id', ownerId).maybeSingle(),
       supabase
         .from('gallery')
+        .select('*')
+        .eq('owner_id', ownerId)
+        .order('created_at', { ascending: false }),
+      supabase
+        .from('portfolio')
         .select('*')
         .eq('owner_id', ownerId)
         .order('created_at', { ascending: false })
@@ -30,7 +35,7 @@ export async function GET(_request: NextRequest, context: RouteContext) {
       return NextResponse.json({ error: 'Profile not found' })
     }
 
-    const preparedData = prepareProfile(data, galleryRes?.data ?? [])
+    const preparedData = prepareProfile(data, galleryRes?.data ?? [], portfolioRes?.data ?? [])
 
     return NextResponse.json({ data: preparedData })
   } catch (err) {

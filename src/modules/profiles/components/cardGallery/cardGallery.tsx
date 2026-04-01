@@ -67,7 +67,9 @@ const CardGallery: FC<IGalleryList> = ({ gallery }) => {
 
   return (
     <div ref={fancyboxRef} className={styles.root}>
-      <h3>{t('gallery.caption')}</h3>
+      <h3>
+        {t('gallery.caption')} ({gallery.length})
+      </h3>
 
       <div ref={galleryRef} className={styles.gallery} onScroll={handleScroll}>
         {gallery.map(photo => (
