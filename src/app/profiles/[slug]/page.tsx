@@ -23,7 +23,11 @@ export async function generateMetadata({ params }: Props) {
   const portfolio = data?.portfolio?.length
   const experience = data?.experience
 
-  const generateDescription = (price, portfolio, experience) => {
+  const generateDescription = (
+    price: string | undefined,
+    portfolio: number | undefined,
+    experience: string | undefined
+  ) => {
     let description
 
     if (price) description = DESIGN_TYPES[0].label + ' - ' + price + ' ' + CURRENCY
@@ -31,6 +35,7 @@ export async function generateMetadata({ params }: Props) {
     if (experience)
       description =
         description + ' Опыт работы: ' + DESIGN_EXPERIENCE.find(x => x.value === experience)?.label
+
     return description
   }
 
