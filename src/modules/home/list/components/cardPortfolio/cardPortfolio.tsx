@@ -6,7 +6,7 @@ import { IPortfolio } from '@/shared/interfaces'
 
 import { paths } from '@/constants'
 
-import CardPortfolioItem from '@/modules/home/list/components/cardPortfolio/cardPortfolioItem'
+import CardPortfolioItem from '@/modules/home/list/components/cardPortfolioItem/cardPortfolioItem'
 
 import styles from './cardPortfolio.module.scss'
 
@@ -22,15 +22,21 @@ const CardPortfolio: FC<ICardPortfolio> = ({ portfolio, slug }) => {
 
   return (
     <div className={styles.root}>
-      <h3>
-        <Link href={paths.profiles + slug} target="_blank">
-          {t('portfolio.title')} ({portfolio.length})
+      <div className={styles.header}>
+        <h3>
+          <Link href={paths.profiles + slug} target="_blank">
+            {t('portfolio.title')} ({portfolio.length})
+          </Link>
+        </h3>
+
+        <Link className={styles.link} href={paths.profiles + slug} target="_blank">
+          {t('view_all')}
         </Link>
-      </h3>
+      </div>
 
       <div className={styles.list}>
         {portfolio.slice(0, LIMIT).map(card => (
-          <Link key={card.id} href={paths.profiles + slug} target="_blank">
+          <Link key={card.id} className={styles.card} href={paths.profiles + slug} target="_blank">
             <CardPortfolioItem card={card} />
           </Link>
         ))}

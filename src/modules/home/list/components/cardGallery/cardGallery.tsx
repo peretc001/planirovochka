@@ -29,11 +29,17 @@ const CardGallery: FC<IGalleryList> = ({ gallery, slug }) => {
 
   return (
     <div className={styles.root}>
-      <h3>
-        <Link href={paths.profiles + slug} target="_blank">
-          {t('gallery.caption')} ({gallery.length})
+      <div className={styles.header}>
+        <h3>
+          <Link href={paths.profiles + slug} target="_blank">
+            {t('gallery.caption')} ({gallery.length})
+          </Link>
+        </h3>
+
+        <Link className={styles.link} href={paths.profiles + slug} target="_blank">
+          {t('view_all')}
         </Link>
-      </h3>
+      </div>
 
       <div ref={fancyboxRef} className={styles.list}>
         {gallery.slice(0, limit).map(photo => (

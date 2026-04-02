@@ -7,11 +7,22 @@
   gap: 16px;
   overflow: hidden;
 
-  h3 {
-    display: inline-flex;
-    width: max-content;
-    margin: 0;
-    border-bottom: 2px solid var(--main-blue);
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    h3 {
+      display: inline-flex;
+      width: max-content;
+      margin: 0;
+      border-bottom: 2px solid var(--main-blue);
+    }
+
+    .link {
+      @include typography.text-xs;
+      color: var(--main-blue);
+    }
   }
 
   .list {
@@ -22,11 +33,16 @@
     position: relative;
 
     .card {
-      max-width: calc(100% / 5);
+      flex: none;
+      width: calc(100% / 5);
       overflow: hidden;
 
+      @media screen and (max-width: 991px) {
+        width: calc(100% / 3);
+      }
+
       @media screen and (max-width: 767px) {
-        max-width: calc(100% / 3);
+        width: 200px;
       }
 
       .picture {

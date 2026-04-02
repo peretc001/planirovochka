@@ -6,14 +6,14 @@ import { CURRENCY } from '@/constants'
 
 import numberFormatter from '@/lib/numberFormatter'
 
-import styles from './cardPortfolio.module.scss'
+import styles from './cardPortfolioItem.module.scss'
 
 interface ICardPortfolioItem {
   readonly card: IPortfolio
 }
 
 const CardPortfolioItem: FC<ICardPortfolioItem> = ({ card }) => (
-  <div className={styles.portfolio}>
+  <div className={styles.root}>
     <picture className={styles.preview}>
       <img src={process.env.NEXT_PUBLIC_S3_PATH + card.photos[0]} />
       <div className={styles.count}>{card.photos.length}</div>
