@@ -10,6 +10,7 @@ import Header from '@/layout/header/header'
 
 import AuthModal from '@/modals/authModal'
 
+import '@/styles/antd.design.scss'
 import '@/globals.scss'
 
 const openSans = Open_Sans({ subsets: ['latin', 'cyrillic'] })
