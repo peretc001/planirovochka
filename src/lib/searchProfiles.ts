@@ -13,6 +13,8 @@ export type ProfileListFilters = {
   name: string
   /** Только профили с хотя бы одной записью в таблице `portfolio`. */
   portfolioOnly: boolean
+  /** URL `inspected=1`: только профили без авторского надзора (`inspected === false`). */
+  uninspectedOnly: boolean
   segments: string[]
   status: string[]
   types: string[]
@@ -185,6 +187,7 @@ export function buildFilters(payload: Record<string, unknown>): ProfileListFilte
     limit: Math.min(limitRaw, PROFILE_LIST_LIMIT),
     name: typeof payload.name === 'string' ? payload.name.trim() : '',
     portfolioOnly: parsePortfolioOnlyFlag(payload.portfolio),
+    uninspectedOnly: parsePortfolioOnlyFlag(payload.inspected),
     segments: normalizeFilterArray(payload.segments),
     status: normalizeFilterArray(payload.status),
     types: normalizeFilterArray(payload.types)
@@ -271,6 +274,10 @@ export async function listProfilesForCatalog(
   filters: ProfileListFilters
 ): Promise<{ data: ProfilesCatalogPage; error?: string }> {
   let query = supabase.from('profiles').select('*').eq('approved', true)
+
+  if (filters.uninspectedOnly) {
+    query = query.eq('inspected', false)
+  }
 
   if (filters.experience.length) {
     query = query.in('experience', filters.experience)

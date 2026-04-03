@@ -18,8 +18,8 @@ const Filter: FC<IFilter> = ({ isMobile }) => (
   <div className={cns(styles.root, isMobile && styles.mobile)}>
     {/*<Name />*/}
     {/*<City />*/}
-    <Additional />
     <Groups />
+    <Additional />
   </div>
 )
 

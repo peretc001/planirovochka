@@ -8,10 +8,11 @@ import styles from '@/modules/home/filter/filter.module.scss'
 const Additional = () => {
   const t = useTranslations('filter')
 
-  const GROUPS = ['portfolio']
+  const GROUPS = ['portfolio', 'inspected']
 
   const OPTIONS = (group: string) => {
     if (group === 'portfolio') return [{ label: 'Только с портфолио', value: '1' }]
+    if (group === 'inspected') return [{ label: 'Возможно без авторского надзора', value: '1' }]
   }
 
   const { replace } = useRouter()
@@ -30,17 +31,21 @@ const Additional = () => {
     replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
-  return GROUPS.map(group => (
-    <div key={group} className={styles.group}>
-      <label htmlFor={group}>{t.rich(`additional.${group}.label`)}</label>
-      <Checkbox.Group
-        className={styles.checkbox}
-        value={searchParams.get(group)?.split(',').filter(Boolean) ?? []}
-        options={OPTIONS(group) ?? []}
-        onChange={checkedValues => onChange(group)(checkedValues)}
-      />
+  return (
+    <div className={styles.group}>
+      <label>{t.rich('additional.title')}</label>
+
+      {GROUPS.map(group => (
+        <Checkbox.Group
+          key={group}
+          className={styles.checkbox}
+          options={OPTIONS(group) ?? []}
+          value={searchParams.get(group)?.split(',').filter(Boolean) ?? []}
+          onChange={checkedValues => onChange(group)(checkedValues)}
+        />
+      ))}
     </div>
-  ))
+  )
 }
 
 export default Additional

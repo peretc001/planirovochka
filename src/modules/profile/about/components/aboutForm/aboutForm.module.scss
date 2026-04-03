@@ -26,6 +26,16 @@
     }
   }
 
+
+  .inspected :global(.ant-form-item-label label) {
+    flex-wrap: wrap;
+
+    em {
+      flex: auto;
+      white-space: pre-line;
+    }
+  }
+
   .separator {
     margin: 8px;
   }

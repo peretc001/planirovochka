@@ -21,6 +21,7 @@ export interface IProfile {
   experienceLabel: string
   first_name: string
   gallery: IGallery[]
+  inspected: boolean
   last_name: string
   middle_name: string
   name: string

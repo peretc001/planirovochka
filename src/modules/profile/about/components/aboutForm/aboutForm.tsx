@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { Button, Form, Input, message, Select } from 'antd'
+import { Button, Form, Input, message, Radio, Select } from 'antd'
 import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
@@ -178,6 +178,22 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
           options={DESIGN_TYPES}
           placeholder={t('about.types.placeholder')}
           showSearch={{ filterOption }}
+        />
+      </Form.Item>
+
+      <Form.Item
+        className={styles.inspected}
+        label={t.rich('about.inspected.label', {
+          em: getHtmlChunks
+        })}
+        name="inspected"
+        rules={[{ message: t('require'), required: true }]}
+      >
+        <Radio.Group
+          options={[
+            { label: 'Да', value: true },
+            { label: 'Нет', value: false }
+          ]}
         />
       </Form.Item>
 
