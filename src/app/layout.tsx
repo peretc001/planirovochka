@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Viewport } from 'next'
 import { Open_Sans } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
@@ -7,6 +8,7 @@ import UseQueryProviders from '@/lib/useQueryProviders'
 
 import Beta from '@/layout/beta/beta'
 import Header from '@/layout/header/header'
+import Metrika from '@/layout/metrica'
 
 import AuthModal from '@/modals/authModal'
 
@@ -42,6 +44,10 @@ const RootLayout = async ({
             </div>
 
             <AuthModal />
+
+            <Suspense>
+              <Metrika />
+            </Suspense>
           </UseQueryProviders>
         </NextIntlClientProvider>
       </body>
