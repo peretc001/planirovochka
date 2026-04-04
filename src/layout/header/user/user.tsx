@@ -12,6 +12,8 @@ import { IUser } from '@/shared/interfaces'
 
 import { paths } from '@/constants'
 
+import { eventLogout } from '@/lib/amplitudeEvents'
+
 import styles from './user.module.scss'
 
 import { signout } from '@/app/actions/auth'
@@ -27,6 +29,7 @@ const User: FC<IUserProps> = ({ user }) => {
 
   const handleLogout = async () => {
     await signout()
+    eventLogout()
   }
 
   const items: MenuProps['items'] = [

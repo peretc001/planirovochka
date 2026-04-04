@@ -4,6 +4,7 @@ import { Open_Sans } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale } from 'next-intl/server'
 
+import { Amplitude } from '@/lib/amplitude'
 import UseQueryProviders from '@/lib/useQueryProviders'
 
 import Beta from '@/layout/beta/beta'
@@ -44,6 +45,8 @@ const RootLayout = async ({
             </div>
 
             <AuthModal />
+
+            <Amplitude />
 
             <Suspense>
               <Metrika />

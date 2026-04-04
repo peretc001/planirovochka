@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl'
 
 import Loader from '@/shared/components/loader/loader'
 
+import { eventSignUp } from '@/lib/amplitudeEvents'
+
 import styles from './signup.module.scss'
 
 import { signup } from '@/app/actions/auth'
@@ -37,7 +39,10 @@ const SignupPage: FC<ISignupPage> = ({ actionClose }) => {
   }
 
   useEffect(() => {
-    if (state?.id) actionClose()
+    if (state?.id) {
+      actionClose()
+      eventSignUp()
+    }
   }, [state?.id])
 
   return (

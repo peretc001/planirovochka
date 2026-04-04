@@ -3,6 +3,8 @@ import { Checkbox } from 'antd'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
+import { eventApplyFilter } from '@/lib/amplitudeEvents'
+
 import styles from '@/modules/home/filter/filter.module.scss'
 
 const Additional = () => {
@@ -27,6 +29,8 @@ const Additional = () => {
     } else {
       params.delete(group)
     }
+
+    eventApplyFilter(group, checkedValues)
 
     replace(`${pathname}?${params.toString()}`, { scroll: false })
   }

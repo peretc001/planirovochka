@@ -11,6 +11,8 @@ import {
   DESIGN_TYPES
 } from '@/constants'
 
+import { eventApplyFilter } from '@/lib/amplitudeEvents'
+
 import styles from '@/modules/home/filter/filter.module.scss'
 
 const Groups = () => {
@@ -38,6 +40,8 @@ const Groups = () => {
     } else {
       params.delete(group)
     }
+
+    eventApplyFilter(group, checkedValues)
 
     replace(`${pathname}?${params.toString()}`, { scroll: false })
   }

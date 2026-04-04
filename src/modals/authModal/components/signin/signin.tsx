@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl'
 
 import Loader from '@/shared/components/loader/loader'
 
+import { eventSignIn } from '@/lib/amplitudeEvents'
+
 import styles from './signin.module.scss'
 
 import { signin } from '@/app/actions/auth'
@@ -32,7 +34,10 @@ const SigninPage: FC<ISigninPage> = ({ actionClose }) => {
   }
 
   useEffect(() => {
-    if (state?.id) actionClose()
+    if (state?.id) {
+      actionClose()
+      eventSignIn()
+    }
   }, [state?.id])
 
   return (
