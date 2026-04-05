@@ -39,6 +39,10 @@
       height: 20px;
       border-bottom: 1px dashed var(--gray-300);
 
+      &.highlighted {
+        border-color: var(--main-blue);
+      }
+
       @media screen and (max-width: 576px) {
         display: none;
       }

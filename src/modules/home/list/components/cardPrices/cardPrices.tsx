@@ -34,15 +34,18 @@ const CardPrices: FC<ICardPrices> = ({ prices, slug, types }) => {
 
   const allowed = DESIGN_TYPES.filter((designType: IType) => types.includes(designType.value))
 
+  // красим цветом те что в поиске
   // сортировка, сначала те что в поиске, потом все остальные
-  const sortedAllowed = [...allowed].sort((a, b) => {
-    const aInUrlTypes = urlTypesSet.has(a.value)
-    const bInUrlTypes = urlTypesSet.has(b.value)
+  const sortedAllowed = [...allowed]
+    .map(item => ({ ...item, highlighted: urlTypesSet.has(item.value) }))
+    .sort((a, b) => {
+      const aInUrlTypes = urlTypesSet.has(a.value)
+      const bInUrlTypes = urlTypesSet.has(b.value)
 
-    if (aInUrlTypes === bInUrlTypes) return 0
+      if (aInUrlTypes === bInUrlTypes) return 0
 
-    return aInUrlTypes ? -1 : 1
-  })
+      return aInUrlTypes ? -1 : 1
+    })
 
   // итоговый спсиок с учетом сортировки и лимитом
   const list = sortedAllowed.slice(0, count)
@@ -61,6 +64,7 @@ const CardPrices: FC<ICardPrices> = ({ prices, slug, types }) => {
       {list?.map(type => (
         <CardPricesItem
           key={type.value}
+          highlighted={type.highlighted}
           label={type.label}
           prices={prices}
           unit={type.unit}

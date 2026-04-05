@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import cns from 'classnames'
 import { useTranslations } from 'next-intl'
 
 import { IPrices } from '@/shared/interfaces'
@@ -10,13 +11,14 @@ import numberFormatter from '@/lib/numberFormatter'
 import styles from './cardPrices.module.scss'
 
 interface ICardPricesItem {
+  readonly highlighted: boolean
   readonly label: string
   readonly prices: IPrices
   readonly unit: string
   readonly value: string
 }
 
-const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, unit, value }) => {
+const CardPricesItem: FC<ICardPricesItem> = ({ highlighted, label, prices, unit, value }) => {
   const t = useTranslations('profile')
 
   const getHtmlChunks = (chunks: any) => <sup>{chunks}</sup>
@@ -32,7 +34,7 @@ const CardPricesItem: FC<ICardPricesItem> = ({ label, prices, unit, value }) => 
     <div key={label} className={styles.item}>
       <div className={styles.title}>{label}</div>
 
-      <div className={styles.dash} />
+      <div className={cns(styles.dash, highlighted && styles.highlighted)} />
 
       {empty ? (
         <div className={styles.empty}>{t('prices.above')}</div>
