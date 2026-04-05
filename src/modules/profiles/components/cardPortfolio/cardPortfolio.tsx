@@ -66,7 +66,7 @@ const CardPortfolio: FC<ICardPortfolio> = ({ portfolio }) => {
   }, [portfolio.length])
 
   return (
-    <div className={styles.root}>
+    <div id="portfolio" className={styles.root}>
       <h3>
         {t('portfolio.title')} ({portfolio.length})
       </h3>

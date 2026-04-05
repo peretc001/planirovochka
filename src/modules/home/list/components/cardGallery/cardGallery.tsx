@@ -31,12 +31,12 @@ const CardGallery: FC<IGalleryList> = ({ gallery, slug }) => {
     <div className={styles.root}>
       <div className={styles.header}>
         <h3>
-          <Link href={paths.profiles + slug} target="_blank">
+          <Link href={paths.profiles + slug + '#gallery'} target="_blank">
             {t('gallery.caption')} ({gallery.length})
           </Link>
         </h3>
 
-        <Link className={styles.link} href={paths.profiles + slug} target="_blank">
+        <Link className={styles.link} href={paths.profiles + slug + '#gallery'} target="_blank">
           {t('view_all')}
         </Link>
       </div>

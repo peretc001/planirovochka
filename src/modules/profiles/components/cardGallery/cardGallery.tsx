@@ -66,7 +66,7 @@ const CardGallery: FC<IGalleryList> = ({ gallery }) => {
   }, [gallery.length])
 
   return (
-    <div ref={fancyboxRef} className={styles.root}>
+    <div ref={fancyboxRef} id="gallery" className={styles.root}>
       <h3>
         {t('gallery.caption')} ({gallery.length})
       </h3>
