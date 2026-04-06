@@ -145,6 +145,12 @@
         gap: 4px;
         overflow: hidden;
 
+        @media (hover: hover) {
+          &:hover {
+            color: var(--main-black);
+          }
+        }
+
         .icon {
           flex: none;
           width: 24px;
