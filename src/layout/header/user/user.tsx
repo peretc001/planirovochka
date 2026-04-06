@@ -25,7 +25,8 @@ interface IUserProps {
 const User: FC<IUserProps> = ({ user }) => {
   const t = useTranslations('profile')
 
-  const { avatar, email } = user || {}
+  const { email, user_metadata } = user || {}
+  const { avatar } = user_metadata || {}
 
   const handleLogout = async () => {
     await signout()
@@ -73,7 +74,11 @@ const User: FC<IUserProps> = ({ user }) => {
         <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
           <div className={styles.user}>
             {avatar ? (
-              <img className={styles.avatar} alt="" src={process.env.NEXT_PUBLIC_URL + avatar} />
+              <img
+                className={styles.avatar}
+                alt=""
+                src={process.env.NEXT_PUBLIC_S3_PATH + avatar}
+              />
             ) : (
               <div className={styles.avatar} />
             )}

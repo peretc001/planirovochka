@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 import sharp from 'sharp'
 
@@ -63,6 +64,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: saveError.message, status: false }, { status: 500 })
     }
 
+    await supabase.auth.updateUser({
+      data: { avatar: avatarUrl }
+    })
+
+    revalidatePath('/', 'layout')
+
     return NextResponse.json({ status: true, url: avatarUrl })
   } catch (err) {
     return NextResponse.json({ error: String(err), status: false }, { status: 500 })
@@ -111,6 +118,12 @@ export async function DELETE() {
     if (updateError) {
       return NextResponse.json({ error: updateError.message, status: false }, { status: 500 })
     }
+
+    await supabase.auth.updateUser({
+      data: { avatar: '' }
+    })
+
+    revalidatePath('/', 'layout')
 
     return NextResponse.json({ status: true })
   } catch (err) {

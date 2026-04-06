@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { Button, Form, Input, message, Radio, Select } from 'antd'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { useMutation } from '@tanstack/react-query'
@@ -33,6 +34,7 @@ interface IAboutForm {
 
 const AboutForm: FC<IAboutForm> = ({ profile }) => {
   const t = useTranslations('profile')
+  const router = useRouter()
 
   const [form] = Form.useForm()
 
@@ -50,6 +52,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
     onSuccess: url => {
       if (url) {
         form.setFieldValue('avatar', url)
+        router.refresh()
       }
     }
   })
@@ -60,6 +63,7 @@ const AboutForm: FC<IAboutForm> = ({ profile }) => {
     onSuccess: status => {
       if (status) {
         form.resetFields(['avatar'])
+        router.refresh()
       }
     }
   })

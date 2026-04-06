@@ -11,7 +11,6 @@ export const getUserApi = async (): Promise<IUser | null> => {
 
   return {
     id: user.id,
-    avatar: (user.user_metadata?.avatar as string | undefined) ?? undefined,
     email: user.email ?? undefined,
     password: undefined
   }

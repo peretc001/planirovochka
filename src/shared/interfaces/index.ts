@@ -2,9 +2,9 @@ import { DESIGN_TYPES } from '@/constants'
 
 export interface IUser {
   id: string | undefined
-  avatar: string | undefined
   email: string | undefined
   password: string | undefined
+  user_metadata?: any
 }
 
 export interface IProfile {
