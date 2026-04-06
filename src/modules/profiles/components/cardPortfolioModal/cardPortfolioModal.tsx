@@ -114,11 +114,25 @@ const CardPortfolioModal: FC<ICardPortfolioModal> = ({ card }) => {
           )}
         </div>
 
-        <div className={styles.price}>
-          {t('portfolio.preview.price')}:&nbsp;
-          <span>
-            {numberFormatter(card.price)} {CURRENCY}
-          </span>
+        <div className={styles.footer}>
+          <div className={styles.price}>
+            {t('portfolio.preview.price')}:&nbsp;
+            <span>
+              {numberFormatter(card.price)} {CURRENCY}
+            </span>
+          </div>
+
+          {card.file ? (
+            <a
+              className={styles.file}
+              href={process.env.NEXT_PUBLIC_S3_PATH + card.file}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <img className={styles.icon} src="/icons/types/pdf.svg" />
+              <div className={styles.name}>{t('portfolio.add.file.label')}</div>
+            </a>
+          ) : null}
         </div>
       </div>
     </div>

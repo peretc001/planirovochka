@@ -1,0 +1,42 @@
+@use "@/styles/typography";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  .description {
+    color: var(--gray-400);
+    @include typography.text-xs;
+  }
+
+  .file {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    max-width: 500px;
+
+    .icon {
+      flex: none;
+      width: 24px;
+      height: 24px;
+    }
+
+    .name {
+      flex: 1;
+      @include typography.text-sm;
+      color: var(--gray-500);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .remove {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+  }
+}

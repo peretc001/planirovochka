@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useState } from 'react'
 import { Modal } from 'antd'
+import { useTranslations } from 'next-intl'
 
 import { IPortfolio } from '@/shared/interfaces'
 
@@ -16,6 +17,8 @@ interface ICardPortfolioItem {
 }
 
 const CardPortfolioItem: FC<ICardPortfolioItem> = ({ card }) => {
+  const t = useTranslations('profile')
+
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleOpenModal = () => {
@@ -44,8 +47,17 @@ const CardPortfolioItem: FC<ICardPortfolioItem> = ({ card }) => {
             />
           ) : null}
 
-          <div className={styles.price}>
-            {numberFormatter(card.price)} {CURRENCY}
+          <div className={styles.footer}>
+            <div className={styles.price}>
+              {numberFormatter(card.price)} {CURRENCY}
+            </div>
+
+            {card.file ? (
+              <div className={styles.file}>
+                <img className={styles.icon} src="/icons/types/pdf.svg" />
+                <div className={styles.name}>{t('portfolio.add.file.label')}</div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

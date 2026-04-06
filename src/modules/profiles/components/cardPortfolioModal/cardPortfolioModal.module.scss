@@ -126,10 +126,39 @@
       }
     }
 
-    .price {
-      @include typography.text-md;
-      @include typography.semibold;
-      user-select: none;
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 8px;
+
+      .price {
+        @include typography.text-md;
+        @include typography.semibold;
+        user-select: none;
+      }
+
+      .file {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        overflow: hidden;
+
+        .icon {
+          flex: none;
+          width: 24px;
+          height: 24px;
+        }
+
+        .name {
+          flex: 1;
+          @include typography.text-sm;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
     }
   }
 }

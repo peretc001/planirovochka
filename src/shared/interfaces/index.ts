@@ -49,6 +49,7 @@ export interface IPortfolio {
   id: number
   created_at: string
   description: string
+  file: null | string
   owner_id: number
   photos: string[]
   price: string

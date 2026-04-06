@@ -60,8 +60,22 @@ const Card: FC<ICard> = ({ card }) => {
           />
         ) : null}
 
-        <div className={styles.price}>
-          {numberFormatter(card.price)} {CURRENCY}
+        <div className={styles.footer}>
+          <div className={styles.price}>
+            {numberFormatter(card.price)} {CURRENCY}
+          </div>
+
+          {card.file ? (
+            <a
+              className={styles.file}
+              href={process.env.NEXT_PUBLIC_S3_PATH + card.file}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <img className={styles.icon} src="/icons/types/pdf.svg" />
+              <div className={styles.name}>{t('portfolio.add.file.label')}</div>
+            </a>
+          ) : null}
         </div>
       </div>
     </div>

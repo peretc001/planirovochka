@@ -60,6 +60,36 @@ const AddPhotos = () => {
 
   return (
     <div className={styles.root}>
+      <Form.Item
+        getValueFromEvent={e => e?.fileList?.slice(0, PHOTOS_LIMIT) ?? []}
+        label={t('portfolio.add.photos.label')}
+        name="photos"
+        rules={[{ message: t('require'), required: true }]}
+        valuePropName="fileList"
+      >
+        <Upload
+          accept="image/jpg, image/jpeg, image/png, image/gif, image/webp"
+          beforeUpload={beforeUpload}
+          disabled={fileList.length >= PHOTOS_LIMIT}
+          maxCount={PHOTOS_LIMIT}
+          multiple
+          showUploadList={false}
+        >
+          <Button
+            color="primary"
+            disabled={fileList.length >= PHOTOS_LIMIT}
+            icon={<UploadOutlined />}
+            variant="outlined"
+          >
+            {t('portfolio.add.photos.button')}
+          </Button>
+        </Upload>
+      </Form.Item>
+
+      <span className={styles.limit}>
+        {t.rich('portfolio.add.photos.limit', { limit: PHOTOS_LIMIT })}
+      </span>
+
       {fileList.length > 0 && (
         <div className={styles.previewList}>
           {previews.map((preview, index) => (
@@ -72,29 +102,6 @@ const AddPhotos = () => {
           ))}
         </div>
       )}
-
-      <Form.Item
-        getValueFromEvent={e => e?.fileList?.slice(0, PHOTOS_LIMIT) ?? []}
-        name="photos"
-        rules={[{ message: t('require'), required: true }]}
-        valuePropName="fileList"
-      >
-        <Upload
-          accept="image/jpg, image/jpeg, image/png, image/gif, image/webp"
-          beforeUpload={beforeUpload}
-          maxCount={PHOTOS_LIMIT}
-          multiple
-          showUploadList={false}
-        >
-          <Button color="primary" icon={<UploadOutlined />} variant="outlined">
-            {t('portfolio.add.photos.label')}
-          </Button>
-        </Upload>
-      </Form.Item>
-
-      <span className={styles.limit}>
-        {t.rich('portfolio.add.photos.limit', { limit: PHOTOS_LIMIT })}
-      </span>
     </div>
   )
 }

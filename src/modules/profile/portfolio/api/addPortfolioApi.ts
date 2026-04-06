@@ -2,12 +2,14 @@ import serverApi from '@/lib/serverApi'
 
 export const addPortfolioApi = async ({
   description,
+  file,
   photos,
   price,
   title,
   type
 }: {
   description: string
+  file?: File | null
   photos: File[]
   price: string
   title: string
@@ -15,8 +17,11 @@ export const addPortfolioApi = async ({
 }) => {
   const formData = new FormData()
 
-  for (const file of photos) {
-    formData.append('photos', file)
+  for (const photo of photos) {
+    formData.append('photos', photo)
+  }
+  if (file) {
+    formData.append('file', file)
   }
   formData.append('description', description ?? '')
   formData.append('price', price ?? '')

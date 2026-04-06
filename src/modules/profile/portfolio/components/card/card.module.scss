@@ -81,10 +81,40 @@
       color: var(--gray-500);
     }
 
-    .price {
-      @include typography.text-sm;
-      @include typography.semibold;
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
       margin-top: 8px;
+
+      .price {
+        flex: 1;
+        @include typography.text-sm;
+        @include typography.semibold;
+        white-space: nowrap;
+      }
+
+      .file {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        overflow: hidden;
+
+        .icon {
+          flex: none;
+          width: 24px;
+          height: 24px;
+        }
+
+        .name {
+          flex: 1;
+          @include typography.text-sm;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
     }
   }
 }

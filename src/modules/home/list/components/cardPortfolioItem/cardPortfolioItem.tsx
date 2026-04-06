@@ -22,8 +22,16 @@ const CardPortfolioItem: FC<ICardPortfolioItem> = ({ card }) => (
     <div className={styles.content}>
       <div className={styles.title}>{card.title}</div>
 
-      <div className={styles.price}>
-        {numberFormatter(card.price)} {CURRENCY}
+      <div className={styles.footer}>
+        <div className={styles.price}>
+          {numberFormatter(card.price)} {CURRENCY}
+        </div>
+
+        {card.file ? (
+          <div className={styles.file}>
+            <img className={styles.icon} src="/icons/types/pdf.svg" />
+          </div>
+        ) : null}
       </div>
     </div>
   </div>

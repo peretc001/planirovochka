@@ -11,6 +11,7 @@ import Loader from '@/shared/components/loader/loader'
 
 import { DESIGN_TYPES, paths } from '@/constants'
 
+import AddFile from '@/modules/profile/portfolio/add/components/addFile/addFile'
 import AddPhotos from '@/modules/profile/portfolio/add/components/addPhotos/addPhotos'
 import { addPortfolioApi } from '@/modules/profile/portfolio/api/addPortfolioApi'
 
@@ -44,6 +45,7 @@ const Add = () => {
 
   const onFinish = async (values: {
     description?: string
+    file?: UploadFile[]
     photos?: UploadFile[]
     price?: string
     title?: string
@@ -56,6 +58,7 @@ const Add = () => {
 
     await save({
       description: values.description ?? '',
+      file: values.file?.[0]?.originFileObj,
       photos: files,
       price: String(values.price ?? ''),
       title: values.title ?? '',
@@ -105,6 +108,8 @@ const Add = () => {
       <span className={styles.limit}>{t('portfolio.add.description.limit')}</span>
 
       <AddPhotos />
+
+      <AddFile />
 
       <Form.Item
         className={styles.price}
