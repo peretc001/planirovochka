@@ -46,6 +46,7 @@ const UserForm: FC<IUserForm> = ({ user }) => {
 
       {isModalOpen ? (
         <Modal
+          className={styles.modal}
           footer={null}
           open={isModalOpen}
           width={isMobileMD ? '100%' : '450px'}
