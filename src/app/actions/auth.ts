@@ -56,3 +56,26 @@ export async function signout() {
   revalidatePath('/')
   redirect('/')
 }
+
+export async function changePassword(
+  _prevState: { error?: string; status?: boolean } | undefined,
+  values: { password: string; password_repeat: string }
+) {
+  const supabase = await createClient()
+
+  const { password, password_repeat } = values
+
+  if (password !== password_repeat) return { error: 'incorrect' }
+
+  const {
+    data: { user },
+    error
+  } = await supabase.auth.updateUser({ password })
+
+  if (!error && user?.id) {
+    revalidatePath('/')
+    return { id: user.id }
+  }
+
+  return { error: error?.status }
+}
