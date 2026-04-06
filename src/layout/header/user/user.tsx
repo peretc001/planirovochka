@@ -38,6 +38,22 @@ const User: FC<IUserProps> = ({ user }) => {
       label: <Link href={paths.profile.about}>{t('menu.index')}</Link>
     },
     {
+      key: '2',
+      label: <Link href={paths.profile.prices}>{t('menu.prices')}</Link>
+    },
+    {
+      key: '3',
+      label: <Link href={paths.profile.contacts}>{t('menu.contacts')}</Link>
+    },
+    {
+      key: '4',
+      label: <Link href={paths.profile.gallery}>{t('menu.gallery')}</Link>
+    },
+    {
+      key: '5',
+      label: <Link href={paths.profile.portfolio.index}>{t('menu.portfolio')}</Link>
+    },
+    {
       type: 'divider'
     },
     {
