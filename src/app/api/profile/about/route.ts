@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { getCurrentUser } from '@/lib/getCurrentUser'
 import { createClient } from '@/lib/supabaseServer'
 
 function toJsonArray(value: unknown): string[] {
@@ -16,12 +17,9 @@ function toOptionalText(value: unknown): null | string {
 export async function GET() {
   const supabase = await createClient()
 
-  const {
-    data: { user },
-    error: authError
-  } = await supabase.auth.getUser()
+  const user = await getCurrentUser()
 
-  if (authError || !user) {
+  if (!user?.id) {
     return NextResponse.json({ data: null, error: 'Unauthorized' }, { status: 401 })
   }
 
