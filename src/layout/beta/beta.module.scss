@@ -47,7 +47,7 @@
   }
 
   :global(.ant-modal-container) {
-    background: var(--main-black);
+    background: var(--main-black) !important;
   }
 
   .description {
