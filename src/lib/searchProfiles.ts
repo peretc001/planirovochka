@@ -13,11 +13,11 @@ export type ProfileListFilters = {
   name: string
   /** Только профили с хотя бы одной записью в таблице `portfolio`. */
   portfolioOnly: boolean
-  /** URL `inspected=1`: только профили без авторского надзора (`inspected === false`). */
-  uninspectedOnly: boolean
   segments: string[]
   status: string[]
   types: string[]
+  /** URL `inspected=1`: только профили без авторского надзора (`inspected === false`). */
+  uninspectedOnly: boolean
 }
 
 const GALLERY_LIMIT = 100
@@ -124,6 +124,7 @@ function formatProfileRow(
     ...r,
     styles: parsed.styles,
     stylesLabel: stylesLabel(parsed.styles),
+    contacts: null,
     experience: experienceRaw,
     experienceLabel: experienceLabel(experienceRaw),
     name: buildDisplayName(r),
@@ -187,10 +188,10 @@ export function buildFilters(payload: Record<string, unknown>): ProfileListFilte
     limit: Math.min(limitRaw, PROFILE_LIST_LIMIT),
     name: typeof payload.name === 'string' ? payload.name.trim() : '',
     portfolioOnly: parsePortfolioOnlyFlag(payload.portfolio),
-    uninspectedOnly: parsePortfolioOnlyFlag(payload.inspected),
     segments: normalizeFilterArray(payload.segments),
     status: normalizeFilterArray(payload.status),
-    types: normalizeFilterArray(payload.types)
+    types: normalizeFilterArray(payload.types),
+    uninspectedOnly: parsePortfolioOnlyFlag(payload.inspected)
   }
 }
 
