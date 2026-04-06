@@ -56,7 +56,7 @@ const CardPrices: FC<ICardPrices> = ({ prices, slug, types }) => {
   return (
     <div className={styles.root}>
       <h3>
-        <Link href={paths.profiles + slug} target="_blank">
+        <Link href={paths.profiles + slug + '#prices'} target="_blank">
           {t('prices.caption')}
         </Link>
       </h3>

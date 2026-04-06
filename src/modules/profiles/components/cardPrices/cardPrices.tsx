@@ -20,7 +20,7 @@ const CardPrices: FC<ICardPrices> = ({ prices, types }) => {
   const allowed = DESIGN_TYPES.filter((designType: IType) => types.includes(designType.value))
 
   return (
-    <div className={styles.root}>
+    <div id="prices" className={styles.root}>
       <h3>{t('prices.caption')}</h3>
 
       {allowed?.map(type => (
