@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC } from 'react'
 import { Form, Input } from 'antd'
 import { useTranslations } from 'next-intl'
@@ -7,7 +9,7 @@ import { IUser } from '@/shared/interfaces'
 import styles from './userForm.module.scss'
 
 interface IUserForm {
-  readonly user: IUser
+  readonly user: IUser | null
 }
 
 const UserForm: FC<IUserForm> = ({ user }) => {
@@ -19,6 +21,9 @@ const UserForm: FC<IUserForm> = ({ user }) => {
     <Form className={styles.root} form={form} initialValues={user} layout="vertical" name="user">
       <Form.Item label={t('email.label')} name="email">
         <Input disabled placeholder={t('email.placeholder')} />
+      </Form.Item>
+      <Form.Item label={t('password.label')} name="password">
+        <Input.Password placeholder={t('password.placeholder')} />
       </Form.Item>
     </Form>
   )

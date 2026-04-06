@@ -34,8 +34,12 @@ const User: FC<IUserProps> = ({ user }) => {
 
   const items: MenuProps['items'] = [
     {
+      key: '0',
+      label: <Link href={paths.profile.index}>{t('menu.index')}</Link>
+    },
+    {
       key: '1',
-      label: <Link href={paths.profile.about}>{t('menu.index')}</Link>
+      label: <Link href={paths.profile.about}>{t('menu.about')}</Link>
     },
     {
       key: '2',

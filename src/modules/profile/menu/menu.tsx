@@ -39,14 +39,14 @@ const Menu = () => {
   return (
     <div ref={menuRef} className={styles.root}>
       <div className={styles.wrapper}>
-        {/*<Link*/}
-        {/*  className={cns(styles.item, pathname === paths.profile.index && styles.active)}*/}
-        {/*  aria-label={paths.profile.index}*/}
-        {/*  href={paths.profile.index}*/}
-        {/*>*/}
-        {/*  <UserCircleIcon className={styles.icon} />*/}
-        {/*  {t('menu.index')}*/}
-        {/*</Link>*/}
+        <Link
+          className={cns(styles.item, pathname === paths.profile.index && styles.active)}
+          aria-label={paths.profile.index}
+          href={paths.profile.index}
+        >
+          <UserCircleIcon className={styles.icon} />
+          {t('menu.index')}
+        </Link>
         <Link
           className={cns(styles.item, pathname === paths.profile.about && styles.active)}
           aria-label={paths.profile.about}

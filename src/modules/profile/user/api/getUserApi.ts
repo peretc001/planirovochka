@@ -1,13 +1,18 @@
-import serverApi from '@/lib/serverApi'
+import type { IUser } from '@/shared/interfaces'
 
-export const getUserApi = async () => {
-  try {
-    const response = await serverApi.post('user/get.php')
+import { getCurrentUser } from '@/lib/getCurrentUser'
 
-    return response?.data
-  } catch (err) {
-    console.log('getUserApi', err)
+export const getUserApi = async (): Promise<IUser | null> => {
+  const user = await getCurrentUser()
 
+  if (!user?.id) {
     return null
+  }
+
+  return {
+    id: user.id,
+    avatar: (user.user_metadata?.avatar as string | undefined) ?? undefined,
+    email: user.email ?? undefined,
+    password: undefined
   }
 }
