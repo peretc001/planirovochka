@@ -1,7 +1,16 @@
+@use "@/styles/typography";
+
 .root {
   flex: none;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  .email {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include typography.text-md;
+  }
 }

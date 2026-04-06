@@ -1,7 +1,5 @@
-'use client'
-
 import React, { FC } from 'react'
-import { Form, Input } from 'antd'
+import { Button } from 'antd'
 import { useTranslations } from 'next-intl'
 
 import { IUser } from '@/shared/interfaces'
@@ -13,19 +11,19 @@ interface IUserForm {
 }
 
 const UserForm: FC<IUserForm> = ({ user }) => {
-  const t = useTranslations('auth')
-
-  const [form] = Form.useForm()
+  const t = useTranslations('profile')
 
   return (
-    <Form className={styles.root} form={form} initialValues={user} layout="vertical" name="user">
-      <Form.Item label={t('email.label')} name="email">
-        <Input disabled placeholder={t('email.placeholder')} />
-      </Form.Item>
-      <Form.Item label={t('password.label')} name="password">
-        <Input.Password placeholder={t('password.placeholder')} />
-      </Form.Item>
-    </Form>
+    <div className={styles.root}>
+      <h2>{t('user.title')}</h2>
+
+      <div className={styles.email}>
+        <label htmlFor="">{t('user.email.label')}:</label>
+        <div className={styles.value}>{user?.email}</div>
+      </div>
+
+      <Button type="primary">{t('user.change')}</Button>
+    </div>
   )
 }
 

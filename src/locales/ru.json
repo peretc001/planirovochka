@@ -94,6 +94,19 @@
       "notifications": "Уведомления",
       "payment": "Платежи"
     },
+    "user": {
+      "title": "Профиль",
+      "email": {
+        "label": "Email"
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите Пароль",
+        "require": "Обязательное поле",
+        "validate": "Пароль должен быть не менее 8 символов"
+      },
+      "change": "Сменить пароль"
+    },
     "about": {
       "avatar": "Ваше фото",
       "first_name": {
