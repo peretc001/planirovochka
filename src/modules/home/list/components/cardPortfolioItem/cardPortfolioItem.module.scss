@@ -65,6 +65,7 @@
       .price {
         @include typography.text-sm;
         @include typography.semibold;
+        white-space: nowrap;
       }
 
       .file {

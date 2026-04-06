@@ -137,6 +137,7 @@
         @include typography.text-md;
         @include typography.semibold;
         user-select: none;
+        white-space: nowrap;
       }
 
       .file {
