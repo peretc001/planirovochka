@@ -1,6 +1,7 @@
 .root {
   @include max-container;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 16px;
   margin: 0 auto;
