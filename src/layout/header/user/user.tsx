@@ -23,7 +23,7 @@ interface IUserProps {
 }
 
 const User: FC<IUserProps> = ({ user }) => {
-  const t = useTranslations('profile')
+  const t = useTranslations('account')
 
   const { email, user_metadata } = user || {}
   const { avatar } = user_metadata || {}
@@ -36,27 +36,27 @@ const User: FC<IUserProps> = ({ user }) => {
   const items: MenuProps['items'] = [
     {
       key: '0',
-      label: <Link href={paths.profile.index}>{t('menu.index')}</Link>
+      label: <Link href={paths.account.index}>{t('menu.index')}</Link>
     },
     {
       key: '1',
-      label: <Link href={paths.profile.about}>{t('menu.about')}</Link>
+      label: <Link href={paths.account.about}>{t('menu.about')}</Link>
     },
     {
       key: '2',
-      label: <Link href={paths.profile.prices}>{t('menu.prices')}</Link>
+      label: <Link href={paths.account.prices}>{t('menu.prices')}</Link>
     },
     {
       key: '3',
-      label: <Link href={paths.profile.contacts}>{t('menu.contacts')}</Link>
+      label: <Link href={paths.account.contacts}>{t('menu.contacts')}</Link>
     },
     {
       key: '4',
-      label: <Link href={paths.profile.gallery}>{t('menu.gallery')}</Link>
+      label: <Link href={paths.account.gallery}>{t('menu.gallery')}</Link>
     },
     {
       key: '5',
-      label: <Link href={paths.profile.portfolio.index}>{t('menu.portfolio')}</Link>
+      label: <Link href={paths.account.portfolio.index}>{t('menu.portfolio')}</Link>
     },
     {
       type: 'divider'

@@ -18,7 +18,7 @@ interface IFileUpload {
 }
 
 const FileUpload: FC<IFileUpload> = ({ isLoading, file, onDelete, onUpload }) => {
-  const t = useTranslations('profile')
+  const t = useTranslations('account')
 
   const [isDragged, setIsDragged] = useState<boolean>(false)
 

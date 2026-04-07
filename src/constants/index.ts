@@ -1,20 +1,22 @@
 import { IType } from '@/shared/interfaces'
 
 export const paths = {
-  home: '/',
-  profile: {
-    about: '/profile/about',
-    contacts: '/profile/contacts',
-    gallery: '/profile/gallery',
-    index: '/profile',
-    payment: '/profile/payment',
+  account: {
+    about: '/account/about',
+    contacts: '/account/contacts',
+    gallery: '/account/gallery',
+    index: '/account',
+    payment: '/account/payment',
     portfolio: {
-      add: '/profile/portfolio/add',
-      index: '/profile/portfolio'
+      add: '/account/portfolio/add',
+      index: '/account/portfolio'
     },
-    prices: '/profile/prices',
+    prices: '/account/prices',
   },
-  profiles: '/profiles/'
+  blog: '/blog',
+  catalog: '/catalog',
+  home: '/',
+  portfolio: '/portfolio'
 }
 
 export const CURRENCY = 'руб.'
@@ -27,6 +29,11 @@ export const DESIGN_TYPES: IType[] = [
     label: 'Дизайн-проект под ключ',
     unit: 'meter',
     value: 'dizayn-proekt'
+  },
+  {
+    label: 'Планировочное решение',
+    unit: 'meter',
+    value: 'planirovochnoe-reshenie'
   },
   {
     label: 'Авторский надзор',
@@ -47,11 +54,6 @@ export const DESIGN_TYPES: IType[] = [
     label: 'Хоумстейджинг',
     unit: 'meter',
     value: 'khoumsteydzhin'
-  },
-  {
-    label: 'Расстановка мебели',
-    unit: 'meter',
-    value: 'rasstanovka-mebeli'
   },
   {
     label: 'Комплектация',

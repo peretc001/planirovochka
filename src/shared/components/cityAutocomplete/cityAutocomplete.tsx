@@ -16,7 +16,7 @@ interface ICityAutocomplete {
 }
 
 const CityAutocomplete: FC<ICityAutocomplete> = ({ defaultCity, onClearCity, onSelectCity }) => {
-  const t = useTranslations('profile')
+  const t = useTranslations('account')
 
   const [city, setCity] = useState(defaultCity)
   const [cities, setCities] = useState<[] | ICitySuggestion[]>([])

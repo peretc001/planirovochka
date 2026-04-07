@@ -10,8 +10,7 @@ import UseQueryProviders from '@/lib/useQueryProviders'
 import Beta from '@/layout/beta/beta'
 import Header from '@/layout/header/header'
 import Metrika from '@/layout/metrica'
-
-import AuthModal from '@/modals/authModal'
+import AuthModal from '@/layout/modals/authModal'
 
 import '@/styles/antd.design.scss'
 import '@/globals.scss'
